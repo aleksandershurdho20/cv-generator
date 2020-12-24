@@ -1,0 +1,53 @@
+$base-color: #4c4c59;
+$main-color: #e74645;
+
+.wrapper-description {
+  margin-top: 10vh;
+  & h2 {
+    color: $base-color;
+    font-size: 35px;
+  }
+  & p {
+    padding-top: 25px;
+  }
+}
+.sub-main {
+  width: 30%;
+  margin-top: 25px;
+}
+.button-two {
+  text-align: center;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: $main-color;
+  border: none;
+  padding: 10px;
+  width: 200px;
+  transition: all 0.5s;
+}
+.button-two span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button-two span:after {
+  content: "»";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button-two:hover span {
+  padding-right: 25px;
+}
+
+.button-two:hover span:after {
+  opacity: 1;
+  right: 0;
+}

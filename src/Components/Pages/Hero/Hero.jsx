@@ -18,8 +18,8 @@ export default function Hero() {
             </p>
           </div>
           <div class="cta">
-            <button class="cta1">Krijo</button>
-            <button class="cta2">Tani</button>
+            <button class="cta1">Krijo CV </button>
+            <button class="cta2">Shiko Shembuj</button>
           </div>
         </div>
 
