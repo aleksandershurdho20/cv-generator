@@ -51,3 +51,21 @@ $main-color: #e74645;
   opacity: 1;
   right: 0;
 }
+@media (min-width: 481px) and (max-width: 767px) {
+  /* CSS */
+  .makeStyles-img-7 {
+    display: none;
+  }
+}
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .makeStyles-img-7 {
+    display: none;
+  }
+  /* CSS */
+}

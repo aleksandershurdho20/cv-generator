@@ -9,9 +9,9 @@ export default function Index() {
             </div>
             <nav>
                 <ul class="nav-links">
-                    <li><a class="nav-link active" href="#">Krijo</a></li>
-                    <li><a class="nav-link" href="#">Hyr</a></li>
-                    <li><a class="nav-link" href="#">Regjistrohu</a></li>
+                    <li><a class="nav-link active" href="/">Kryefaqja</a></li>
+                    <li><a class="nav-link" href="/hyr">Hyr</a></li>
+                    <li><a class="nav-link" href="/regjistrohu">Regjistrohu</a></li>
                 </ul>
             </nav>
             <div class="cart">
