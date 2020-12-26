@@ -1,5 +1,6 @@
 import React from 'react'
 import Home from "../src/Containers/Home"
+import CreateCv from "./Containers/CreateCV/Create"
 import {
     BrowserRouter as Router,
     Switch,
@@ -29,6 +30,8 @@ export default function Routes() {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/RrethNesh" component={() => <h2>Rreth nesh</h2>} />
+                    <Route path="/Krijo" component={CreateCv} />
+
                     <Route path="*" component={() => <div>
                         <img src={NotFound} style={imageStyles} />
                         <h1 style={Erororr}>404</h1>

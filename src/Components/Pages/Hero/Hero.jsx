@@ -3,9 +3,14 @@ import Cv from "../../../assets/cv.png";
 import BigCircle from "../../../assets/big-eclipse.svg";
 import MediumCircle from "../../../assets/mid-eclipse.svg";
 import SmallCircle from "../../../assets/small-eclipse.svg";
-
+import { Link } from "react-router-dom";
 import "./Hero.scss";
 export default function Hero() {
+  const linkStyles = {
+    color: "inherit",
+    textDecoreation: "none",
+  };
+
   return (
     <main>
       <section className="hero-wrapper">
@@ -18,7 +23,11 @@ export default function Hero() {
             </p>
           </div>
           <div class="cta">
-            <button class="cta1">Krijo CV </button>
+            <button class="cta1">
+              <Link to="/Krijo" style={linkStyles}>
+                Krijo CV{" "}
+              </Link>
+            </button>
             <button class="cta2">Shiko Shembuj</button>
           </div>
         </div>
