@@ -10,6 +10,11 @@ import "react-alice-carousel/lib/scss/alice-carousel.scss";
 import AliceCarousel from "react-alice-carousel";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
+import CvTemplateLeftSidebar from "../../Containers/CreateCV/CvTemplateLeftSidebar";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Button from "@material-ui/core/Button";
 
 const handleDragStart = (e) => e.preventDefault();
 const responsive = {
@@ -35,7 +40,22 @@ const items = [
     className="yours-custom-class"
   />,
 ];
+function getSteps() {
+  return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
+}
 
+function getStepContent(stepIndex) {
+  switch (stepIndex) {
+    case 0:
+      return "Informacioni Personal";
+    case 1:
+      return "Eksperienca";
+    case 2:
+      return "Zgjidh Formatin e CV";
+    default:
+      return "Unknown stepIndex";
+  }
+}
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -73,12 +93,28 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+    boxShadow:
+      " 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2)",
   },
 }));
 
 export default function SimpleTabs() {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -86,7 +122,7 @@ export default function SimpleTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      {/* <AppBar position="static">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -100,44 +136,43 @@ export default function SimpleTabs() {
         CV Europass
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Cv e Modifikuar
-        <div className="sidenav">
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Clients</a>
-          <a href="#">Contact</a>
-        </div>
-        <div className="main">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-          <Divider variant="middle" />
-          <h3 style={{ padding: 15 }}>Eksperienca</h3>
-          <Divider variant="middle" />
-          <div className="experience-wrapper">
-            <div className="experience-hisotry">2010 - 2020</div>
-            <div className="experience-description">
-              Senior Developer
-              <ul>
-                <li>Java</li>
-                <li>Php</li>
-                <li>css</li>
-                <li>ok</li>
-              </ul>
+       
+
+        <AliceCarousel mouseTracking items={items} />
+      </TabPanel> */}
+      <Stepper activeStep={activeStep} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <div>
+        {activeStep === steps.length ? (
+          <div>
+            <Typography className={classes.instructions}>
+              All steps completed
+            </Typography>
+            <Button onClick={handleReset}>Reset</Button>
+          </div>
+        ) : (
+          <div>
+            <h2>{getStepContent(activeStep)}</h2>
+            <div>
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className={classes.backButton}
+              >
+                Back
+              </Button>
+              <Button variant="contained" color="primary" onClick={handleNext}>
+                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              </Button>
             </div>
           </div>
-          <Divider variant="middle" />
-          <h3 style={{ padding: 15 }}>Edukimi</h3>
-          <Divider variant="middle" />
-        </div>
-        {/* <AliceCarousel mouseTracking items={items} /> */}
-      </TabPanel>
+        )}
+      </div>
     </div>
   );
 }

@@ -43,3 +43,9 @@ nav {
 .active {
   color: $main-color;
 }
+.MuiStepIcon-root.MuiStepIcon-active {
+  color: $main-color !important;
+}
+.MuiStepIcon-root.MuiStepIcon-completed {
+  color: $main-color !important;
+}
