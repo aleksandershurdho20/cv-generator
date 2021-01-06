@@ -11,6 +11,9 @@ import AliceCarousel from "react-alice-carousel";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import CvTemplateLeftSidebar from "../../Containers/CreateCV/CvTemplateLeftSidebar";
+import Container from "@material-ui/core/Container";
+import TextField from "@material-ui/core/TextField";
+
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -147,32 +150,95 @@ export default function SimpleTabs() {
           </Step>
         ))}
       </Stepper>
-      <div>
-        {activeStep === steps.length ? (
+      {activeStep === steps.length ? (
+        <div>
+          <Typography className={classes.instructions}>
+            All steps completed
+          </Typography>
+          <Button onClick={handleReset}>Reset</Button>
+        </div>
+      ) : (
+        <div>
+          <Container>
+            <h3 style={{ fontWeight: "500", marginLeft: "8%" }}>
+              {getStepContent(activeStep)}
+            </h3>
+            <Divider />
+          </Container>
           <div>
-            <Typography className={classes.instructions}>
-              All steps completed
-            </Typography>
-            <Button onClick={handleReset}>Reset</Button>
+            <Button
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              className={classes.backButton}
+            >
+              Back
+            </Button>
+            <Button variant="contained" color="primary" onClick={handleNext}>
+              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+            </Button>
           </div>
-        ) : (
-          <div>
-            <h2>{getStepContent(activeStep)}</h2>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
-            </div>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
+      {activeStep === 0 && (
+        <Container>
+          <Grid container spacing={3}>
+            <Grid item md={4}>
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="Emer"
+                  variant="outlined"
+                />
+              </div>
+            </Grid>
+            <Grid item md={4}>
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="Emer"
+                  variant="outlined"
+                  fullWidth
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Email"
+                  variant="outlined"
+                  fullWidth
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Adresa"
+                  variant="outlined"
+                  fullWidth
+                />
+              </div>
+            </Grid>
+
+            <Grid item md={4}>
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="Mbiemer"
+                  variant="outlined"
+                  fullWidth
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Telefon  "
+                  fullWidth
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Qyteti"
+                  variant="outlined"
+                  fullWidth
+                />
+              </div>
+            </Grid>
+          </Grid>
+        </Container>
+      )}
     </div>
   );
 }
