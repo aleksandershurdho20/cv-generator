@@ -1,0 +1,31 @@
+$main-color: #e74645;
+$secondary-color: #fff;
+$base-color: #585772;
+
+.extra-info-btn {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+  background: $main-color;
+  color: $secondary-color;
+  font-size: 14px;
+  border-color: $main-color;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 22px;
+  padding: 10px 40px;
+  text-transform: uppercase;
+  transition: all 0.2s linear;
+  cursor: pointer;
+
+  &:hover {
+    color: $main-color;
+    background: $secondary-color;
+    border-color: $main-color;
+    transition: all 0.2s linear;
+    cursor: pointer;
+  }
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,12 +13,14 @@ import Grid from "@material-ui/core/Grid";
 import CvTemplateLeftSidebar from "../../Containers/CreateCV/CvTemplateLeftSidebar";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
-
+import AddIcon from "@material-ui/icons/Add";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
-
+import ExtraInformation from "../ExtraData/ExtraInformation";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import "./Carosel.scss";
 const handleDragStart = (e) => e.preventDefault();
 const responsive = {
   0: { items: 1 },
@@ -92,19 +94,23 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
+const useclasses = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     boxShadow:
       " 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2)",
   },
+  cvFields: {
+    marginBottom: 15,
+  },
 }));
 
 export default function SimpleTabs() {
   const [value, setValue] = React.useState(0);
-  const classes = useStyles();
+  const classes = useclasses();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [activateExtraInfo, setActivateExtraInfo] = useState(false);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -185,6 +191,7 @@ export default function SimpleTabs() {
             <Grid item md={4}>
               <div>
                 <TextField
+                  className={classes.cvFields}
                   id="outlined-basic"
                   label="Emer"
                   variant="outlined"
@@ -194,18 +201,21 @@ export default function SimpleTabs() {
             <Grid item md={4}>
               <div>
                 <TextField
+                  className={classes.cvFields}
                   id="outlined-basic"
                   label="Emer"
                   variant="outlined"
                   fullWidth
                 />
                 <TextField
+                  className={classes.cvFields}
                   id="outlined-basic"
                   label="Email"
                   variant="outlined"
                   fullWidth
                 />
                 <TextField
+                  className={classes.cvFields}
                   id="outlined-basic"
                   label="Adresa"
                   variant="outlined"
@@ -217,18 +227,21 @@ export default function SimpleTabs() {
             <Grid item md={4}>
               <div>
                 <TextField
+                  className={classes.cvFields}
                   id="outlined-basic"
                   label="Mbiemer"
                   variant="outlined"
                   fullWidth
                 />
                 <TextField
+                  className={classes.cvFields}
                   id="outlined-basic"
                   label="Telefon  "
                   fullWidth
                   variant="outlined"
                 />
                 <TextField
+                  className={classes.cvFields}
                   id="outlined-basic"
                   label="Qyteti"
                   variant="outlined"
@@ -236,6 +249,26 @@ export default function SimpleTabs() {
                 />
               </div>
             </Grid>
+
+            <Divider />
+
+            <button
+              className="extra-info-btn"
+              onClick={() => setActivateExtraInfo(!activateExtraInfo)}
+            >
+              {activateExtraInfo ? (
+                <>
+                  <HighlightOffIcon /> <span>Fshi</span>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <AddIcon />
+                  <span>Informacion Shtese </span>
+                </>
+              )}
+            </button>
+            {activateExtraInfo && <ExtraInformation />}
           </Grid>
         </Container>
       )}
