@@ -29,3 +29,26 @@ $base-color: #585772;
     cursor: pointer;
   }
 }
+.avatar-wrapper {
+  // padding: 50px;
+  cursor: pointer;
+  background: #fafafa;
+  width: 148px;
+  height: 148px;
+  display: flex;
+  position: relative;
+  transition: 0.3s ease-in all;
+  align-items: center;
+  border-radius: 12px;
+  flex-direction: column;
+  justify-content: center;
+}
+.avatar-center {
+  font-size: 67px;
+  text-align: center;
+  display: flex;
+}
+.MuiOutlinedInput-notchedOutline {
+  border-color: #fafafa !important;
+  background: #fafafa !important;
+}

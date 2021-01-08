@@ -19,7 +19,12 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import ExtraInformation from "../ExtraData/ExtraInformation";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import FaceIcon from "@material-ui/icons/Face";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import Modal from "../../Components/Modal/Modal";
 import "./Carosel.scss";
 const handleDragStart = (e) => e.preventDefault();
 const responsive = {
@@ -112,7 +117,30 @@ export default function SimpleTabs() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [activateExtraInfo, setActivateExtraInfo] = useState(false);
   const steps = getSteps();
-
+  const [files, setFiles] = useState([]);
+  const [displayUploadedPhoto, setDisplayUploadedPhoto] = useState("");
+  const [fileName, setFileName] = useState(null);
+  const [cvData, setCvData] = useState({
+    emer: "",
+    mbiemer: "",
+    email: "",
+    telefon: "",
+    adresa: "",
+    qyteti: "",
+    dataElindjes: "",
+    vendiILindejs: "",
+    Patenta: "",
+    Gjinia: "",
+    Kombesia: "",
+    statusiMartesor: "",
+  });
+  const handleCVFields = (e) => {
+    const { name, value } = e.target;
+    setCvData({
+      ...cvData,
+      [name]: value,
+    });
+  };
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -129,8 +157,33 @@ export default function SimpleTabs() {
     setValue(newValue);
   };
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleFiles = (files) => {
+    setFiles(files);
+    setDisplayUploadedPhoto(files);
+  };
+  const name = displayUploadedPhoto && displayUploadedPhoto[0].name;
+  setFileName(name);
+  console.log(displayUploadedPhoto, "file");
+  // const datas = files.map((data) => data);
+  // setDisplayUploadedPhoto(datas);
   return (
     <div className={classes.root}>
+      <Modal
+        open={open}
+        handleClickOpen={handleClickOpen}
+        handleClose={handleClose}
+        modalTitle="Ngarko Foto"
+        handleFiles={handleFiles}
+      />
+
       {/* <AppBar position="static">
         <Tabs
           value={value}
@@ -165,7 +218,7 @@ export default function SimpleTabs() {
         </div>
       ) : (
         <div>
-          <Container>
+          <Container style={{ marginTop: 20 }}>
             <h3 style={{ fontWeight: "500", marginLeft: "8%" }}>
               {getStepContent(activeStep)}
             </h3>
@@ -189,13 +242,12 @@ export default function SimpleTabs() {
         <Container>
           <Grid container spacing={3}>
             <Grid item md={4}>
-              <div>
-                <TextField
-                  className={classes.cvFields}
-                  id="outlined-basic"
-                  label="Emer"
-                  variant="outlined"
-                />
+              <InputLabel id="demo-simple-select-label">Ngarko</InputLabel>
+
+              <div className="avatar-wrapper" onClick={handleClickOpen}>
+                <FaceIcon className="avatar-center" />
+                <span>Shto Fotografi</span>
+                <img src={displayUploadedPhoto} />
               </div>
             </Grid>
             <Grid item md={4}>
@@ -205,6 +257,9 @@ export default function SimpleTabs() {
                   id="outlined-basic"
                   label="Emer"
                   variant="outlined"
+                  name="emer"
+                  value={cvData.emer}
+                  onChange={handleCVFields}
                   fullWidth
                 />
                 <TextField
@@ -213,12 +268,18 @@ export default function SimpleTabs() {
                   label="Email"
                   variant="outlined"
                   fullWidth
+                  name="email"
+                  value={cvData.email}
+                  onChange={handleCVFields}
                 />
                 <TextField
                   className={classes.cvFields}
                   id="outlined-basic"
                   label="Adresa"
                   variant="outlined"
+                  name="adresa"
+                  value={cvData.adresa}
+                  onChange={handleCVFields}
                   fullWidth
                 />
               </div>
@@ -232,6 +293,9 @@ export default function SimpleTabs() {
                   label="Mbiemer"
                   variant="outlined"
                   fullWidth
+                  name="mbiemer"
+                  value={cvData.mbiemer}
+                  onChange={handleCVFields}
                 />
                 <TextField
                   className={classes.cvFields}
@@ -239,6 +303,9 @@ export default function SimpleTabs() {
                   label="Telefon  "
                   fullWidth
                   variant="outlined"
+                  name="telefon"
+                  value={cvData.telefon}
+                  onChange={handleCVFields}
                 />
                 <TextField
                   className={classes.cvFields}
@@ -246,12 +313,97 @@ export default function SimpleTabs() {
                   label="Qyteti"
                   variant="outlined"
                   fullWidth
+                  name="qyteti"
+                  value={cvData.qyteti}
+                  onChange={handleCVFields}
                 />
               </div>
             </Grid>
 
             <Divider />
 
+            {activateExtraInfo && (
+              // <ExtraInformation handleCVFields={handleCVFields} cvData={cvData} />
+              <>
+                <Grid item md={4}>
+                  <div>
+                    <TextField
+                      className={classes.cvFields}
+                      id="outlined-basic"
+                      label="Data e Lindjes"
+                      variant="outlined"
+                      fullWidth
+                      name="dataElindjes"
+                      value={cvData.dataElindjes}
+                      onChange={handleCVFields}
+                    />
+                    <TextField
+                      className={classes.cvFields}
+                      id="outlined-basic"
+                      label="Patenta"
+                      variant="outlined"
+                      fullWidth
+                      name="Patenta"
+                      value={cvData.Patenta}
+                      onChange={handleCVFields}
+                    />
+                    <TextField
+                      className={classes.cvFields}
+                      id="outlined-basic"
+                      label="Komebsia"
+                      variant="outlined"
+                      fullWidth
+                      value={cvData.Kombesia}
+                      name="Kombesia"
+                      onChange={handleCVFields}
+                    />
+                  </div>
+                </Grid>
+
+                <Grid item md={4}>
+                  <div>
+                    <TextField
+                      className={classes.cvFields}
+                      id="outlined-basic"
+                      label="Vendi i Lindjes"
+                      variant="outlined"
+                      fullWidth
+                      name="vendiILindejs"
+                      value={cvData.vendiILindejs}
+                      onChange={handleCVFields}
+                    />
+                    <InputLabel id="demo-simple-select-label">
+                      Gjinia
+                    </InputLabel>
+
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      fullWidth
+                      style={{ marginBottom: 15 }}
+                      name="Gjinia"
+                      value={cvData.Gjinia}
+                      onChange={handleCVFields}
+                    >
+                      <MenuItem value={`Mashkull`}>Mashkull</MenuItem>
+                      <MenuItem value={`Femer`}>Femer</MenuItem>
+                    </Select>
+
+                    <TextField
+                      className={classes.cvFields}
+                      id="outlined-basic"
+                      label="Qyteti"
+                      variant="outlined"
+                      fullWidth
+                      name="statusiMartesor"
+                      value={cvData.statusiMartesor}
+                      onChange={handleCVFields}
+                    />
+                  </div>
+                  {console.log(cvData)}
+                </Grid>
+              </>
+            )}
             <button
               className="extra-info-btn"
               onClick={() => setActivateExtraInfo(!activateExtraInfo)}
@@ -268,7 +420,6 @@ export default function SimpleTabs() {
                 </>
               )}
             </button>
-            {activateExtraInfo && <ExtraInformation />}
           </Grid>
         </Container>
       )}

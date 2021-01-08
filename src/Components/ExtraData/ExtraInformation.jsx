@@ -18,9 +18,10 @@ const useclasses = makeStyles((theme) => ({
     marginBottom: 15,
   },
 }));
-export default function ExtraInformation() {
+export default function ExtraInformation({ cvData, handleCVFields }) {
   const classes = useclasses();
 
+  console.log(cvData, "cv props");
   return (
     <>
       <Grid item md={4} className="animate__fadeInDown">
@@ -31,6 +32,9 @@ export default function ExtraInformation() {
             label="Data e Lindjes"
             variant="outlined"
             fullWidth
+            name="dataElindjes"
+            value={cvData.dataElindjes}
+            onChange={handleCVFields}
           />
           <TextField
             className={classes.cvFields}
@@ -38,6 +42,9 @@ export default function ExtraInformation() {
             label="Patenta"
             variant="outlined"
             fullWidth
+            name="Patenta"
+            value={cvData.Patenta}
+            onChange={handleCVFields}
           />
           <TextField
             className={classes.cvFields}
