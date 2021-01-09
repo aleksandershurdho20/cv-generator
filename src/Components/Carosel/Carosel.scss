@@ -52,3 +52,10 @@ $base-color: #585772;
   border-color: #fafafa !important;
   background: #fafafa !important;
 }
+.step-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 9vh;
+  padding-bottom: 15px;
+}

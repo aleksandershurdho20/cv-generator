@@ -25,7 +25,9 @@ import Select from "@material-ui/core/Select";
 import FaceIcon from "@material-ui/icons/Face";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Modal from "../../Components/Modal/Modal";
+import Experience from "../../Containers/Experience/Experience";
 import "./Carosel.scss";
+import Footer from "../../Containers/Footer/Footer";
 const handleDragStart = (e) => e.preventDefault();
 const responsive = {
   0: { items: 1 },
@@ -133,6 +135,11 @@ export default function SimpleTabs() {
     Gjinia: "",
     Kombesia: "",
     statusiMartesor: "",
+    pozicioni: "",
+    qytetiPuna: "",
+    kompania: "",
+    dataEFillimi: "",
+    dataEmbarimit: "",
   });
   const handleCVFields = (e) => {
     const { name, value } = e.target;
@@ -169,8 +176,6 @@ export default function SimpleTabs() {
     setFiles(files);
     setDisplayUploadedPhoto(files);
   };
-  const name = displayUploadedPhoto && displayUploadedPhoto[0].name;
-  setFileName(name);
   console.log(displayUploadedPhoto, "file");
   // const datas = files.map((data) => data);
   // setDisplayUploadedPhoto(datas);
@@ -209,7 +214,13 @@ export default function SimpleTabs() {
           </Step>
         ))}
       </Stepper>
-      {activeStep === steps.length ? (
+      <Container style={{ marginTop: 20 }}>
+        <h3 style={{ fontWeight: "500", marginLeft: "8%" }}>
+          {getStepContent(activeStep)}
+        </h3>
+        <Divider />
+      </Container>
+      {/* {activeStep === steps.length ? (
         <div>
           <Typography className={classes.instructions}>
             All steps completed
@@ -237,9 +248,11 @@ export default function SimpleTabs() {
             </Button>
           </div>
         </div>
-      )}
+      )} */}
+      {activeStep === 1 && <Experience {...cvData} />}
+
       {activeStep === 0 && (
-        <Container>
+        <Container style={{ marginTop: 10 }}>
           <Grid container spacing={3}>
             <Grid item md={4}>
               <InputLabel id="demo-simple-select-label">Ngarko</InputLabel>
@@ -321,7 +334,22 @@ export default function SimpleTabs() {
             </Grid>
 
             <Divider />
-
+            <button
+              className="extra-info-btn"
+              onClick={() => setActivateExtraInfo(!activateExtraInfo)}
+            >
+              {activateExtraInfo ? (
+                <>
+                  <HighlightOffIcon /> <span>Fshi</span>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <AddIcon />
+                  <span>Informacion Shtese </span>
+                </>
+              )}
+            </button>
             {activateExtraInfo && (
               // <ExtraInformation handleCVFields={handleCVFields} cvData={cvData} />
               <>
@@ -404,25 +432,22 @@ export default function SimpleTabs() {
                 </Grid>
               </>
             )}
-            <button
-              className="extra-info-btn"
-              onClick={() => setActivateExtraInfo(!activateExtraInfo)}
-            >
-              {activateExtraInfo ? (
-                <>
-                  <HighlightOffIcon /> <span>Fshi</span>
-                </>
-              ) : (
-                <>
-                  {" "}
-                  <AddIcon />
-                  <span>Informacion Shtese </span>
-                </>
-              )}
-            </button>
           </Grid>
         </Container>
       )}
+      <div className="step-btns">
+        <Button
+          disabled={activeStep === 0}
+          onClick={handleBack}
+          className={classes.backButton}
+        >
+          Back
+        </Button>
+        <Button variant="contained" color="primary" onClick={handleNext}>
+          {activeStep === steps.length - 1 ? "Finish" : "Next"}
+        </Button>
+      </div>
+      <Footer backgroundColor={`#FAFAFA`} />
     </div>
   );
 }

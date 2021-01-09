@@ -8,7 +8,7 @@ import "./Hero.scss";
 export default function Hero() {
   const linkStyles = {
     color: "inherit",
-    textDecoreation: "none",
+    textDecoration: "none ",
   };
 
   return (
