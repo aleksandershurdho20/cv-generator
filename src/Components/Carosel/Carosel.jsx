@@ -460,7 +460,7 @@ export default function SimpleTabs() {
         >
           Submit
         </Button>
-        <Fab
+        {/* <Fab
           style={activeStep !== 2 ? { display: "none" } : { marginLeft: 15 }}
           variant="extended"
           onClick={() => setOpenModal(true)}
@@ -477,55 +477,13 @@ export default function SimpleTabs() {
         >
           <DialogTitle id="alert-dialog-slide-title">{"Shiko Cv"}</DialogTitle>
           <DialogContent>
-            <div ref={bodyRef}>
-              <CV
-                personalData={{
-                  name: cvData.emer,
-                  title: cvData.pozicioni,
-                  image: "https://bulma.io/images/placeholders/128x128.png",
-                  contacts: [
-                    { type: "email", value: cvData.email },
-                    { type: "phone", value: cvData.telefon },
-                    { type: "location", value: cvData.qyteti },
-                  ],
-                }}
-                sections={[
-                  {
-                    type: "experiences-list",
-                    title: "Eksperienca",
-                    icon: "archive",
-                    items: [
-                      {
-                        title: cvData.pozicioni,
-                        company: cvData.kompania,
-                        description: cvData.pershkrimi,
-                        datesBetween: `${cvData.muajiFillimit} ${cvData.dataEFillimi} - ${cvData.muajiMbarimit} ${cvData.dataEmbarimit} `,
-                      },
-                    ],
-                  },
-                  {
-                    type: "common-list",
-                    title: "Edukimi",
-                    icon: "graduation",
-                    items: [
-                      {
-                        title: cvData.diploma,
-                        authority: cvData.universiteti,
-                        rightSide: `${cvData.educationDataeFillimit} ${cvData.educationMuajiFillimit} - ${cvData.educationDataeMbarimit} ${cvData.educationMuajiMbarimit}`,
-                      },
-                    ],
-                  },
-                ]}
-                branding={true} // or false to hide it.
-              />
-            </div>
-          </DialogContent>
+                     </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenModal(false)} color="primary">
               Mbyll
             </Button>
           </DialogActions>
-        </Dialog>
+        </Dialog> */}
 
         {/* <Pdf targetRef={ref} filename="code-example.pdf">
           {({ toPdf }) => (
@@ -629,6 +587,49 @@ export default function SimpleTabs() {
           branding={true} // or false to hide it.
         />
       </PdfContainer> */}
+      <div ref={bodyRef}>
+        <CV
+          personalData={{
+            name: cvData.emer,
+            title: cvData.pozicioni,
+            image: "https://bulma.io/images/placeholders/128x128.png",
+            contacts: [
+              { type: "email", value: cvData.email },
+              { type: "phone", value: cvData.telefon },
+              { type: "location", value: cvData.qyteti },
+            ],
+          }}
+          sections={[
+            {
+              type: "experiences-list",
+              title: "Eksperienca",
+              icon: "archive",
+              items: [
+                {
+                  title: cvData.pozicioni,
+                  company: cvData.kompania,
+                  description: cvData.pershkrimi,
+                  datesBetween: `${cvData.muajiFillimit} ${cvData.dataEFillimi} - ${cvData.muajiMbarimit} ${cvData.dataEmbarimit} `,
+                },
+              ],
+            },
+            {
+              type: "common-list",
+              title: "Edukimi",
+              icon: "graduation",
+              items: [
+                {
+                  title: cvData.diploma,
+                  authority: cvData.universiteti,
+                  rightSide: `${cvData.educationDataeFillimit} ${cvData.educationMuajiFillimit} - ${cvData.educationDataeMbarimit} ${cvData.educationMuajiMbarimit}`,
+                },
+              ],
+            },
+          ]}
+          branding={true} // or false to hide it.
+        />
+      </div>
+
       <Footer backgroundColor={`#FAFAFA`} />
     </div>
   );
