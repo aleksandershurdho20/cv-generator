@@ -26,8 +26,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Experience(props) {
-  console.log(props, "prorpor");
+  const {
+    pozicioni,
+    qytetiPuna,
+    kompania,
+    dataEFillimi,
+    dataEmbarimit,
+    muajiFillimit,
+    muajiMbarimit,
+  } = props;
+  console.log(props, "props");
+
   const currentYear = new Date().getUTCFullYear();
+  console.log(pozicioni, "pozicioni");
   const years = Array(currentYear - (currentYear - 20))
     .fill("")
     .map((v, idx) => currentYear - idx);
@@ -56,7 +67,7 @@ export default function Experience(props) {
             id="panel1a-header"
           >
             <WorkIcon />
-            <span>Eksperienca</span>
+            <span style={{ paddingLeft: 10 }}>Eksperienca</span>
           </AccordionSummary>
           <AccordionDetails>
             <Grid container>
@@ -67,6 +78,8 @@ export default function Experience(props) {
                     label="Pozicioni"
                     variant="outlined"
                     name="pozicioni"
+                    value={pozicioni}
+                    onChange={props.handleCVFields}
                     fullWidth
                   />
                 </Grid>
@@ -75,8 +88,10 @@ export default function Experience(props) {
                     id="outlined-basic"
                     label="Qyteti"
                     variant="outlined"
-                    name="qyteti"
+                    name="qytetiPuna"
                     fullWidth
+                    value={qytetiPuna}
+                    onChange={props.handleCVFields}
                   />
                 </Grid>
               </Grid>
@@ -86,13 +101,15 @@ export default function Experience(props) {
                     id="outlined-basic"
                     label="Kompania"
                     variant="outlined"
-                    name="qyteti"
+                    name="kompania"
                     fullWidth
+                    value={kompania}
+                    onChange={props.handleCVFields}
                   />
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
-                <Grid item md={6}>
+                <Grid item md={6} sm={12} xs={12}>
                   <InputLabel
                     id="demo-simple-select-label"
                     style={{ marginTop: 10 }}
@@ -100,14 +117,25 @@ export default function Experience(props) {
                     Data e fillimit
                   </InputLabel>
 
-                  <select className="select">
+                  <select
+                    className="select"
+                    name="muajiFillimit"
+                    value={muajiFillimit}
+                    onChange={props.handleCVFields}
+                  >
                     {monthNames.map((data, index) => (
                       <option value={data} key={index}>
                         {data}
                       </option>
                     ))}
                   </select>
-                  <select className="select" style={{ marginLeft: 20 }}>
+                  <select
+                    className="select"
+                    style={{ marginLeft: 20 }}
+                    name="dataEFillimi"
+                    value={dataEFillimi}
+                    onChange={props.handleCVFields}
+                  >
                     {years.map((data, index) => (
                       <option value={data} key={index}>
                         {data}
@@ -115,7 +143,7 @@ export default function Experience(props) {
                     ))}
                   </select>
                 </Grid>
-                <Grid item md={6}>
+                <Grid item md={6} sm={12} xs={12}>
                   <InputLabel
                     id="demo-simple-select-label"
                     style={{ marginTop: 10 }}
@@ -123,14 +151,25 @@ export default function Experience(props) {
                     Data e mbarimit
                   </InputLabel>
 
-                  <select className="select">
+                  <select
+                    className="select"
+                    name="muajiMbarimit"
+                    value={muajiMbarimit}
+                    onChange={props.handleCVFields}
+                  >
                     {monthNames.map((data, index) => (
                       <option value={data} key={index}>
                         {data}
                       </option>
                     ))}
                   </select>
-                  <select className="select" style={{ marginLeft: 20 }}>
+                  <select
+                    className="select"
+                    style={{ marginLeft: 20 }}
+                    name="dataEmbarimit"
+                    value={dataEmbarimit}
+                    onChange={props.handleCVFields}
+                  >
                     {years.map((data, index) => (
                       <option value={data} key={index}>
                         {data}
@@ -140,13 +179,13 @@ export default function Experience(props) {
                 </Grid>
               </Grid>
               <Grid container>
-                <InputLabel
-                  id="demo-simple-select-label"
-                  style={{ marginTop: 10 }}
-                >
-                  Pershkrimi
-                </InputLabel>
                 <Grid item md={12}>
+                  <InputLabel
+                    id="demo-simple-select-label"
+                    style={{ marginTop: 10 }}
+                  >
+                    Pershkrimi
+                  </InputLabel>
                   <textarea
                     id="outlined-basic"
                     className="textarea-description"
@@ -156,7 +195,7 @@ export default function Experience(props) {
             </Grid>
           </AccordionDetails>
         </Accordion>{" "}
-        <Edukimi />
+        <Edukimi {...props} />
       </Container>
     </div>
   );

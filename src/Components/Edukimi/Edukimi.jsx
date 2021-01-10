@@ -24,7 +24,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Edukimi() {
+export default function Edukimi(props) {
+  const {
+    diploma,
+    universiteti,
+    educationQyteti,
+    educationMuajiFillimit,
+    educationDataeFillimit,
+    educationMuajiMbarimit,
+    educationDataeMbarimit,
+    educationPershkrimi,
+  } = props;
+  console.log(props, "edukkimi props");
   const currentYear = new Date().getUTCFullYear();
   const years = Array(currentYear - (currentYear - 20))
     .fill("")
@@ -53,7 +64,7 @@ export default function Edukimi() {
           id="panel1a-header"
         >
           <SchoolIcon />
-          <span>Edukimi</span>
+          <span style={{ paddingLeft: 10 }}>Edukimi</span>
         </AccordionSummary>
         <AccordionDetails>
           <Grid container>
@@ -63,7 +74,9 @@ export default function Edukimi() {
                   id="outlined-basic"
                   label="Diploma/Titulli i kualifikimit  "
                   variant="outlined"
-                  name="pozicioni"
+                  name="diploma"
+                  value={diploma}
+                  onChange={props.handleCVFields}
                   fullWidth
                 />
               </Grid>
@@ -72,7 +85,9 @@ export default function Edukimi() {
                   id="outlined-basic"
                   label="Universiteti"
                   variant="outlined"
-                  name="qyteti"
+                  name="universiteti"
+                  value={universiteti}
+                  onChange={props.handleCVFields}
                   fullWidth
                 />
               </Grid>
@@ -83,13 +98,15 @@ export default function Edukimi() {
                   id="outlined-basic"
                   label="Qyteti"
                   variant="outlined"
-                  name="qyteti"
+                  name="educationQyteti"
+                  value={educationQyteti}
+                  onChange={props.handleCVFields}
                   fullWidth
                 />
               </Grid>
             </Grid>
             <Grid container spacing={2}>
-              <Grid item md={6}>
+              <Grid item md={6} sm={12} xs={12}>
                 <InputLabel
                   id="demo-simple-select-label"
                   style={{ marginTop: 10 }}
@@ -97,14 +114,25 @@ export default function Edukimi() {
                   Data e fillimit
                 </InputLabel>
 
-                <select className="select">
+                <select
+                  className="select"
+                  name="educationMuajiFillimit"
+                  value={educationMuajiFillimit}
+                  onChange={props.handleCVFields}
+                >
                   {monthNames.map((data, index) => (
                     <option value={data} key={index}>
                       {data}
                     </option>
                   ))}
                 </select>
-                <select className="select" style={{ marginLeft: 20 }}>
+                <select
+                  className="select"
+                  style={{ marginLeft: 20 }}
+                  name="educationDataeFillimit"
+                  value={educationDataeFillimit}
+                  onChange={props.handleCVFields}
+                >
                   {years.map((data, index) => (
                     <option value={data} key={index}>
                       {data}
@@ -112,7 +140,7 @@ export default function Edukimi() {
                   ))}
                 </select>
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={6} sm={12} xs={12}>
                 <InputLabel
                   id="demo-simple-select-label"
                   style={{ marginTop: 10 }}
@@ -120,14 +148,25 @@ export default function Edukimi() {
                   Data e mbarimit
                 </InputLabel>
 
-                <select className="select">
+                <select
+                  className="select"
+                  name="educationMuajiMbarimit"
+                  value={educationMuajiMbarimit}
+                  onChange={props.handleCVFields}
+                >
                   {monthNames.map((data, index) => (
                     <option value={data} key={index}>
                       {data}
                     </option>
                   ))}
                 </select>
-                <select className="select" style={{ marginLeft: 20 }}>
+                <select
+                  className="select"
+                  style={{ marginLeft: 20 }}
+                  name="educationDataeMbarimit"
+                  value={educationDataeMbarimit}
+                  onChange={props.handleCVFields}
+                >
                   {years.map((data, index) => (
                     <option value={data} key={index}>
                       {data}
@@ -145,6 +184,9 @@ export default function Edukimi() {
               </InputLabel>
               <Grid item md={12}>
                 <textarea
+                  name="educationPershkrimi"
+                  value={educationPershkrimi}
+                  onChange={props.handleCVFields}
                   id="outlined-basic"
                   className="textarea-description"
                 />

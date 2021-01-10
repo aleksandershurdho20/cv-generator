@@ -48,9 +48,12 @@ $base-color: #585772;
   text-align: center;
   display: flex;
 }
+.MuiOutlinedInput-input {
+  background: #fafafa !important;
+}
 .MuiOutlinedInput-notchedOutline {
   border-color: #fafafa !important;
-  background: #fafafa !important;
+  // background: #fafafa !important;
 }
 .step-btns {
   display: flex;
@@ -58,4 +61,7 @@ $base-color: #585772;
   align-items: center;
   margin-top: 9vh;
   padding-bottom: 15px;
+}
+.styles_branding___BNJr {
+  display: none !important;
 }
