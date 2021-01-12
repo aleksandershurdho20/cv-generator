@@ -13,6 +13,7 @@ import { SpeakerNotesOffOutlined } from "@material-ui/icons";
 import InputLabel from "@material-ui/core/InputLabel";
 import Edukimi from "../../Components/Edukimi/Edukimi";
 import TextField from "@material-ui/core/TextField";
+import Gjuhet from "../../Components/Gjuhet";
 import "./Experience.scss";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -196,6 +197,7 @@ export default function Experience(props) {
           </AccordionDetails>
         </Accordion>{" "}
         <Edukimi {...props} />
+        <Gjuhet />
       </Container>
     </div>
   );

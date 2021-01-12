@@ -47,7 +47,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
 function getSteps() {
   return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
 }
@@ -64,31 +63,6 @@ function getStepContent(stepIndex) {
       return;
   }
 }
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
 
 const useclasses = makeStyles((theme) => ({
   root: {
@@ -142,6 +116,7 @@ export default function SimpleTabs() {
     educationMuajiMbarimit: "",
     educationPershkrimi: "",
   });
+
   const ref = useRef();
   const bodyRef = useRef();
   const createPdfs = () => createPdf(bodyRef.current);
@@ -184,15 +159,8 @@ export default function SimpleTabs() {
   console.log(displayUploadedPhoto, "file");
   // const datas = files.map((data) => data);
   // setDisplayUploadedPhoto(datas);
-  const options = {
-    orientation: "landscape",
-    unit: "in",
-    format: [4, 2],
-  };
+
   const createPdf = (html) => Doc.createPdf(html);
-  const exportPDFWithComponent = () => {
-    this.pdfExportComponent.save();
-  };
 
   return (
     <div className={classes.root}>
@@ -460,133 +428,8 @@ export default function SimpleTabs() {
         >
           Submit
         </Button>
-        {/* <Fab
-          style={activeStep !== 2 ? { display: "none" } : { marginLeft: 15 }}
-          variant="extended"
-          onClick={() => setOpenModal(true)}
-        >
-          Shiko CV
-          <VisibilityIcon />
-        </Fab>
-        <Dialog
-          open={openModal}
-          onClose={() => setOpenModal(false)}
-          aria-labelledby="alert-dialog-slide-title"
-          fullWidth
-          aria-describedby="alert-dialog-slide-description"
-        >
-          <DialogTitle id="alert-dialog-slide-title">{"Shiko Cv"}</DialogTitle>
-          <DialogContent>
-                     </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOpenModal(false)} color="primary">
-              Mbyll
-            </Button>
-          </DialogActions>
-        </Dialog> */}
-
-        {/* <Pdf targetRef={ref} filename="code-example.pdf">
-          {({ toPdf }) => (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={toPdf}
-              style={
-                activeStep !== 2 ? { display: "none" } : { display: "inline" }
-              }
-            >
-              Submit
-            </Button>
-          )}
-        </Pdf> */}
       </div>
 
-      {/* <div ref={ref}>
-        <CV
-          personalData={{
-            name: cvData.emer,
-            title: cvData.pozicioni,
-            image: "https://bulma.io/images/placeholders/128x128.png",
-            contacts: [
-              { type: "email", value: cvData.email },
-              { type: "phone", value: cvData.telefon },
-              { type: "location", value: cvData.qyteti },
-            ],
-          }}
-          sections={[
-            {
-              type: "experiences-list",
-              title: "Eksperienca",
-              icon: "archive",
-              items: [
-                {
-                  title: cvData.pozicioni,
-                  company: cvData.kompania,
-                  description: cvData.pershkrimi,
-                  datesBetween: `${cvData.muajiFillimit} ${cvData.dataEFillimi} - ${cvData.muajiMbarimit} ${cvData.dataEmbarimit} `,
-                },
-              ],
-            },
-            {
-              type: "common-list",
-              title: "Edukimi",
-              icon: "graduation",
-              items: [
-                {
-                  title: cvData.diploma,
-                  authority: cvData.universiteti,
-                  rightSide: `${cvData.educationDataeFillimit} ${cvData.educationMuajiFillimit} - ${cvData.educationDataeMbarimit} ${cvData.educationMuajiMbarimit}`,
-                },
-              ],
-            },
-          ]}
-          branding={true} // or false to hide it.
-        />
-      </div> */}
-
-      {/* <PdfContainer createPdf={createPdf}>
-        
-        <CV
-          personalData={{
-            name: cvData.emer,
-            title: cvData.pozicioni,
-            image: "https://bulma.io/images/placeholders/128x128.png",
-            contacts: [
-              { type: "email", value: cvData.email },
-              { type: "phone", value: cvData.telefon },
-              { type: "location", value: cvData.qyteti },
-            ],
-          }}
-          sections={[
-            {
-              type: "experiences-list",
-              title: "Eksperienca",
-              icon: "archive",
-              items: [
-                {
-                  title: cvData.pozicioni,
-                  company: cvData.kompania,
-                  description: cvData.pershkrimi,
-                  datesBetween: `${cvData.muajiFillimit} ${cvData.dataEFillimi} - ${cvData.muajiMbarimit} ${cvData.dataEmbarimit} `,
-                },
-              ],
-            },
-            {
-              type: "common-list",
-              title: "Edukimi",
-              icon: "graduation",
-              items: [
-                {
-                  title: cvData.diploma,
-                  authority: cvData.universiteti,
-                  rightSide: `${cvData.educationDataeFillimit} ${cvData.educationMuajiFillimit} - ${cvData.educationDataeMbarimit} ${cvData.educationMuajiMbarimit}`,
-                },
-              ],
-            },
-          ]}
-          branding={true} // or false to hide it.
-        />
-      </PdfContainer> */}
       <div ref={bodyRef}>
         <CV
           personalData={{
