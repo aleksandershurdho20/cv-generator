@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Gjuhet(props) {
+export default function Gjuhet({ languageKnowledges, addMoreLanguages }) {
   const classes = useStyles();
 
   return (
@@ -35,27 +35,36 @@ export default function Gjuhet(props) {
         <AccordionDetails>
           <Grid container>
             <Grid container spacing={2}>
-              <Grid item md={6} sm={12} xs={12}>
-                <TextField
-                  id="outlined-basic"
-                  label="Gjuha  "
-                  variant="outlined"
-                  name="diploma"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item md={6} sm={12} xs={12}>
-                <select
-                  className="select"
-                  style={{ marginTop: 0, width: "60%" }}
-                  name="muajiFillimit"
-                >
-                  <option>Shum mire</option>
-                  <option>Mire</option>
-                  <option>Keq</option>
-                </select>
-              </Grid>
-              <a>Fshi</a>
+              {languageKnowledges.length > 0 &&
+                languageKnowledges.map((data, index) => (
+                  <>
+                    <Grid item md={6} sm={12} xs={12}>
+                      <TextField
+                        id="outlined-basic"
+                        label="Gjuha  "
+                        variant="outlined"
+                        value={data.gjuha}
+                        name="diploma"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item md={6} sm={12} xs={12}>
+                      <select
+                        className="select"
+                        style={{ marginTop: 0, width: "60%" }}
+                        name="muajiFillimit"
+                        value={data.niveli}
+                      >
+                        <option>Shum mire</option>
+                        <option>Mire</option>
+                        <option>Keq</option>
+                      </select>
+                    </Grid>
+                  </>
+                ))}
+              <button className="extra-info-btn" onClick={addMoreLanguages}>
+                Shto Njohuri
+              </button>
             </Grid>
           </Grid>
         </AccordionDetails>

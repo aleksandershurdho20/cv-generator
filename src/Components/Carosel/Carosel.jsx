@@ -116,6 +116,16 @@ export default function SimpleTabs() {
     educationMuajiMbarimit: "",
     educationPershkrimi: "",
   });
+  const [languageKnowledges, setLanguageKnowledges] = useState([
+    {
+      gjuha: "",
+      niveli: "",
+    },
+  ]);
+
+  const addMoreLanguages = () => {
+    setLanguageKnowledges([...languageKnowledges, { gjuha: "", niveli: "" }]);
+  };
 
   const ref = useRef();
   const bodyRef = useRef();
@@ -215,7 +225,12 @@ export default function SimpleTabs() {
         </div>
       )} */}
       {activeStep === 1 && (
-        <Experience {...cvData} handleCVFields={handleCVFields} />
+        <Experience
+          {...cvData}
+          handleCVFields={handleCVFields}
+          languageKnowledges={languageKnowledges}
+          addMoreLanguages={addMoreLanguages}
+        />
       )}
       {activeStep === 2 && <TemplateList />}
 
@@ -302,105 +317,6 @@ export default function SimpleTabs() {
             </Grid>
 
             <Divider />
-            <button
-              className="extra-info-btn"
-              onClick={() => setActivateExtraInfo(!activateExtraInfo)}
-              disabled
-            >
-              {activateExtraInfo ? (
-                <>
-                  <HighlightOffIcon /> <span>Fshi</span>
-                </>
-              ) : (
-                <>
-                  {" "}
-                  <AddIcon />
-                  <span>Informacion Shtese </span>
-                </>
-              )}
-            </button>
-            {activateExtraInfo && (
-              // <ExtraInformation handleCVFields={handleCVFields} cvData={cvData} />
-              <>
-                <Grid item md={4}>
-                  <div>
-                    <TextField
-                      className={classes.cvFields}
-                      id="outlined-basic"
-                      label="Data e Lindjes"
-                      variant="outlined"
-                      fullWidth
-                      name="dataElindjes"
-                      value={cvData.dataElindjes}
-                      onChange={handleCVFields}
-                    />
-                    <TextField
-                      className={classes.cvFields}
-                      id="outlined-basic"
-                      label="Patenta"
-                      variant="outlined"
-                      fullWidth
-                      name="Patenta"
-                      value={cvData.Patenta}
-                      onChange={handleCVFields}
-                    />
-                    <TextField
-                      className={classes.cvFields}
-                      id="outlined-basic"
-                      label="Komebsia"
-                      variant="outlined"
-                      fullWidth
-                      value={cvData.Kombesia}
-                      name="Kombesia"
-                      onChange={handleCVFields}
-                    />
-                  </div>
-                </Grid>
-
-                <Grid item md={4}>
-                  <div>
-                    <TextField
-                      className={classes.cvFields}
-                      id="outlined-basic"
-                      label="Vendi i Lindjes"
-                      variant="outlined"
-                      fullWidth
-                      name="vendiILindejs"
-                      value={cvData.vendiILindejs}
-                      onChange={handleCVFields}
-                    />
-                    <InputLabel id="demo-simple-select-label">
-                      Gjinia
-                    </InputLabel>
-
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      fullWidth
-                      style={{ marginBottom: 15 }}
-                      name="Gjinia"
-                      value={cvData.Gjinia}
-                      onChange={handleCVFields}
-                    >
-                      <MenuItem value={`Mashkull`}>Mashkull</MenuItem>
-                      <MenuItem value={`Femer`}>Femer</MenuItem>
-                    </Select>
-
-                    <TextField
-                      className={classes.cvFields}
-                      id="outlined-basic"
-                      label="Qyteti"
-                      variant="outlined"
-                      fullWidth
-                      name="statusiMartesor"
-                      value={cvData.statusiMartesor}
-                      onChange={handleCVFields}
-                    />
-                  </div>
-                  {console.log(cvData)}
-                </Grid>
-              </>
-            )}
           </Grid>
         </Container>
       )}

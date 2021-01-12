@@ -35,9 +35,10 @@ export default function Experience(props) {
     dataEmbarimit,
     muajiFillimit,
     muajiMbarimit,
+    languageKnowledges,
+    addMoreLanguages,
   } = props;
   console.log(props, "props");
-
   const currentYear = new Date().getUTCFullYear();
   console.log(pozicioni, "pozicioni");
   const years = Array(currentYear - (currentYear - 20))
@@ -197,7 +198,10 @@ export default function Experience(props) {
           </AccordionDetails>
         </Accordion>{" "}
         <Edukimi {...props} />
-        <Gjuhet />
+        <Gjuhet
+          languageKnowledges={languageKnowledges}
+          addMoreLanguages={addMoreLanguages}
+        />
       </Container>
     </div>
   );
