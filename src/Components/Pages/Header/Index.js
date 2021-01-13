@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Header.scss"
+import LanguageSwitcher from "../../LanguageSwitcher/Index"
 export default function Index() {
     return (
         <header>
@@ -15,7 +16,7 @@ export default function Index() {
                 </ul>
             </nav>
             <div class="cart">
-                sample
+                <LanguageSwitcher />
             </div>
         </header>
     )

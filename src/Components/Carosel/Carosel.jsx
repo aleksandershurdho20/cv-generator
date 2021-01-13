@@ -122,6 +122,8 @@ export default function SimpleTabs() {
       niveli: "",
     },
   ]);
+  const [validateName, setValidateName] = useState("");
+  const [validateSurname, setValidateSurname] = useState("");
 
   const handleLangaugeFields = (e, index) => {
     const { name, value } = e.target;
@@ -151,9 +153,19 @@ export default function SimpleTabs() {
       ...cvData,
       [name]: value,
     });
+    setValidateName("");
+    setValidateSurname("");
   };
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (!cvData.emer) {
+      setValidateName("Emri nuk mund te jete bosh !");
+      setActiveStep(0);
+    } else if (!cvData.mbiemer) {
+      setValidateSurname("Mbiemri nuk mund te jete bosh !");
+      setActiveStep(0);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -269,10 +281,12 @@ export default function SimpleTabs() {
                   id="outlined-basic"
                   label="Emer"
                   variant="outlined"
+                  error={validateName}
                   name="emer"
                   value={cvData.emer}
                   onChange={handleCVFields}
                   fullWidth
+                  helperText={validateName}
                 />
                 <TextField
                   className={classes.cvFields}
@@ -306,6 +320,8 @@ export default function SimpleTabs() {
                   variant="outlined"
                   fullWidth
                   name="mbiemer"
+                  error={validateSurname}
+                  helperText={validateSurname}
                   value={cvData.mbiemer}
                   onChange={handleCVFields}
                 />
