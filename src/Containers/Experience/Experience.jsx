@@ -37,6 +37,8 @@ export default function Experience(props) {
     muajiMbarimit,
     languageKnowledges,
     addMoreLanguages,
+    deleteAddedLanguages,
+    handleLangaugeFields,
   } = props;
   console.log(props, "props");
   const currentYear = new Date().getUTCFullYear();
@@ -201,6 +203,8 @@ export default function Experience(props) {
         <Gjuhet
           languageKnowledges={languageKnowledges}
           addMoreLanguages={addMoreLanguages}
+          deleteAddedLanguages={deleteAddedLanguages}
+          handleLangaugeFields={handleLangaugeFields}
         />
       </Container>
     </div>

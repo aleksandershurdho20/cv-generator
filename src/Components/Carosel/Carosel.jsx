@@ -123,8 +123,22 @@ export default function SimpleTabs() {
     },
   ]);
 
+  const handleLangaugeFields = (e, index) => {
+    const { name, value } = e.target;
+    let tempArr = [...languageKnowledges];
+    tempArr[index][name] = value;
+    setLanguageKnowledges(tempArr);
+    console.log(tempArr, "temp");
+  };
+
   const addMoreLanguages = () => {
     setLanguageKnowledges([...languageKnowledges, { gjuha: "", niveli: "" }]);
+  };
+  const deleteAddedLanguages = (index) => {
+    let tempArr = [...languageKnowledges];
+    tempArr.splice(index, 1);
+    console.log(`deleted`);
+    setLanguageKnowledges(tempArr);
   };
 
   const ref = useRef();
@@ -230,6 +244,8 @@ export default function SimpleTabs() {
           handleCVFields={handleCVFields}
           languageKnowledges={languageKnowledges}
           addMoreLanguages={addMoreLanguages}
+          deleteAddedLanguages={deleteAddedLanguages}
+          handleLangaugeFields={handleLangaugeFields}
         />
       )}
       {activeStep === 2 && <TemplateList />}
@@ -383,6 +399,17 @@ export default function SimpleTabs() {
                   rightSide: `${cvData.educationDataeFillimit} ${cvData.educationMuajiFillimit} - ${cvData.educationDataeMbarimit} ${cvData.educationMuajiMbarimit}`,
                 },
               ],
+            },
+            {
+              type: "common-list",
+              title: "Njohuri Gjuhesore",
+              icon: "language",
+              items: languageKnowledges.map((data) => {
+                return {
+                  authority: data.gjuha,
+                  authorityMeta: data.niveli,
+                };
+              }),
             },
           ]}
           branding={true} // or false to hide it.

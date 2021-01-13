@@ -6,19 +6,28 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PublicIcon from "@material-ui/icons/Public";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Button from "@material-ui/core/Button";
+import "./Gjuhet.scss";
 import React from "react";
+import IconButton from "@material-ui/core/IconButton";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
+  button: {
+    marginLeft: theme.spacing(1),
+    color: "#ff0000",
   },
 }));
 
-export default function Gjuhet({ languageKnowledges, addMoreLanguages }) {
+export default function Gjuhet({
+  languageKnowledges,
+  addMoreLanguages,
+  deleteAddedLanguages,
+  handleLangaugeFields,
+}) {
   const classes = useStyles();
 
   return (
@@ -44,7 +53,8 @@ export default function Gjuhet({ languageKnowledges, addMoreLanguages }) {
                         label="Gjuha  "
                         variant="outlined"
                         value={data.gjuha}
-                        name="diploma"
+                        name="gjuha"
+                        onChange={(value) => handleLangaugeFields(value, index)}
                         fullWidth
                       />
                     </Grid>
@@ -52,13 +62,24 @@ export default function Gjuhet({ languageKnowledges, addMoreLanguages }) {
                       <select
                         className="select"
                         style={{ marginTop: 0, width: "60%" }}
-                        name="muajiFillimit"
+                        name="niveli"
                         value={data.niveli}
+                        onChange={(value) => handleLangaugeFields(value, index)}
                       >
                         <option>Shum mire</option>
                         <option>Mire</option>
                         <option>Keq</option>
                       </select>
+
+                      {index !== 0 && (
+                        <IconButton
+                          aria-label="delete"
+                          onClick={(index) => deleteAddedLanguages(index)}
+                          className={classes.button}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      )}
                     </Grid>
                   </>
                 ))}
