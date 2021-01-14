@@ -122,6 +122,25 @@ export default function SimpleTabs() {
       niveli: "",
     },
   ]);
+  const [skills, setSkills] = useState([
+    {
+      njohuri: "",
+    },
+  ]);
+  const handleSkillsFields = (e, index) => {
+    const { name, value } = e.target;
+    let tempArr = [...skills];
+    tempArr[index][name] = value;
+    setSkills(tempArr);
+  };
+  const addSkillFields = () => {
+    setSkills([...skills, { njohuri: "" }]);
+  };
+  const removeSkills = (index) => {
+    let tempArr = [...skills];
+    tempArr.splice(index, 1);
+    setSkills(tempArr);
+  };
   const [validateName, setValidateName] = useState("");
   const [validateSurname, setValidateSurname] = useState("");
 
@@ -258,6 +277,10 @@ export default function SimpleTabs() {
           addMoreLanguages={addMoreLanguages}
           deleteAddedLanguages={deleteAddedLanguages}
           handleLangaugeFields={handleLangaugeFields}
+          skills={skills}
+          handleSkillsFields={handleSkillsFields}
+          addSkillFields={addSkillFields}
+          removeSkills={removeSkills}
         />
       )}
       {activeStep === 2 && <TemplateList />}

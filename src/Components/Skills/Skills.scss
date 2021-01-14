@@ -1,0 +1,18 @@
+$main-color: #e74645;
+$hover-white: #fff;
+.skills-container {
+  .skills-btn {
+    width: 8%;
+
+    border-radius: 7px;
+    margin: auto;
+    color: $main-color;
+    padding: 7px;
+    background: transparent;
+    border: 1px solid $main-color;
+    cursor: pointer;
+  }
+  &:hover {
+    background: $hover-white;
+  }
+}

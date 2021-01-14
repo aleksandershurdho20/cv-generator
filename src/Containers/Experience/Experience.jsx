@@ -14,6 +14,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Edukimi from "../../Components/Edukimi/Edukimi";
 import TextField from "@material-ui/core/TextField";
 import Gjuhet from "../../Components/Gjuhet";
+import Skills from "../../Components/Skills/Index";
 import "./Experience.scss";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +40,10 @@ export default function Experience(props) {
     addMoreLanguages,
     deleteAddedLanguages,
     handleLangaugeFields,
+    skills,
+    handleSkillsFields,
+    addSkillFields,
+    removeSkills,
   } = props;
   console.log(props, "props");
   const currentYear = new Date().getUTCFullYear();
@@ -205,6 +210,12 @@ export default function Experience(props) {
           addMoreLanguages={addMoreLanguages}
           deleteAddedLanguages={deleteAddedLanguages}
           handleLangaugeFields={handleLangaugeFields}
+        />
+        <Skills
+          skills={skills}
+          handleSkillsFields={handleSkillsFields}
+          addSkillFields={addSkillFields}
+          removeSkills={removeSkills}
         />
       </Container>
     </div>
