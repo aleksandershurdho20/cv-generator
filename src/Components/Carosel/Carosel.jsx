@@ -165,7 +165,7 @@ export default function SimpleTabs() {
   const ref = useRef();
   const bodyRef = useRef();
   const createPdfs = () => createPdf(bodyRef.current);
-
+  const [imageFiles, setImageFiles] = useState("");
   const handleCVFields = (e) => {
     const { name, value } = e.target;
     setCvData({
@@ -207,11 +207,26 @@ export default function SimpleTabs() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleFiles = (files) => {
-    setFiles(files);
-    setDisplayUploadedPhoto(files);
+  const handleFiles = async (e) => {
+    // setFiles(files);
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ngarko");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/cval/image/upload",
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImageFiles(file.secure_url);
   };
-  console.log(displayUploadedPhoto, "file");
   // const datas = files.map((data) => data);
   // setDisplayUploadedPhoto(datas);
 
@@ -292,9 +307,14 @@ export default function SimpleTabs() {
               <InputLabel id="demo-simple-select-label">Ngarko</InputLabel>
 
               <div className="avatar-wrapper" onClick={handleClickOpen}>
-                <FaceIcon className="avatar-center" />
-                <span>Shto Fotografi</span>
-                <img src={displayUploadedPhoto} />
+                {imageFiles.length > 0 ? (
+                  <img src={imageFiles} />
+                ) : (
+                  <>
+                    <FaceIcon className="avatar-center" />
+                    <span>Shto Fotografi</span>
+                  </>
+                )}
               </div>
             </Grid>
             <Grid item md={4}>

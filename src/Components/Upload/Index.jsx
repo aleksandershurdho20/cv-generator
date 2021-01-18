@@ -5,11 +5,13 @@ export default function Index({ handleFiles }) {
   console.log(handleFiles, "handle");
   return (
     <div>
-      <DropzoneArea
+      {/* <DropzoneArea
         onChange={handleFiles}
         dropzoneText={"Ngarkoni Foto"}
         acceptedFiles={["image/jpeg", "image/png", "image/bmp"]}
-      />
+        onDrop={onDrop}
+      /> */}
+      <input type="file" name="file" onChange={handleFiles} />
     </div>
   );
 }
