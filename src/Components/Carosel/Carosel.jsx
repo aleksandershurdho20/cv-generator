@@ -426,7 +426,7 @@ export default function SimpleTabs() {
           personalData={{
             name: cvData.emer,
             title: cvData.pozicioni,
-            image: "https://bulma.io/images/placeholders/128x128.png",
+            image: imageFiles,
             contacts: [
               { type: "email", value: cvData.email },
               { type: "phone", value: cvData.telefon },
