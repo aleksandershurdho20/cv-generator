@@ -15,6 +15,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  button: {
+    background: "rgba(0, 0, 0, 0.04)",
+    marginLeft: 10,
+  },
+  input: {
+    width: "50%",
+  },
 }));
 
 export default function Skills({
@@ -49,7 +56,7 @@ export default function Skills({
                     value={data.njohuri}
                     name="njohuri"
                     onChange={(value) => handleSkillsFields(value, index)}
-                    fullWidth
+                    className={classes.input}
                   />
                   {index !== 0 && (
                     <IconButton

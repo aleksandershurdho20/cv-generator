@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginLeft: theme.spacing(1),
-    color: "#ff0000",
+    background: "rgba(0, 0, 0, 0.04)",
   },
 }));
 

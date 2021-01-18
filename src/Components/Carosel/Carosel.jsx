@@ -450,6 +450,12 @@ export default function SimpleTabs() {
                 };
               }),
             },
+            {
+              type: "tag-list",
+              title: "Aftesi Profesionale",
+              icon: "rocket",
+              items: skills.map((skill) => skill.njohuri),
+            },
           ]}
           branding={true} // or false to hide it.
         />
