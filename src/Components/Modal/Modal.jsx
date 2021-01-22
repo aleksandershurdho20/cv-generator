@@ -9,6 +9,8 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import Upload from "../Upload/Index";
+import { strings } from "../../utils/LanguageSwitcher/Index";
+import "./Modal.scss";
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -65,7 +67,7 @@ export default function CustomizedDialogs({
   const [maxWidth, setMaxWidth] = React.useState("650px");
 
   return (
-    <div>
+    <div className="modal-wrapper">
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -77,7 +79,7 @@ export default function CustomizedDialogs({
           onClose={handleClose}
           style={{ textAlign: "center" }}
         >
-          {modalTitle}
+          {strings.modalTitle}
         </DialogTitle>
         <DialogContent dividers>
           {/* <Typography gutterBottom>
