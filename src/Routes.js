@@ -3,7 +3,7 @@ import Home from "../src/Containers/Home"
 import CreateCv from "./Containers/CreateCV/Create"
 import Header from "./Components/Pages/Header/Index"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import Sidebar from "./Components/Pages/Header/MobileMenu/Sidebar"
 import NotFound from "./assets/NotFound.svg"
 const imageStyles = {
     width: '27%',
@@ -25,6 +25,7 @@ export default function Routes() {
         <>
             <Router>
                 <Header />
+                <Sidebar />
 
                 <Switch>
 

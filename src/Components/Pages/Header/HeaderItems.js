@@ -89,3 +89,16 @@ margin-left: 24px;
 }
 
 `;
+export const MobileNavMenu = styled.div`
+
+display:flex;
+flex-direction:column;
+width:100%;
+height:100%;
+position:absolute;
+top:80px;
+left:-100px;
+opacity:1;
+transition:all 0.5s ease;
+
+`
