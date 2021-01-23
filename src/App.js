@@ -8,7 +8,6 @@ import 'animate.css'
 function App() {
   return (
     <>
-      <Header />
       <Routes />
     </>
 

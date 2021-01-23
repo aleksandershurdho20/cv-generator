@@ -1,12 +1,9 @@
 import React from 'react'
 import Home from "../src/Containers/Home"
 import CreateCv from "./Containers/CreateCV/Create"
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import Header from "./Components/Pages/Header/Index"
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import NotFound from "./assets/NotFound.svg"
 const imageStyles = {
     width: '27%',
@@ -27,7 +24,10 @@ export default function Routes() {
     return (
         <>
             <Router>
+                <Header />
+
                 <Switch>
+
                     <Route exact path="/" component={Home} />
                     <Route path="/RrethNesh" component={() => <h2>Rreth nesh</h2>} />
                     <Route path="/Krijo" component={CreateCv} />
