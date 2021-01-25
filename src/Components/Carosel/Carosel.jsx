@@ -1,52 +1,24 @@
-import React, { useState, useRef } from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import "react-alice-carousel/lib/scss/alice-carousel.scss";
-import AliceCarousel from "react-alice-carousel";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
-import CvTemplateLeftSidebar from "../../Containers/CreateCV/CvTemplateLeftSidebar";
-import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
-import AddIcon from "@material-ui/icons/Add";
-import Stepper from "@material-ui/core/Stepper";
+import InputLabel from "@material-ui/core/InputLabel";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import ExtraInformation from "../ExtraData/ExtraInformation";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
+import Stepper from "@material-ui/core/Stepper";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import FaceIcon from "@material-ui/icons/Face";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import React, { useRef, useState } from "react";
+import "react-alice-carousel/lib/scss/alice-carousel.scss";
+import CV from "react-cv";
 import Modal from "../../Components/Modal/Modal";
 import Experience from "../../Containers/Experience/Experience";
-import "./Carosel.scss";
 import Footer from "../../Containers/Footer/Footer";
-import TemplateList from "../SelectTemplates/TemplateList";
-import CV from "react-cv";
-import Pdf from "react-to-pdf";
-import DownloadLink from "react-download-link";
 import Doc from "../../utils/PdfGenerator/DocService";
-import PdfContainer from "../../Components/Pdf/PdfContainer";
-import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
-import Dialog from "@material-ui/core/Dialog";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import Fab from "@material-ui/core/Fab";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import TemplateList from "../SelectTemplates/TemplateList";
+import "./Carosel.scss";
+import TemplateOne from "../SelectTemplates/CVTemplates/TemplateOne";
 function getSteps() {
   return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
 }
@@ -127,6 +99,7 @@ export default function SimpleTabs() {
       njohuri: "",
     },
   ]);
+
   const handleSkillsFields = (e, index) => {
     const { name, value } = e.target;
     let tempArr = [...skills];
@@ -479,6 +452,7 @@ export default function SimpleTabs() {
           ]}
           branding={true} // or false to hide it.
         />
+        <TemplateOne {...cvData} />
       </div>
 
       <Footer backgroundColor={`#FAFAFA`} />
