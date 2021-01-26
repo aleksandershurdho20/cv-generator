@@ -1,7 +1,10 @@
+
+
 import React, { useState } from 'react';
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { strings } from "../../utils/LanguageSwitcher/Index";
 import './Language.scss';
+
 
 export default function Index() {
     const [state, setState] = useState(null)

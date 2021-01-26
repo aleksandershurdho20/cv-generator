@@ -192,6 +192,7 @@ export default function SimpleTabs() {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
+        mode: "cors",
 
         method: "POST",
         body: data,
@@ -452,7 +453,7 @@ export default function SimpleTabs() {
           ]}
           branding={true} // or false to hide it.
         />
-        <TemplateOne {...cvData} />
+        <TemplateOne {...cvData} skills={skills} />
       </div>
 
       <Footer backgroundColor={`#FAFAFA`} />
