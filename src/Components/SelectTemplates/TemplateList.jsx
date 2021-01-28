@@ -19,23 +19,27 @@ export default function TemplateList() {
     { url: "images/6.jpg" },
     { url: "images/7.jpg" },
   ];
+  console.log(selectTemplate);
   return (
     <Container>
-      <Carousel>
+      <Carousel
+        selectedItem={0}
+        onClickItem={(item) => setSelectTempalte(item)}
+      >
         <div style={{ height: "400px" }}>
           <img src={InitialCvTempalte} />
 
-          <p className="legend">Template </p>
+          <p className="legend">Perdor kete template. </p>
         </div>
         <div style={{ height: "400px" }}>
           <img src={Template2} />
 
-          <p className="legend">Template2 </p>
+          <p className="legend">Perdor kete template. </p>
         </div>
         <div style={{ height: "400px" }}>
           <img src={Template3} />
 
-          <p className="legend">Template3 </p>
+          <p className="legend">Perdor kete template. </p>
         </div>
       </Carousel>
     </Container>

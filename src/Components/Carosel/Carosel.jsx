@@ -19,6 +19,10 @@ import Doc from "../../utils/PdfGenerator/DocService";
 import TemplateList from "../SelectTemplates/TemplateList";
 import "./Carosel.scss";
 import TemplateOne from "../SelectTemplates/CVTemplates/TemplateOne";
+import Skeleton from "@material-ui/lab/Skeleton";
+import Snackbar from "@material-ui/core/Snackbar";
+import Slide from "@material-ui/core/Slide";
+
 function getSteps() {
   return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
 }
@@ -99,7 +103,7 @@ export default function SimpleTabs() {
       njohuri: "",
     },
   ]);
-
+  const [loading, setLoading] = useState(false);
   const handleSkillsFields = (e, index) => {
     const { name, value } = e.target;
     let tempArr = [...skills];
@@ -180,27 +184,58 @@ export default function SimpleTabs() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleFiles = async (e) => {
-    // setFiles(files);
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "ngarko");
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/cval/image/upload",
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-        mode: "cors",
+  function TransitionLeft(props) {
+    return <Slide {...props} direction="left" />;
+  }
 
-        method: "POST",
-        body: data,
-      }
-    );
-    const file = await res.json();
-    setImageFiles(file.secure_url);
-  };
+  async function handleFiles(e, success, failure) {
+    let headers = new Headers();
+    headers.append("Accept", "Application/JSON");
+    setLoading(true);
+    let formdata = new FormData();
+
+    formdata.append("file", e.target.files[0]);
+    formdata.append("upload_preset", "ngarko");
+    console.log(e.target.files[0], "even");
+    const preview = URL.createObjectURL(e.target.files[0]);
+    if (preview) {
+      setImageFiles(preview);
+      setLoading(false);
+    }
+    // let req = new Request("https://api.cloudinary.com/v1_1/cval/image/upload", {
+    //   method: "POST",
+    //   headers,
+    //   mode: "cors",
+    //   body: formdata,
+    // });
+
+    // fetch(req)
+    //   .then((res) => res.json())
+    //   .then((data) => setImageFiles(data.secure_url));
+    // .then((data) => success(data.data.url))
+    // .catch((err) => failure(err.message));
+  }
+  // const handleFiles = async (e) => {
+  //   // setFiles(files);
+  //   const files = e.target.files;
+  //   const data = new FormData();
+  //   data.append("file", files[0]);
+  //   data.append("upload_preset", "ngarko");
+  //   const res = await fetch(
+  //     "https://api.cloudinary.com/v1_1/cval/image/upload",
+  //     {
+  //       headers: {
+  //         "Access-Control-Allow-Origin": "*",
+  //       },
+  //       mode: "cors",
+
+  //       method: "POST",
+  //       body: data,
+  //     }
+  //   );
+  //   const file = await res.json();
+  //   setImageFiles(file.secure_url);
+  // };
   // const datas = files.map((data) => data);
   // setDisplayUploadedPhoto(datas);
 
@@ -280,16 +315,22 @@ export default function SimpleTabs() {
             <Grid item md={4}>
               <InputLabel id="demo-simple-select-label">Ngarko</InputLabel>
 
-              <div className="avatar-wrapper" onClick={handleClickOpen}>
+              <div className="avatar-wrapper">
                 {imageFiles.length > 0 ? (
-                  <img src={imageFiles} />
-                ) : (
                   <>
+                    <img src={imageFiles} />
+                    <a onClick={() => setImageFiles("")}>Fshi</a>
+                  </>
+                ) : (
+                  <div className="avatar-wrapper" onClick={handleClickOpen}>
                     <FaceIcon className="avatar-center" />
                     <span>Shto Fotografi</span>
-                  </>
+                  </div>
                 )}
               </div>
+              {/* {imageFiles.length > 0 && (
+                <a onClick={() => setImageFiles("")}>Fshi</a>
+              )} */}
             </Grid>
             <Grid item md={4}>
               <div>
