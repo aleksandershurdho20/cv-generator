@@ -196,7 +196,7 @@ export default function SimpleTabs() {
 
     formdata.append("file", e.target.files[0]);
     formdata.append("upload_preset", "ngarko");
-    console.log(e.target.files[0], "even");
+
     const preview = URL.createObjectURL(e.target.files[0]);
     if (preview) {
       setImageFiles(preview);
@@ -307,7 +307,15 @@ export default function SimpleTabs() {
           removeSkills={removeSkills}
         />
       )}
-      {activeStep === 2 && <TemplateList />}
+      {activeStep === 2 && (
+        <TemplateList
+          bodyRef={bodyRef}
+          {...cvData}
+          skills={skills}
+          languageKnowledges={languageKnowledges}
+          imageFiles={imageFiles}
+        />
+      )}
 
       {activeStep === 0 && (
         <Container style={{ marginTop: 10 }}>
@@ -436,7 +444,7 @@ export default function SimpleTabs() {
         </Button>
       </div>
 
-      <div ref={bodyRef}>
+      {/* <div ref={bodyRef}>
         <CV
           personalData={{
             name: cvData.emer,
@@ -496,7 +504,7 @@ export default function SimpleTabs() {
         />
         <TemplateOne {...cvData} skills={skills} />
       </div>
-
+ */}
       <Footer backgroundColor={`#FAFAFA`} />
     </div>
   );
