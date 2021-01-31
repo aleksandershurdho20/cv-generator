@@ -144,7 +144,14 @@ export default function TemplateTwo(props) {
           <div className="title">
             <p className="bold">Njohuri Gjuhesore</p>
           </div>
-          <p>{props.pershkrimi}</p>
+          <p>
+            {props.languageKnowledges.map((data, index) => (
+              <div key={index}>
+                <p>{data.gjuha}</p>
+                <p>{data.niveli}</p>
+              </div>
+            ))}
+          </p>
         </div>
         <div className="resume_item resume_work">
           <div className="title">

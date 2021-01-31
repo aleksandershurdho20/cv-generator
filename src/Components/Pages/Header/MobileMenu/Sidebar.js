@@ -17,7 +17,7 @@ const Sidebar = ({ handleOpen, open }) => {
                     <SidebarLink to="/Krijo" activeStyle>
                         Krijo
                     </SidebarLink>
-                    <SidebarLink to="/Shembuj" activeStyle>
+                    <SidebarLink to="/Cv/shembuj" activeStyle>
                         Shembuj
                     </SidebarLink>
 

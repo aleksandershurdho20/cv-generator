@@ -1,0 +1,16 @@
+.example-cv-hero {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  .inner-example-hero {
+    // background: #f0f0f1;
+    padding: 50px;
+  }
+  .card-hero {
+    background: #e79897;
+    width: 15%;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -34,7 +34,7 @@ export default function Index() {
                     <NavLink to='/Krijo' activeStyle>
                         Krijo
           </NavLink>
-                    <NavLink to='/Shembuj' activeStyle>
+                    <NavLink to='/Cv/shembuj' activeStyle>
                         Shembuj
           </NavLink>
                     {/* Second Nav */}
