@@ -10,6 +10,8 @@ import Container from "@material-ui/core/Container";
 import CV from "react-cv";
 import TemplateOne from "./CVTemplates/TemplateOne";
 import TemplateTwo from "./CVTemplates/Template2/TemplateTwo";
+import Pdf from "react-to-pdf";
+
 export default function TemplateList(props) {
   const [selectTemplate, setSelectTempalte] = useState("");
 
@@ -49,8 +51,13 @@ export default function TemplateList(props) {
         </div>
         {/* {selectTemplate === 0 && bodyRef} */}
       </Carousel>
-      <div ref={props.bodyRef}>
-        {/* <CV
+      {selectTemplate === 2 && (
+        <div ref={props.bodyRef}>
+          <TemplateTwo {...props} />
+        </div>
+      )}
+      {/* <div ref={props.bodyRef}> */}
+      {/* <CV
           personalData={{
             name: props.emer,
             title: props.pozicioni,
@@ -107,9 +114,9 @@ export default function TemplateList(props) {
           ]}
           branding={true} // or false to hide it.
         /> */}
-        {/* <TemplateOne {...props} skills={props.skills} /> */}
-        <TemplateTwo {...props} />
-      </div>
+      {/* <TemplateOne {...props} skills={props.skills} /> */}
+      {/* <TemplateTwo {...props} /> */}
+      {/* </div> */}
     </Container>
   );
 }

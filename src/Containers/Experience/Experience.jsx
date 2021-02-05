@@ -15,6 +15,9 @@ import Edukimi from "../../Components/Edukimi/Edukimi";
 import TextField from "@material-ui/core/TextField";
 import Gjuhet from "../../Components/Gjuhet";
 import Skills from "../../Components/Skills/Index";
+import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton";
+
 import "./Experience.scss";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+  },
+  experienceWrapper: {
+    width: "100%",
   },
 }));
 
@@ -44,6 +50,7 @@ export default function Experience(props) {
     handleSkillsFields,
     addSkillFields,
     removeSkills,
+    eksperienca,
   } = props;
   console.log(props, "props");
   const currentYear = new Date().getUTCFullYear();
@@ -66,6 +73,7 @@ export default function Experience(props) {
     "Nentor",
     "Dhjetor",
   ];
+  console.log(eksperienca);
   return (
     <div className={classes.root}>
       <Container>
@@ -80,127 +88,174 @@ export default function Experience(props) {
           </AccordionSummary>
           <AccordionDetails>
             <Grid container>
-              <Grid container spacing={2}>
-                <Grid item md={6} sm={12} xs={12}>
-                  <TextField
-                    id="outlined-basic"
-                    label="Pozicioni"
-                    variant="outlined"
-                    name="pozicioni"
-                    value={pozicioni}
-                    onChange={props.handleCVFields}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item md={6} sm={12} xs={12}>
-                  <TextField
-                    id="outlined-basic"
-                    label="Qyteti"
-                    variant="outlined"
-                    name="qytetiPuna"
-                    fullWidth
-                    value={qytetiPuna}
-                    onChange={props.handleCVFields}
-                  />
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item md={12} style={{ marginTop: 15 }}>
-                  <TextField
-                    id="outlined-basic"
-                    label="Kompania"
-                    variant="outlined"
-                    name="kompania"
-                    fullWidth
-                    value={kompania}
-                    onChange={props.handleCVFields}
-                  />
-                </Grid>
-              </Grid>
-              <Grid container spacing={2}>
-                <Grid item md={6} sm={12} xs={12}>
-                  <InputLabel
-                    id="demo-simple-select-label"
-                    style={{ marginTop: 10 }}
-                  >
-                    Data e fillimit
-                  </InputLabel>
+              {eksperienca &&
+                eksperienca.map((data, index) => (
+                  <div key={index} className={classes.experienceWrapper}>
+                    <Grid container spacing={2}>
+                      <Grid item md={6} sm={12} xs={12}>
+                        <TextField
+                          id="outlined-basic"
+                          label="Pozicioni"
+                          variant="outlined"
+                          name="pozicioni"
+                          value={data.pozicioni}
+                          // onChange={props.handleCVFields}
+                          onChange={(value) =>
+                            props.handleExperienceFields(value, index)
+                          }
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item md={6} sm={12} xs={12}>
+                        <TextField
+                          id="outlined-basic"
+                          label="Qyteti"
+                          variant="outlined"
+                          name="qyteti"
+                          fullWidth
+                          value={data.qyteti}
+                          // onChange={props.handleCVFields}
+                          onChange={(value) =>
+                            props.handleExperienceFields(value, index)
+                          }
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container>
+                      <Grid item md={12} style={{ marginTop: 15 }}>
+                        <TextField
+                          id="outlined-basic"
+                          label="Kompania"
+                          variant="outlined"
+                          name="kompania"
+                          fullWidth
+                          value={data.kompania}
+                          onChange={(value) =>
+                            props.handleExperienceFields(value, index)
+                          }
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                      <Grid item md={6} sm={12} xs={12}>
+                        <InputLabel
+                          id="demo-simple-select-label"
+                          style={{ marginTop: 10 }}
+                        >
+                          Data e fillimit
+                        </InputLabel>
 
-                  <select
-                    className="select"
-                    name="muajiFillimit"
-                    value={muajiFillimit}
-                    onChange={props.handleCVFields}
-                  >
-                    {monthNames.map((data, index) => (
-                      <option value={data} key={index}>
-                        {data}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    className="select"
-                    style={{ marginLeft: 20 }}
-                    name="dataEFillimi"
-                    value={dataEFillimi}
-                    onChange={props.handleCVFields}
-                  >
-                    {years.map((data, index) => (
-                      <option value={data} key={index}>
-                        {data}
-                      </option>
-                    ))}
-                  </select>
-                </Grid>
-                <Grid item md={6} sm={12} xs={12}>
-                  <InputLabel
-                    id="demo-simple-select-label"
-                    style={{ marginTop: 10 }}
-                  >
-                    Data e mbarimit
-                  </InputLabel>
+                        <select
+                          className="select"
+                          name="muajiFillimit"
+                          value={data.muajiFillimit}
+                          // onChange={props.handleCVFields}
+                          onChange={(value) =>
+                            props.handleExperienceFields(value, index)
+                          }
+                        >
+                          {monthNames.map((value, index) => (
+                            <option value={value} key={index}>
+                              {value}
+                            </option>
+                          ))}
+                        </select>
+                        <select
+                          className="select"
+                          style={{ marginLeft: 20 }}
+                          name="dataEFillimi"
+                          value={data.dataEFillimi}
+                          // onChange={props.handleCVFields}
+                          onChange={(value) =>
+                            props.handleExperienceFields(value, index)
+                          }
+                        >
+                          {years.map((value, index) => (
+                            <option value={value} key={index}>
+                              {value}
+                            </option>
+                          ))}
+                        </select>
+                      </Grid>
+                      <Grid item md={6} sm={12} xs={12}>
+                        <InputLabel
+                          id="demo-simple-select-label"
+                          style={{ marginTop: 10 }}
+                        >
+                          Data e mbarimit
+                        </InputLabel>
 
-                  <select
-                    className="select"
-                    name="muajiMbarimit"
-                    value={muajiMbarimit}
-                    onChange={props.handleCVFields}
-                  >
-                    {monthNames.map((data, index) => (
-                      <option value={data} key={index}>
-                        {data}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    className="select"
-                    style={{ marginLeft: 20 }}
-                    name="dataEmbarimit"
-                    value={dataEmbarimit}
-                    onChange={props.handleCVFields}
-                  >
-                    {years.map((data, index) => (
-                      <option value={data} key={index}>
-                        {data}
-                      </option>
-                    ))}
-                  </select>
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item md={12}>
-                  <InputLabel
-                    id="demo-simple-select-label"
-                    style={{ marginTop: 10 }}
-                  >
-                    Pershkrimi
-                  </InputLabel>
-                  <textarea
-                    id="outlined-basic"
-                    className="textarea-description"
-                  />
-                </Grid>
-              </Grid>
+                        <select
+                          className="select"
+                          name="muajiMbarimit"
+                          value={data.muajiMbarimit}
+                          // onChange={props.handleCVFields}
+                          onChange={(value) =>
+                            props.handleExperienceFields(value, index)
+                          }
+                        >
+                          {monthNames.map((value, index) => (
+                            <option value={value} key={index}>
+                              {value}
+                            </option>
+                          ))}
+                        </select>
+                        <select
+                          className="select"
+                          style={{ marginLeft: 20 }}
+                          name="dataEmbarimit"
+                          value={data.dataEmbarimit}
+                          // onChange={props.handleCVFields}
+                          onChange={(value) =>
+                            props.handleExperienceFields(value, index)
+                          }
+                        >
+                          {years.map((data, index) => (
+                            <option value={data} key={index}>
+                              {data}
+                            </option>
+                          ))}
+                        </select>
+                      </Grid>
+                    </Grid>
+                    <Grid container>
+                      <Grid item md={12}>
+                        <InputLabel
+                          id="demo-simple-select-label"
+                          style={{ marginTop: 10 }}
+                        >
+                          Pershkrimi
+                        </InputLabel>
+                        <textarea
+                          id="outlined-basic"
+                          className="textarea-description"
+                          name="pershkrimi"
+                          value={data.pershkrimi}
+                          onChange={(value) =>
+                            props.handleExperienceFields(value, index)
+                          }
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container justify="center">
+                      {index !== 0 && (
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => props.removeExperienceFields(index)}
+                          className={classes.button}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      )}
+                    </Grid>
+                  </div>
+                ))}
+              <button
+                className="extra-info-btn"
+                onClick={props.duplicateExperienceFields}
+              >
+                Shto Eksperienca
+              </button>
             </Grid>
           </AccordionDetails>
         </Accordion>{" "}

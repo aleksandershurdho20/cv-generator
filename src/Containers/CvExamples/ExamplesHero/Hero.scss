@@ -1,16 +1,42 @@
+$card-color: #fdedec;
+$container: #fadada;
 .example-cv-hero {
   display: flex;
   justify-content: center;
   width: 100%;
+  padding: 9%;
   .inner-example-hero {
     // background: #f0f0f1;
-    padding: 50px;
+    // padding: 50px;
   }
-  .card-hero {
-    background: #e79897;
-    width: 15%;
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-  }
+}
+.card-hero {
+  background: #e79897;
+  width: 5%;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  /* top: 42px; */
+  /* bottom: 93px; */
+  top: 74%;
+  left: auto;
+  right: 50%;
+}
+.wrapper-template {
+  background: $card-color;
+  // background-image: url(https://cdn.dribbble.com/users/34632/screenshots/5852676/talent_search_4x.png?compress=1&resize=800x600);
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // height: 400px;
+}
+.slider-img {
+  width: 100%;
+  // height: 500px;
+  object-fit: cover;
+}
+.alice-carousel ul li img {
+  // height: 400px;
+  width: 100%;
+  // object-fit: cover;
 }

@@ -77,12 +77,16 @@ export default function SimpleTabs() {
     statusiMartesor: "",
     pozicioni: "",
     qytetiPuna: "",
-    kompania: "",
-    dataEFillimi: "",
-    muajiFillimit: "",
-    muajiMbarimit: "",
-    dataEmbarimit: "",
-    pershkrimi: "",
+    eksperienca: [
+      {
+        kompania: "",
+        dataEFillimi: "",
+        muajiFillimit: "",
+        muajiMbarimit: "",
+        dataEmbarimit: "",
+        pershkrimi: "",
+      },
+    ],
     diploma: "",
     universiteti: "",
     educationQyteti: "",
@@ -103,6 +107,44 @@ export default function SimpleTabs() {
       njohuri: "",
     },
   ]);
+
+  const handleExperienceFields = (e, index) => {
+    const { name, value } = e.target;
+    let tempArr = [...cvData.eksperienca];
+    tempArr[index][name] = value;
+    console.log(tempArr);
+    debugger;
+    setCvData({
+      ...cvData,
+      eksperienca: tempArr,
+    });
+  };
+  const duplicateExperienceFields = () => {
+    setCvData({
+      ...cvData,
+      eksperienca: [
+        ...cvData.eksperienca,
+        {
+          pozicioni: "",
+          qyteti: "",
+          kompania: "",
+          dataEFillimi: "",
+          muajiFillimit: "",
+          muajiMbarimit: "",
+          dataEmbarimit: "",
+          pershkrimi: "",
+        },
+      ],
+    });
+  };
+  const removeExperienceFields = (index) => {
+    const tempArr = [...cvData.eksperienca];
+    tempArr.splice(index, 1);
+    setCvData({
+      ...cvData,
+      eksperienca: tempArr,
+    });
+  };
   const [loading, setLoading] = useState(false);
   const handleSkillsFields = (e, index) => {
     const { name, value } = e.target;
@@ -297,6 +339,7 @@ export default function SimpleTabs() {
         <Experience
           {...cvData}
           handleCVFields={handleCVFields}
+          duplicateExperienceFields={duplicateExperienceFields}
           languageKnowledges={languageKnowledges}
           addMoreLanguages={addMoreLanguages}
           deleteAddedLanguages={deleteAddedLanguages}
@@ -305,6 +348,8 @@ export default function SimpleTabs() {
           handleSkillsFields={handleSkillsFields}
           addSkillFields={addSkillFields}
           removeSkills={removeSkills}
+          handleExperienceFields={handleExperienceFields}
+          removeExperienceFields={removeExperienceFields}
         />
       )}
       {activeStep === 2 && (
