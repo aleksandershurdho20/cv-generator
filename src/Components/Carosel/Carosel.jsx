@@ -87,14 +87,18 @@ export default function SimpleTabs() {
         pershkrimi: "",
       },
     ],
-    diploma: "",
-    universiteti: "",
-    educationQyteti: "",
-    educationDataeFillimit: "",
-    educationDataeMbarimit: "",
-    educationMuajiFillimit: "",
-    educationMuajiMbarimit: "",
-    educationPershkrimi: "",
+    edukimi: [
+      {
+        diploma: "",
+        universiteti: "",
+        educationQyteti: "",
+        educationDataeFillimit: "",
+        educationDataeMbarimit: "",
+        educationMuajiFillimit: "",
+        educationMuajiMbarimit: "",
+        educationPershkrimi: "",
+      },
+    ],
   });
   const [languageKnowledges, setLanguageKnowledges] = useState([
     {
@@ -181,6 +185,43 @@ export default function SimpleTabs() {
     setLanguageKnowledges(tempArr);
   };
 
+  const handleDuplicateEducation = () => {
+    setCvData({
+      ...cvData,
+      edukimi: [
+        ...cvData.edukimi,
+        {
+          diploma: "",
+          universiteti: "",
+          educationQyteti: "",
+          educationDataeFillimit: "",
+          educationDataeMbarimit: "",
+          educationMuajiFillimit: "",
+          educationMuajiMbarimit: "",
+          educationPershkrimi: "",
+        },
+      ],
+    });
+  };
+  const handleEducationFields = (e, index) => {
+    const { name, value } = e.target;
+    let tempArr = [...cvData.edukimi];
+    tempArr[index][name] = value;
+    console.log(tempArr);
+    debugger;
+    setCvData({
+      ...cvData,
+      edukimi: tempArr,
+    });
+  };
+  const removeEducationFields = (index) => {
+    const tempArr = [...cvData.edukimi];
+    tempArr.splice(index, 1);
+    setCvData({
+      ...cvData,
+      edukimi: tempArr,
+    });
+  };
   const ref = useRef();
   const bodyRef = useRef();
   const createPdfs = () => createPdf(bodyRef.current);
@@ -350,6 +391,9 @@ export default function SimpleTabs() {
           removeSkills={removeSkills}
           handleExperienceFields={handleExperienceFields}
           removeExperienceFields={removeExperienceFields}
+          handleDuplicateEducation={handleDuplicateEducation}
+          handleEducationFields={handleEducationFields}
+          removeEducationFields={removeEducationFields}
         />
       )}
       {activeStep === 2 && (
