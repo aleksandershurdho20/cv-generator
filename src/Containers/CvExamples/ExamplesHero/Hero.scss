@@ -40,3 +40,15 @@ $container: #fadada;
   width: 100%;
   // object-fit: cover;
 }
+.card-wrapper {
+  width: 250px;
+  margin-top: 20px;
+  .template-image {
+    border-radius: 4px;
+  }
+
+  .title {
+    padding-bottom: 10px;
+    color: #0000007a;
+  }
+}

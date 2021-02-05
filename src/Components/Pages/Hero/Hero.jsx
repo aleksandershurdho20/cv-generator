@@ -3,6 +3,7 @@ import Cv from "../../../assets/cv.png";
 import BigCircle from "../../../assets/big-eclipse.svg";
 import MediumCircle from "../../../assets/mid-eclipse.svg";
 import SmallCircle from "../../../assets/small-eclipse.svg";
+
 import { Link } from "react-router-dom";
 import "./Hero.scss";
 export default function Hero() {

@@ -157,31 +157,37 @@ export default function TemplateTwo(props) {
           <div className="title">
             <p className="bold">Eksperienca</p>
           </div>
-          <ul>
-            <li>
-              <div className="date">{`${props.muajiFillimit} ${props.dataEFillimi} - ${props.muajiMbarimit} ${props.dataEmbarimit} `}</div>
-              <div className="info">
-                <p className="semi-bold">{props.pozicioni}</p>
-                <p>{props.kompania}</p>
-              </div>
-            </li>
-          </ul>
+          {props.eksperienca &&
+            props.eksperienca.map((data, index) => (
+              <ul key={index}>
+                <li>
+                  <div className="date">{`${data.muajiFillimit} ${data.dataEFillimi} - ${data.muajiMbarimit} ${data.dataEmbarimit} `}</div>
+                  <div className="info">
+                    <p className="semi-bold">{data.pozicioni}</p>
+                    <p>{data.kompania}</p>
+                  </div>
+                </li>
+              </ul>
+            ))}
         </div>
         <div className="resume_item resume_education">
           <div className="title">
             <p className="bold">Edukimi</p>
           </div>
-          <ul>
-            <li>
-              <div className="date">{`${props.educationDataeFillimit} ${props.educationMuajiFillimit} - ${props.educationDataeMbarimit} ${props.educationMuajiMbarimit}`}</div>
-              <div className="info">
-                <p className="semi-bold">
-                  {props.diploma} ({props.universiteti})
-                </p>
-                <p>{props.educationPershkrimi}</p>
-              </div>
-            </li>
-          </ul>
+          {props.edukimi &&
+            props.edukimi.map((data, index) => (
+              <ul key={index}>
+                <li>
+                  <div className="date">{`${data.educationDataeFillimit} ${data.educationMuajiFillimit} - ${data.educationDataeMbarimit} ${data.educationMuajiMbarimit}`}</div>
+                  <div className="info">
+                    <p className="semi-bold">
+                      {data.diploma} ({data.universiteti})
+                    </p>
+                    <p>{data.educationPershkrimi}</p>
+                  </div>
+                </li>
+              </ul>
+            ))}
         </div>
         {/* <div className="resume_item resume_hobby">
           <div className="title">

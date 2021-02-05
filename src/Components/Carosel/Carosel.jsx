@@ -22,6 +22,7 @@ import TemplateOne from "../SelectTemplates/CVTemplates/TemplateOne";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Snackbar from "@material-ui/core/Snackbar";
 import Slide from "@material-ui/core/Slide";
+import MuiAlert from "@material-ui/lab/Alert";
 
 function getSteps() {
   return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
@@ -62,6 +63,8 @@ export default function SimpleTabs() {
   const [displayUploadedPhoto, setDisplayUploadedPhoto] = useState("");
   const [fileName, setFileName] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [errorrMessage, setErrorrMessage] = useState("");
+  const [display, setDisplay] = useState(false);
   const [cvData, setCvData] = useState({
     emer: "",
     mbiemer: "",
@@ -141,6 +144,10 @@ export default function SimpleTabs() {
       ],
     });
   };
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
   const removeExperienceFields = (index) => {
     const tempArr = [...cvData.eksperienca];
     tempArr.splice(index, 1);
@@ -224,7 +231,14 @@ export default function SimpleTabs() {
   };
   const ref = useRef();
   const bodyRef = useRef();
-  const createPdfs = () => createPdf(bodyRef.current);
+  const createPdfs = () => {
+    if (!bodyRef.current) {
+      setDisplay(true);
+      setErrorrMessage("Ju lutem zgjidhni nje template!");
+    }
+    createPdf(bodyRef.current);
+    // setDisplay(false);
+  };
   const [imageFiles, setImageFiles] = useState("");
   const handleCVFields = (e) => {
     const { name, value } = e.target;
@@ -531,6 +545,11 @@ export default function SimpleTabs() {
         >
           Submit
         </Button>
+        <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={() => setDisplay(false)} severity="error">
+            {errorrMessage}
+          </Alert>
+        </Snackbar>
       </div>
 
       {/* <div ref={bodyRef}>
