@@ -8,7 +8,7 @@ import Template3 from "../../assets/template3.png";
 import Container from "@material-ui/core/Container";
 
 import Grid from "@material-ui/core/Grid";
-
+import Footer from "../Footer/Footer";
 export default function Examples() {
   const handleOnDragStart = (e) => e.preventDefault();
 
@@ -28,14 +28,14 @@ export default function Examples() {
             </Grid>
             <Grid item md={4} sm={12}>
               <div className="card-wrapper">
-                <h4 className="title">Template 1</h4>
+                <h4 className="title">Template 2</h4>
 
                 <img src={Template3} className="template-image" />
               </div>{" "}
             </Grid>
             <Grid item md={4} sm={12}>
               <div className="card-wrapper">
-                <h4 className="title">Template 1</h4>
+                <h4 className="title">Template 3</h4>
 
                 <img src={Template2} className="template-image" />
               </div>
@@ -43,6 +43,8 @@ export default function Examples() {
           </Grid>
         </Container>
       </div>
+      <Footer backgroundColor={`#FAFAFA`} />
+
       {/* <AliceCarousel
         mouseTrackingEnabled
         autoPlay={true}

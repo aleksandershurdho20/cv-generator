@@ -29,7 +29,14 @@ export default function Hero() {
                 Krijo CV{" "}
               </Link>
             </button>
-            <button class="cta2">Shiko Shembuj</button>
+            <button class="cta2">
+              <Link
+                to="/Cv/shembuj"
+                style={{ textDecoration: "none", color: "#FFF" }}
+              >
+                Shiko Shembuj
+              </Link>
+            </button>
           </div>
         </div>
 

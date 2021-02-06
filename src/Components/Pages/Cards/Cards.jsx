@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 300,
   },
+  cardTitle: {
+    color: "#0000007a",
+  },
 }));
 export default function Cards() {
   const classes = useStyles();
@@ -43,7 +46,7 @@ export default function Cards() {
                   title="Contemplative Reptile"
                 />
                 <CardContent>
-                  <h3>Zgjidh template</h3>
+                  <h3 className={classes.cardTitle}>Zgjidh template</h3>
                   <p>Zgjidh template ne formation EuroPass ose CV Moderne</p>
                 </CardContent>
               </CardActionArea>
@@ -58,7 +61,7 @@ export default function Cards() {
                   title="Contemplative Reptile"
                 />
                 <CardContent>
-                  <h3>Ploteso te dhenat</h3>
+                  <h3 className={classes.cardTitle}>Ploteso te dhenat</h3>
                   <p>Ploteso te dhenat, pjesen tjeter na i lini ne</p>
                 </CardContent>
               </CardActionArea>
@@ -73,7 +76,7 @@ export default function Cards() {
                   title="Contemplative Reptile"
                 />
                 <CardContent>
-                  <h3>Modifiko Formatin e Cv</h3>
+                  <h3 className={classes.cardTitle}>Modifiko Formatin e Cv</h3>
                   <p>Bejeni tuajen, vetem me disa klikime larg</p>
                 </CardContent>
               </CardActionArea>
