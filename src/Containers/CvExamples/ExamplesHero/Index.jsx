@@ -6,10 +6,12 @@ export default function Index() {
     <>
       <div className="example-cv-hero">
         <div className="inner-example-hero">
-          <h1>Real Resume Samples for Every Job & Profession</h1>
+          <h1>Shembuj CV reale per cdo profesion.</h1>
           <h3>
-            Find the perfect free resume sample and upgrade your resume with
-            CV.AL
+            Gjeni CV qe ju pershtatet me shume dhe perdoreni ate permes
+            platformes CV.AL
+            {/* Find the perfect free resume sample and upgrade your resume with
+            CV.AL */}
           </h3>
         </div>
       </div>

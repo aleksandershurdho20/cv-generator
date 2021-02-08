@@ -15,3 +15,46 @@
   padding: 25px;
   border-radius: 6px;
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .select {
+    width: 100%;
+    padding: 18.5px 14px;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .select {
+    width: 100%;
+    padding: 18.5px 14px;
+  }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .select {
+    width: 100%;
+    padding: 18.5px 14px;
+  }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .select {
+    width: 100%;
+    padding: 18.5px 14px;
+  }
+}

@@ -5,10 +5,13 @@ import Header from "./Components/Pages/Header/Index"
 import Cards from "./Components/Pages/Cards/Cards"
 import Routes from "./Routes"
 import 'animate.css'
+import Seo from "./Components/SEO/Seo"
 function App() {
   return (
     <>
+
       <Routes />
+      <Seo title="CV.AL | Kryefaqja" />
     </>
 
   );

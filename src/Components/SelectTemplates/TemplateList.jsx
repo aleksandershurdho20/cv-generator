@@ -57,7 +57,7 @@ export default function TemplateList(props) {
         </div>
       )}
       {selectTemplate === 0 && (
-        <div ref={props.bodyRef}>
+        <div ref={props.bodyRef} style={{ display: "none" }}>
           <CV
             personalData={{
               name: props.emer,

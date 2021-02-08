@@ -423,7 +423,7 @@ export default function SimpleTabs() {
       {activeStep === 0 && (
         <Container style={{ marginTop: 10 }}>
           <Grid container spacing={3}>
-            <Grid item md={4}>
+            <Grid item md={4} sm={12} xs={12}>
               <InputLabel id="demo-simple-select-label">Ngarko</InputLabel>
 
               <div className="avatar-wrapper">
