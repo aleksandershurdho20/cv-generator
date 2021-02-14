@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Sidebar from "./Components/Pages/Header/MobileMenu/Sidebar"
 import NotFound from "./assets/NotFound.svg"
 import CvExamples from "../src/Containers/CvExamples/Examples"
+import Download from "../src/Containers/Download"
 const imageStyles = {
     width: '27%',
     position: 'relative',
@@ -34,7 +35,7 @@ export default function Routes() {
                     <Route path="/RrethNesh" component={() => <h2>Rreth nesh</h2>} />
                     <Route path="/Krijo" component={CreateCv} />
                     <Route path="/Cv/shembuj" component={CvExamples} />
-
+                    <Route path="/CV/Download" component={Download} />
                     <Route path="*" component={() => <div>
                         <img src={NotFound} style={imageStyles} />
                         <h1 style={Erororr}>404</h1>

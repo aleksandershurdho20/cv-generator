@@ -53,7 +53,7 @@ const useclasses = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
   const [value, setValue] = React.useState(0);
   const classes = useclasses();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -417,6 +417,7 @@ export default function SimpleTabs() {
           skills={skills}
           languageKnowledges={languageKnowledges}
           imageFiles={imageFiles}
+          displayCV={props.displayCV}
         />
       )}
 

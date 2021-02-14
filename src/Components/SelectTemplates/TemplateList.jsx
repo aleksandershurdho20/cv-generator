@@ -11,7 +11,7 @@ import CV from "react-cv";
 import TemplateOne from "./CVTemplates/TemplateOne";
 import TemplateTwo from "./CVTemplates/Template2/TemplateTwo";
 import Pdf from "react-to-pdf";
-
+import Download from "../../Containers/Download";
 export default function TemplateList(props) {
   const [selectTemplate, setSelectTempalte] = useState("");
   console.log(props, "template list");
@@ -24,10 +24,7 @@ export default function TemplateList(props) {
     { url: "images/6.jpg" },
     { url: "images/7.jpg" },
   ];
-  console.log(props.bodyRef);
-  console.log(props);
-  console.log(props.skills, "skills");
-  console.log(selectTemplate);
+
   return (
     <Container>
       <Carousel
@@ -51,91 +48,11 @@ export default function TemplateList(props) {
         </div>
         {/* {selectTemplate === 0 && bodyRef} */}
       </Carousel>
-      {selectTemplate === 2 && (
-        <div ref={props.bodyRef}>
-          <TemplateTwo {...props} />
-        </div>
-      )}
-      {selectTemplate === 0 && (
-        <div ref={props.bodyRef} style={{ display: "none" }}>
-          <CV
-            personalData={{
-              name: props.emer,
-              title: props.pozicioni,
-              image: props.imageFiles,
-              contacts: [
-                { type: "email", value: props.email },
-                { type: "phone", value: props.telefon },
-                { type: "location", value: props.qyteti },
-              ],
-            }}
-            sections={[
-              {
-                type: "experiences-list",
-                title: "Eksperienca",
-                icon: "archive",
-                // items: [
-                //   {
-                //     title: props.pozicioni,
-                //     company: props.kompania,
-                //     description: props.pershkrimi,
-                //     datesBetween: `${props.muajiFillimit} ${props.dataEFillimi} - ${props.muajiMbarimit} ${props.dataEmbarimit} `,
-                //   },
-                // ],
-
-                items: props.eksperienca.map((data) => {
-                  return {
-                    title: data.pozicioni,
-                    company: data.kompania,
-                    description: data.pershkrimi,
-                    datesBetween: `${data.muajiFillimit} ${data.dataEFillimi} - ${data.muajiMbarimit} ${data.dataEmbarimit} `,
-                  };
-                }),
-              },
-              {
-                type: "common-list",
-                title: "Edukimi",
-                icon: "graduation",
-                // items: [
-                //   {
-                //     title: props.diploma,
-                //     authority: props.universiteti,
-                //     rightSide: `${props.educationDataeFillimit} ${props.educationMuajiFillimit} - ${props.educationDataeMbarimit} ${props.educationMuajiMbarimit}`,
-                //   },
-                // ],
-
-                items: props.edukimi.map((data) => {
-                  return {
-                    title: data.diploma,
-                    authority: data.universiteti,
-                    rightSide: `${data.educationDataeFillimit} ${data.educationMuajiFillimit} - ${data.educationDataeMbarimit} ${data.educationMuajiMbarimit}`,
-                  };
-                }),
-              },
-              {
-                type: "common-list",
-                title: "Njohuri Gjuhesore",
-                icon: "language",
-                items: props.languageKnowledges.map((data) => {
-                  return {
-                    authority: data.gjuha,
-                    authorityMeta: data.niveli,
-                  };
-                }),
-              },
-              {
-                type: "tag-list",
-                title: "Aftesi Profesionale",
-                icon: "rocket",
-                items: props.skills.map((skill) => skill.njohuri),
-              },
-            ]}
-            branding={true} // or false to hide it.
-          />
-          {/* <TemplateOne {...props} skills={props.skills} />
-      {/* <TemplateTwo {...props} /> */}
-        </div>
-      )}
+      <div>
+        <Download {...props} selectTemplate={selectTemplate} />
+      </div>
     </Container>
   );
 }
+
+// props.location && props.location.pathname.includes("/Krijo")
