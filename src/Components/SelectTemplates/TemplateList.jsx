@@ -12,6 +12,8 @@ import TemplateOne from "./CVTemplates/TemplateOne";
 import TemplateTwo from "./CVTemplates/Template2/TemplateTwo";
 import Pdf from "react-to-pdf";
 import Download from "../../Containers/Download";
+import Template4 from "../../assets/Template4.PNG";
+
 export default function TemplateList(props) {
   const [selectTemplate, setSelectTempalte] = useState("");
   console.log(props, "template list");
@@ -19,7 +21,7 @@ export default function TemplateList(props) {
     { url: InitialCvTempalte },
     { url: Template2 },
     { url: Template3 },
-    { url: "images/4.jpg" },
+    { url: Template4 },
     { url: "images/5.jpg" },
     { url: "images/6.jpg" },
     { url: "images/7.jpg" },
@@ -46,6 +48,12 @@ export default function TemplateList(props) {
 
           <p className="legend">Perdor kete template. </p>
         </div>
+        <div style={{ height: "400px" }}>
+          <img src={Template4} />
+
+          <p className="legend">Perdor kete template. </p>
+        </div>
+
         {/* {selectTemplate === 0 && bodyRef} */}
       </Carousel>
       <div>

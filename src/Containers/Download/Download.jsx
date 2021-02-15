@@ -1,7 +1,7 @@
 import React from "react";
 import TemplateTwo from "../../Components/SelectTemplates/CVTemplates/Template2/TemplateTwo";
 import CV from "react-cv";
-
+import Template3 from "../../Components/SelectTemplates/CVTemplates/Template3/Template3";
 export default function Download(props) {
   return (
     <div style={{ display: "inline" }}>
@@ -88,6 +88,45 @@ export default function Download(props) {
           />
           {/* <TemplateOne {...props} skills={props.skills} />
       {/* <TemplateTwo {...props} /> */}
+        </div>
+      )}
+      {/* <Resume
+            name={props.emer + "" + props.mbiemer}
+            firstName={props.emer}
+            tel={props.telefon}
+            email={props.email}
+            address="New York, NY"
+            profileImage={props.imageFiles}
+            profession="Business magnate, playboy and scientist"
+            skills={props.skills.map((skill) => {
+              return {
+                name: skill.njohuri,
+              };
+            })}
+            experiences={props.eksperienca.map((data) => {
+              return {
+                title: data.pozicioni,
+                company: data.kompania,
+                description: (
+                  <div>
+                    <p>{data.pershkrimi}</p>
+                  </div>
+                ),
+                period: `${data.muajiFillimit} ${data.dataEFillimi} - ${data.muajiMbarimit} ${data.dataEmbarimit} `,
+              };
+            })}
+            education={[
+              {
+                school: "MIT",
+                department: "Electrical engineering",
+                degree: "Master's degree",
+                period: "1970-1971",
+              },
+            ]}
+          /> */}
+      {props.selectTemplate === 3 && (
+        <div ref={props.bodyRef}>
+          <Template3 {...props} />
         </div>
       )}
     </div>

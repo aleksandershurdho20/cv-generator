@@ -80,6 +80,7 @@ export default function SimpleTabs(props) {
     statusiMartesor: "",
     pozicioni: "",
     qytetiPuna: "",
+    profili: "",
     eksperienca: [
       {
         kompania: "",
