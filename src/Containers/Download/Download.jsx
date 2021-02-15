@@ -2,6 +2,7 @@ import React from "react";
 import TemplateTwo from "../../Components/SelectTemplates/CVTemplates/Template2/TemplateTwo";
 import CV from "react-cv";
 import Template3 from "../../Components/SelectTemplates/CVTemplates/Template3/Template3";
+import TemplateFour from "../../Components/SelectTemplates/CVTemplates/Template4/Template4";
 export default function Download(props) {
   return (
     <div style={{ display: "inline" }}>
@@ -127,6 +128,11 @@ export default function Download(props) {
       {props.selectTemplate === 3 && (
         <div ref={props.bodyRef}>
           <Template3 {...props} />
+        </div>
+      )}
+      {props.selectTemplate === 1 && (
+        <div ref={props.bodyRef}>
+          <TemplateFour {...props} />
         </div>
       )}
     </div>

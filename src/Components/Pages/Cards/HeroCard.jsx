@@ -35,8 +35,8 @@ export default function HeroCard() {
               <h2>Krijoni CV Profesionale dhe e bukura brenda pak minutash</h2>
               <p>
                 Përmes kësaj platforme ju mund të krijoni CV profesionale për
-                vetëm 15 minuta në gjuhën shqipe. Krijimi i CV-së është shumë i
-                thjeshtë përmes platformës tonë, e po ashtu platforma ka pjesë
+                vetëm 5 minuta në gjuhën shqipe. Krijimi i CV-së është shumë i
+                thjeshtë përmes platformës tonë, gjithashtu platforma ka pjesë
                 të cilat ju ndihmojnë të plotësoni përshkrimet e punëve që keni
                 kryer.
               </p>

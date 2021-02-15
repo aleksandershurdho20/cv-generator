@@ -28,9 +28,9 @@ export default function Index() {
                     <NavLink exact to='/' activeStyle>
                         Kryefaqja
           </NavLink>
-                    <NavLink to='/RrethNesh' activeStyle>
+                    {/* <NavLink to='/RrethNesh' activeStyle>
                         Rreth Nesh
-          </NavLink>
+          </NavLink> */}
                     <NavLink to='/Krijo' activeStyle>
                         Krijo
           </NavLink>

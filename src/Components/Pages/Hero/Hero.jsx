@@ -18,10 +18,7 @@ export default function Hero() {
         <div class="introduction">
           <div class="hero-container">
             <h1>Krijo CV</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua
-            </p>
+            <p>Krijoni modelin e CV qe cdo rekrutues e adhuron ate! </p>
           </div>
           <div class="cta">
             <button class="cta1">

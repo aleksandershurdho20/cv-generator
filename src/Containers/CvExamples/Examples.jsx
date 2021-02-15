@@ -6,6 +6,7 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import Template2 from "../../assets/template2.png";
 import Template3 from "../../assets/template3.png";
 import Container from "@material-ui/core/Container";
+import Template4 from "../../assets/Template4.PNG";
 
 import Grid from "@material-ui/core/Grid";
 import Footer from "../Footer/Footer";
@@ -22,26 +23,36 @@ export default function Examples() {
           <Grid container>
             <Grid item md={4} sm={12}>
               <div className="card-wrapper">
-                <h4 className="title">Template 1</h4>
+                <h4 className="title">Shembulli 1</h4>
                 <img src={Template2} className="template-image" />
               </div>
             </Grid>
             <Grid item md={4} sm={12}>
               <div className="card-wrapper">
-                <h4 className="title">Template 2</h4>
+                <h4 className="title">Shembulli 2</h4>
 
                 <img src={Template3} className="template-image" />
               </div>{" "}
             </Grid>
             <Grid item md={4} sm={12}>
               <div className="card-wrapper">
-                <h4 className="title">Template 3</h4>
+                <h4 className="title">Shembulli 3</h4>
 
-                <img src={Template2} className="template-image" />
+                <img
+                  src={Template4}
+                  style={{ height: 363 }}
+                  className="template-image"
+                />
               </div>
             </Grid>
           </Grid>
         </Container>
+      </div>
+      <div className="errors-form">
+        <h2>Deshironi te beni sugjerime ose te raportoni per probleme?</h2>
+        <a href="mailto:contactcv.al@gmail.com" style={{ color: "#e74645" }}>
+          Kontakt
+        </a>
       </div>
       <Footer backgroundColor={`#FAFAFA`} />
 

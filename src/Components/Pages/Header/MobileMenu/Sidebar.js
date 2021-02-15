@@ -11,9 +11,9 @@ const Sidebar = ({ handleOpen, open }) => {
                     <SidebarLink exact to='/' activeStyle >
                         Kryefaqja
                     </SidebarLink>
-                    <SidebarLink to="/RrethNesh" activeStyle>
+                    {/* <SidebarLink onClick={()} activeStyle>
                         RrethNesh
-                    </SidebarLink>
+                    </SidebarLink> */}
                     <SidebarLink to="/Krijo" activeStyle>
                         Krijo
                     </SidebarLink>

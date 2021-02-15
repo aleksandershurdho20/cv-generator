@@ -32,7 +32,7 @@ export default function Routes() {
                 <Switch>
 
                     <Route exact path="/" component={Home} />
-                    <Route path="/RrethNesh" component={() => <h2>Rreth nesh</h2>} />
+                    {/* <Route path="/RrethNesh" component={() => <h2>Rreth nesh</h2>} /> */}
                     <Route path="/Krijo" component={CreateCv} />
                     <Route path="/Cv/shembuj" component={CvExamples} />
                     <Route path="/CV/Download" component={Download} />
