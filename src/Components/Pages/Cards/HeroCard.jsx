@@ -36,7 +36,7 @@ export default function HeroCard() {
             <div className="wrapper-description">
               <Fade bottom>
                 <h2>
-                  Krijoni CV Profesionale dhe e bukura brenda pak minutash
+                  Krijoni CV Profesionale dhe te bukura brenda pak minutash
                 </h2>
               </Fade>
               <p>
