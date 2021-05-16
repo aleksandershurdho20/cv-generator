@@ -5,6 +5,8 @@ import React from "react";
 import Teplate from "../../../assets/template.svg";
 import "./HeroCards.scss";
 import { useHistory } from "react-router-dom";
+import Fade from "react-reveal/Fade";
+
 const useStyles = makeStyles((theme) => ({
   main: {
     flexGrow: 1,
@@ -32,7 +34,11 @@ export default function HeroCard() {
         <Grid item md={6}>
           <Container>
             <div className="wrapper-description">
-              <h2>Krijoni CV Profesionale dhe e bukura brenda pak minutash</h2>
+              <Fade bottom>
+                <h2>
+                  Krijoni CV Profesionale dhe e bukura brenda pak minutash
+                </h2>
+              </Fade>
               <p>
                 Përmes kësaj platforme ju mund të krijoni CV profesionale për
                 vetëm 5 minuta në gjuhën shqipe. Krijimi i CV-së është shumë i

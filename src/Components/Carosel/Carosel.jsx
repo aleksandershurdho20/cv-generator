@@ -535,6 +535,7 @@ export default function SimpleTabs(props) {
           variant="contained"
           color="primary"
           onClick={handleNext}
+          className="step-btn"
           style={activeStep === 2 ? { display: "none" } : { display: "inline" }}
         >
           Next
@@ -542,6 +543,7 @@ export default function SimpleTabs(props) {
         <Button
           variant="contained"
           color="primary"
+          className="step-btn"
           style={activeStep !== 2 ? { display: "none" } : { display: "inline" }}
           onClick={createPdfs}
         >
@@ -554,67 +556,6 @@ export default function SimpleTabs(props) {
         </Snackbar>
       </div>
 
-      {/* <div ref={bodyRef}>
-        <CV
-          personalData={{
-            name: cvData.emer,
-            title: cvData.pozicioni,
-            image: imageFiles,
-            contacts: [
-              { type: "email", value: cvData.email },
-              { type: "phone", value: cvData.telefon },
-              { type: "location", value: cvData.qyteti },
-            ],
-          }}
-          sections={[
-            {
-              type: "experiences-list",
-              title: "Eksperienca",
-              icon: "archive",
-              items: [
-                {
-                  title: cvData.pozicioni,
-                  company: cvData.kompania,
-                  description: cvData.pershkrimi,
-                  datesBetween: `${cvData.muajiFillimit} ${cvData.dataEFillimi} - ${cvData.muajiMbarimit} ${cvData.dataEmbarimit} `,
-                },
-              ],
-            },
-            {
-              type: "common-list",
-              title: "Edukimi",
-              icon: "graduation",
-              items: [
-                {
-                  title: cvData.diploma,
-                  authority: cvData.universiteti,
-                  rightSide: `${cvData.educationDataeFillimit} ${cvData.educationMuajiFillimit} - ${cvData.educationDataeMbarimit} ${cvData.educationMuajiMbarimit}`,
-                },
-              ],
-            },
-            {
-              type: "common-list",
-              title: "Njohuri Gjuhesore",
-              icon: "language",
-              items: languageKnowledges.map((data) => {
-                return {
-                  authority: data.gjuha,
-                  authorityMeta: data.niveli,
-                };
-              }),
-            },
-            {
-              type: "tag-list",
-              title: "Aftesi Profesionale",
-              icon: "rocket",
-              items: skills.map((skill) => skill.njohuri),
-            },
-          ]}
-          branding={true} // or false to hide it.
-        />
-        <TemplateOne {...cvData} skills={skills} />
-      </div>
- */}
       <Footer backgroundColor={`#FAFAFA`} />
     </div>
   );

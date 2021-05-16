@@ -49,10 +49,10 @@ export default function TemplateTwo(props) {
                 <ul key={index}>
                   <li>
                     <div className="skill_name">{data.njohuri}</div>
-                    <div className="skill_progress">
+                    {/* <div className="skill_progress">
                       <span style={{ width: "80%" }}></span>
                     </div>
-                    <div className="skill_per">80%</div>
+                    <div className="skill_per">80%</div> */}
                   </li>{" "}
                 </ul>
               ))}
