@@ -4,12 +4,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer as formReducer } from 'redux-form';
 import App from './App';
-
-const rootReducer = combineReducers({
-  form: formReducer
-});
-
-const store = createStore(rootReducer);
+import {store} from './redux/store/store'
 
 ReactDOM.render(
   <Provider store={store}>

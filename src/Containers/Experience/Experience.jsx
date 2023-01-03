@@ -52,9 +52,7 @@ export default function Experience(props) {
     removeSkills,
     eksperienca,
   } = props;
-  console.log(props, "props");
   const currentYear = new Date().getUTCFullYear();
-  console.log(pozicioni, "pozicioni");
   const years = Array(currentYear - (currentYear - 20))
     .fill("")
     .map((v, idx) => currentYear - idx);
@@ -73,7 +71,6 @@ export default function Experience(props) {
     "Nentor",
     "Dhjetor",
   ];
-  console.log(eksperienca);
   return (
     <div className={classes.root}>
       <Container>

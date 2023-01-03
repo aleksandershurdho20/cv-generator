@@ -23,6 +23,11 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import Snackbar from "@material-ui/core/Snackbar";
 import Slide from "@material-ui/core/Slide";
 import MuiAlert from "@material-ui/lab/Alert";
+import { useDispatch, useSelector } from "react-redux";
+import { cvDataState,changeCvData,handleChangeExperienceFields,
+  addExperienceFields,
+  removeExperienceFields
+} from "../../redux/slices/createCv";
 
 function getSteps() {
   return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
@@ -54,6 +59,7 @@ const useclasses = makeStyles((theme) => ({
 }));
 
 export default function SimpleTabs(props) {
+  
   const [value, setValue] = React.useState(0);
   const classes = useclasses();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -65,6 +71,9 @@ export default function SimpleTabs(props) {
   const [openModal, setOpenModal] = useState(false);
   const [errorrMessage, setErrorrMessage] = useState("");
   const [display, setDisplay] = useState(false);
+  
+  const state = useSelector(cvDataState)
+  const dispatch = useDispatch()
   const [cvData, setCvData] = useState({
     emer: "",
     mbiemer: "",
@@ -120,8 +129,9 @@ export default function SimpleTabs(props) {
     const { name, value } = e.target;
     let tempArr = [...cvData.eksperienca];
     tempArr[index][name] = value;
-    console.log(tempArr);
-    debugger;
+
+    dispatch(handleChangeExperienceFields({index,name,value}))
+    // debugger;
     setCvData({
       ...cvData,
       eksperienca: tempArr,
@@ -144,6 +154,7 @@ export default function SimpleTabs(props) {
         },
       ],
     });
+    dispatch(addExperienceFields())
   };
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -156,6 +167,8 @@ export default function SimpleTabs(props) {
       ...cvData,
       eksperienca: tempArr,
     });
+
+    dispatch(removeExperienceFields(index))
   };
   const [loading, setLoading] = useState(false);
   const handleSkillsFields = (e, index) => {
@@ -216,7 +229,7 @@ export default function SimpleTabs(props) {
     let tempArr = [...cvData.edukimi];
     tempArr[index][name] = value;
     console.log(tempArr);
-    debugger;
+    // debugger;
     setCvData({
       ...cvData,
       edukimi: tempArr,
@@ -241,12 +254,18 @@ export default function SimpleTabs(props) {
     // setDisplay(false);
   };
   const [imageFiles, setImageFiles] = useState("");
+  console.log({state})
   const handleCVFields = (e) => {
     const { name, value } = e.target;
     setCvData({
       ...cvData,
       [name]: value,
     });
+    dispatch(changeCvData({
+      ...state,
+      key:name,value})
+    )
+    console.log("on change")
     setValidateName("");
     setValidateSurname("");
   };

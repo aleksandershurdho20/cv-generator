@@ -12,7 +12,7 @@ function App() {
 
       <Routes />
       <Seo title="CV.AL | Kryefaqja" />
-      {console.log = function () { }}
+      {/* {console.log = function () { }} */}
     </>
 
   );

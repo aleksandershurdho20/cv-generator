@@ -38,7 +38,6 @@ export default function Edukimi(props) {
     educationPershkrimi,
     edukimi,
   } = props;
-  console.log(props, "edukkimi props");
   const currentYear = new Date().getUTCFullYear();
   const years = Array(currentYear - (currentYear - 20))
     .fill("")

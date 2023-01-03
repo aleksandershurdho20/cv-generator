@@ -17,13 +17,13 @@ export default function Create() {
           responsive="true"
           layoutKey="-gw-1+2a-9x+5c"
         />{" "} */}
-        <AdSense.Google
+        {/* <AdSense.Google
           client="ca-pub-6835959278488464"
           slot="7806394673"
           style={{ display: "block" }}
           layout="in-article"
           format="fluid"
-        />
+        /> */}
       </Grid>
       <Grid item md={9}>
         <Carosel />
