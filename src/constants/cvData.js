@@ -41,6 +41,17 @@ export const cvData ={
     edukimi: [
         educationData
     ],
+    njohuri:[
+        {
+            title:''
+        }
+    ],
+    gjuhet:[
+        {
+            title:'',niveli:''
+        }
+    ]
+    
   }
 
 

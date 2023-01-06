@@ -26,7 +26,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import { cvDataState,changeCvData,handleChangeExperienceFields,
   addExperienceFields,
-  removeExperienceFields
+  removeExperienceDataFields
 } from "../../redux/slices/createCv";
 
 function getSteps() {
@@ -168,7 +168,7 @@ export default function SimpleTabs(props) {
       eksperienca: tempArr,
     });
 
-    dispatch(removeExperienceFields(index))
+    dispatch(removeExperienceDataFields(index))
   };
   const [loading, setLoading] = useState(false);
   const handleSkillsFields = (e, index) => {
@@ -188,23 +188,6 @@ export default function SimpleTabs(props) {
   const [validateName, setValidateName] = useState("");
   const [validateSurname, setValidateSurname] = useState("");
 
-  const handleLangaugeFields = (e, index) => {
-    const { name, value } = e.target;
-    let tempArr = [...languageKnowledges];
-    tempArr[index][name] = value;
-    setLanguageKnowledges(tempArr);
-    console.log(tempArr, "temp");
-  };
-
-  const addMoreLanguages = () => {
-    setLanguageKnowledges([...languageKnowledges, { gjuha: "", niveli: "" }]);
-  };
-  const deleteAddedLanguages = (index) => {
-    let tempArr = [...languageKnowledges];
-    tempArr.splice(index, 1);
-    console.log(`deleted`);
-    setLanguageKnowledges(tempArr);
-  };
 
   const handleDuplicateEducation = () => {
     setCvData({
@@ -375,12 +358,12 @@ export default function SimpleTabs(props) {
           </Step>
         ))}
       </Stepper>
-      <Container style={{ marginTop: 20 }}>
+      {/* <Container style={{ marginTop: 20 }}>
         <h3 style={{ fontWeight: "500", marginLeft: "8%" }}>
           {getStepContent(activeStep)}
         </h3>
         <Divider />
-      </Container>
+      </Container>  */}
       {/* {activeStep === steps.length ? (
         <div>
           <Typography className={classes.instructions}>
@@ -415,10 +398,6 @@ export default function SimpleTabs(props) {
           {...cvData}
           handleCVFields={handleCVFields}
           duplicateExperienceFields={duplicateExperienceFields}
-          languageKnowledges={languageKnowledges}
-          addMoreLanguages={addMoreLanguages}
-          deleteAddedLanguages={deleteAddedLanguages}
-          handleLangaugeFields={handleLangaugeFields}
           skills={skills}
           handleSkillsFields={handleSkillsFields}
           addSkillFields={addSkillFields}

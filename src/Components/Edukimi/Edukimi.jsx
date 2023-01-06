@@ -1,20 +1,22 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import WorkIcon from "@material-ui/icons/Work";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Container from "@material-ui/core/Container";
-import { SpeakerNotesOffOutlined } from "@material-ui/icons";
 import InputLabel from "@material-ui/core/InputLabel";
 import SchoolIcon from "@material-ui/icons/School";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    cvDataState,
+    addEducationFields,
+    handleChangeEducationFields,
+    removeEducationFields
+} from "../../redux/slices/createCv";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -26,18 +28,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Edukimi(props) {
-  const {
-    diploma,
-    universiteti,
-    educationQyteti,
-    educationMuajiFillimit,
-    educationDataeFillimit,
-    educationMuajiMbarimit,
-    educationDataeMbarimit,
-    educationPershkrimi,
-    edukimi,
-  } = props;
+export default function Edukimi() {
+  const state = useSelector(cvDataState);
+
+  const { edukimi } = state;
+  const dispatch = useDispatch();
+
+  const addEducationDataFields =() =>{
+    dispatch(addEducationFields())
+  }
+  const handleEducationFields = (e,index) =>{
+    const {name,value}= e.target;
+    dispatch(handleChangeEducationFields({index,name,value}))
+  }
+  const removeEducationDataFields = (index) =>{
+    dispatch(removeEducationFields(index))
+  }
   const currentYear = new Date().getUTCFullYear();
   const years = Array(currentYear - (currentYear - 20))
     .fill("")
@@ -83,7 +89,7 @@ export default function Edukimi(props) {
                         value={data.diploma}
                         // onChange={props.handleCVFields}
                         onChange={(value) =>
-                          props.handleEducationFields(value, index)
+                          handleEducationFields(value, index)
                         }
                         fullWidth
                       />
@@ -95,9 +101,8 @@ export default function Edukimi(props) {
                         variant="outlined"
                         name="universiteti"
                         value={data.universiteti}
-                        // onChange={props.handleCVFields}
                         onChange={(value) =>
-                          props.handleEducationFields(value, index)
+                          handleEducationFields(value, index)
                         }
                         fullWidth
                       />
@@ -112,9 +117,8 @@ export default function Edukimi(props) {
                         name="educationQyteti"
                         value={data.educationQyteti}
                         onChange={(value) =>
-                          props.handleEducationFields(value, index)
+                          handleEducationFields(value, index)
                         }
-                        // onChange={props.handleCVFields}
                         fullWidth
                       />
                     </Grid>
@@ -133,9 +137,8 @@ export default function Edukimi(props) {
                         name="educationMuajiFillimit"
                         value={data.educationMuajiFillimit}
                         onChange={(value) =>
-                          props.handleEducationFields(value, index)
+                          handleEducationFields(value, index)
                         }
-                        // onChange={props.handleCVFields}
                       >
                         {monthNames.map((value, index) => (
                           <option value={value} key={index}>
@@ -148,9 +151,8 @@ export default function Edukimi(props) {
                         style={{ marginLeft: 20 }}
                         name="educationDataeFillimit"
                         value={data.educationDataeFillimit}
-                        // onChange={props.handleCVFields}
                         onChange={(value) =>
-                          props.handleEducationFields(value, index)
+                          handleEducationFields(value, index)
                         }
                       >
                         {years.map((value, index) => (
@@ -172,9 +174,8 @@ export default function Edukimi(props) {
                         className="select"
                         name="educationMuajiMbarimit"
                         value={data.educationMuajiMbarimit}
-                        // onChange={props.handleCVFields}
                         onChange={(value) =>
-                          props.handleEducationFields(value, index)
+                          handleEducationFields(value, index)
                         }
                       >
                         {monthNames.map((value, index) => (
@@ -188,9 +189,8 @@ export default function Edukimi(props) {
                         style={{ marginLeft: 20 }}
                         name="educationDataeMbarimit"
                         value={data.educationDataeMbarimit}
-                        // onChange={props.handleCVFields}
                         onChange={(value) =>
-                          props.handleEducationFields(value, index)
+                          handleEducationFields(value, index)
                         }
                       >
                         {years.map((value, index) => (
@@ -212,9 +212,8 @@ export default function Edukimi(props) {
                       <textarea
                         name="educationPershkrimi"
                         value={data.educationPershkrimi}
-                        // onChange={props.handleCVFields}
                         onChange={(value) =>
-                          props.handleEducationFields(value, index)
+                          handleEducationFields(value, index)
                         }
                         id="outlined-basic"
                         className="textarea-description"
@@ -225,7 +224,7 @@ export default function Edukimi(props) {
                     {index !== 0 && (
                       <IconButton
                         aria-label="delete"
-                        onClick={() => props.removeEducationFields(index)}
+                        onClick={() => removeEducationDataFields(index)}
                         className={classes.button}
                       >
                         <DeleteIcon />
@@ -236,7 +235,7 @@ export default function Edukimi(props) {
               ))}
             <button
               className="extra-info-btn"
-              onClick={props.handleDuplicateEducation}
+              onClick={addEducationDataFields}
             >
               Shto Njohuri
             </button>

@@ -17,7 +17,11 @@ import Gjuhet from "../../Components/Gjuhet";
 import Skills from "../../Components/Skills/Index";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-
+import { useDispatch, useSelector } from "react-redux";
+import { cvDataState,handleChangeExperienceFields,
+  addExperienceFields,
+  removeExperienceDataFields
+} from "../../redux/slices/createCv";
 import "./Experience.scss";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,23 +39,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Experience(props) {
   const {
-    pozicioni,
-    qytetiPuna,
-    kompania,
-    dataEFillimi,
-    dataEmbarimit,
-    muajiFillimit,
-    muajiMbarimit,
-    languageKnowledges,
-    addMoreLanguages,
-    deleteAddedLanguages,
-    handleLangaugeFields,
     skills,
     handleSkillsFields,
     addSkillFields,
     removeSkills,
-    eksperienca,
   } = props;
+  const state = useSelector(cvDataState)
+  const dispatch = useDispatch()
+  const {eksperienca}= state
+
+  const handleExperienceFields = (e, index) => {
+    const { name, value } = e.target;
+    dispatch(handleChangeExperienceFields({index,name,value}))
+ 
+  };
+  const handleAddExperienceFields = () =>{
+    dispatch(addExperienceFields())
+    
+  }
+  const removeExperienceFields = (index) =>{
+    dispatch(removeExperienceDataFields(index))
+  }
   const currentYear = new Date().getUTCFullYear();
   const years = Array(currentYear - (currentYear - 20))
     .fill("")
@@ -96,9 +104,8 @@ export default function Experience(props) {
                           variant="outlined"
                           name="pozicioni"
                           value={data.pozicioni}
-                          // onChange={props.handleCVFields}
                           onChange={(value) =>
-                            props.handleExperienceFields(value, index)
+                            handleExperienceFields(value, index)
                           }
                           fullWidth
                         />
@@ -113,7 +120,7 @@ export default function Experience(props) {
                           value={data.qyteti}
                           // onChange={props.handleCVFields}
                           onChange={(value) =>
-                            props.handleExperienceFields(value, index)
+                            handleExperienceFields(value, index)
                           }
                         />
                       </Grid>
@@ -128,7 +135,7 @@ export default function Experience(props) {
                           fullWidth
                           value={data.kompania}
                           onChange={(value) =>
-                            props.handleExperienceFields(value, index)
+                            handleExperienceFields(value, index)
                           }
                         />
                       </Grid>
@@ -148,7 +155,7 @@ export default function Experience(props) {
                           value={data.muajiFillimit}
                           // onChange={props.handleCVFields}
                           onChange={(value) =>
-                            props.handleExperienceFields(value, index)
+                            handleExperienceFields(value, index)
                           }
                         >
                           {monthNames.map((value, index) => (
@@ -164,7 +171,7 @@ export default function Experience(props) {
                           value={data.dataEFillimi}
                           // onChange={props.handleCVFields}
                           onChange={(value) =>
-                            props.handleExperienceFields(value, index)
+                            handleExperienceFields(value, index)
                           }
                         >
                           {years.map((value, index) => (
@@ -188,7 +195,7 @@ export default function Experience(props) {
                           value={data.muajiMbarimit}
                           // onChange={props.handleCVFields}
                           onChange={(value) =>
-                            props.handleExperienceFields(value, index)
+                            handleExperienceFields(value, index)
                           }
                         >
                           {monthNames.map((value, index) => (
@@ -204,7 +211,7 @@ export default function Experience(props) {
                           value={data.dataEmbarimit}
                           // onChange={props.handleCVFields}
                           onChange={(value) =>
-                            props.handleExperienceFields(value, index)
+                            handleExperienceFields(value, index)
                           }
                         >
                           {years.map((data, index) => (
@@ -229,7 +236,7 @@ export default function Experience(props) {
                           name="pershkrimi"
                           value={data.pershkrimi}
                           onChange={(value) =>
-                            props.handleExperienceFields(value, index)
+                            handleExperienceFields(value, index)
                           }
                         />
                       </Grid>
@@ -238,7 +245,7 @@ export default function Experience(props) {
                       {index !== 0 && (
                         <IconButton
                           aria-label="delete"
-                          onClick={() => props.removeExperienceFields(index)}
+                          onClick={() => removeExperienceFields(index)}
                           className={classes.button}
                         >
                           <DeleteIcon />
@@ -249,20 +256,15 @@ export default function Experience(props) {
                 ))}
               <button
                 className="extra-info-btn"
-                onClick={props.duplicateExperienceFields}
+                onClick={handleAddExperienceFields}
               >
                 Shto Eksperienca
               </button>
             </Grid>
           </AccordionDetails>
         </Accordion>{" "}
-        <Edukimi {...props} />
-        <Gjuhet
-          languageKnowledges={languageKnowledges}
-          addMoreLanguages={addMoreLanguages}
-          deleteAddedLanguages={deleteAddedLanguages}
-          handleLangaugeFields={handleLangaugeFields}
-        />
+        <Edukimi  />
+        <Gjuhet/>
         <Skills
           skills={skills}
           handleSkillsFields={handleSkillsFields}
