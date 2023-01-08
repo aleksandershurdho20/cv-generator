@@ -1,6 +1,9 @@
 import React from "react";
 import "./TemplateTwo.scss";
+import {useSelector } from "react-redux";
+import { cvDataState} from "../../../../redux/slices/createCv";
 export default function TemplateTwo(props) {
+  const state = useSelector(cvDataState)
   return (
     <div className="resume">
       <div className="resume_left">
@@ -10,27 +13,27 @@ export default function TemplateTwo(props) {
         <div className="resume_content">
           <div className="resume_item resume_info">
             <div className="title">
-              <p className="bold">{props.emer}</p>
-              <p className="regular">{props.pozicioni}</p>
+              <p className="bold">{state.emer}</p>
+              <p className="regular">{state.pozicioni}</p>
             </div>
             <ul>
               <li>
                 <div className="icon">
                   <i className="fas fa-map-signs"></i>
                 </div>
-                <div className="data">{props.adresa}</div>
+                <div className="data">{state.adresa}</div>
               </li>
               <li>
                 <div className="icon">
                   <i className="fas fa-mobile-alt"></i>
                 </div>
-                <div className="data">{props.telefon}</div>
+                <div className="data">{state.telefon}</div>
               </li>
               <li>
                 <div className="icon">
                   <i className="fas fa-envelope"></i>
                 </div>
-                <div className="data">{props.email}</div>
+                <div className="data">{state.email}</div>
               </li>
               {/* <li>
                 <div className="icon">
@@ -44,11 +47,11 @@ export default function TemplateTwo(props) {
             <div className="title">
               <p className="bold">Njohuri Profesionale</p>
             </div>
-            {props.skills &&
-              props.skills.map((data, index) => (
+            {state.njohuri &&
+              state.njohuri.map((data, index) => (
                 <ul key={index}>
                   <li>
-                    <div className="skill_name">{data.njohuri}</div>
+                    <div className="skill_name">{data.title}</div>
                     {/* <div className="skill_progress">
                       <span style={{ width: "80%" }}></span>
                     </div>
@@ -145,9 +148,9 @@ export default function TemplateTwo(props) {
             <p className="bold">Njohuri Gjuhesore</p>
           </div>
           <p>
-            {props.languageKnowledges.map((data, index) => (
+            {state.gjuhet.map((data, index) => (
               <div key={index}>
-                <p>{data.gjuha}</p>
+                <p>{data.title}</p>
                 <p>{data.niveli}</p>
               </div>
             ))}
@@ -157,8 +160,8 @@ export default function TemplateTwo(props) {
           <div className="title">
             <p className="bold">Eksperienca</p>
           </div>
-          {props.eksperienca &&
-            props.eksperienca.map((data, index) => (
+          {state.eksperienca &&
+            state.eksperienca.map((data, index) => (
               <ul key={index}>
                 <li>
                   <div className="date">{`${data.muajiFillimit} ${data.dataEFillimi} - ${data.muajiMbarimit} ${data.dataEmbarimit} `}</div>
@@ -174,8 +177,8 @@ export default function TemplateTwo(props) {
           <div className="title">
             <p className="bold">Edukimi</p>
           </div>
-          {props.edukimi &&
-            props.edukimi.map((data, index) => (
+          {state.edukimi &&
+            state.edukimi.map((data, index) => (
               <ul key={index}>
                 <li>
                   <div className="date">{`${data.educationDataeFillimit} ${data.educationMuajiFillimit} - ${data.educationDataeMbarimit} ${data.educationMuajiMbarimit}`}</div>

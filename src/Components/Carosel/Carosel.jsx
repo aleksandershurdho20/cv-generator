@@ -395,18 +395,7 @@ export default function SimpleTabs(props) {
       )} */}
       {activeStep === 1 && (
         <Experience
-          {...cvData}
-          handleCVFields={handleCVFields}
-          duplicateExperienceFields={duplicateExperienceFields}
-          skills={skills}
-          handleSkillsFields={handleSkillsFields}
-          addSkillFields={addSkillFields}
-          removeSkills={removeSkills}
-          handleExperienceFields={handleExperienceFields}
-          removeExperienceFields={removeExperienceFields}
-          handleDuplicateEducation={handleDuplicateEducation}
-          handleEducationFields={handleEducationFields}
-          removeEducationFields={removeEducationFields}
+       
         />
       )}
       {activeStep === 2 && (

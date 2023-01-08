@@ -11340,11 +11340,6 @@ react-side-effect@^2.1.0:
   resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.1.tgz#66c5701c3e7560ab4822a4ee2742dee215d72eb3"
   integrity sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
 
-react-simple-image-slider@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-simple-image-slider/-/react-simple-image-slider-2.0.1.tgz#daeef189c1f7e5f79a38863fb292392f050d3a7b"
-  integrity sha512-qul6jPi2k5j//N/g5CnQJcVqrfIFERe5bUC1aFP4vG3lpxUsNU/PdpUfV2twskkcWwedQWEg3gUFpmtoJ9WDgQ==
-
 react-ssr-adsense@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-ssr-adsense/-/react-ssr-adsense-1.0.1.tgz#236f7c52d6e56a01ab5cc3d3b1780f073476b992"

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SimpleImageSlider from "react-simple-image-slider";
 
 import InitialCvTempalte from "../../assets/cv_preview.png";
 import Template2 from "../../assets/template2.png";
@@ -14,7 +13,9 @@ import Pdf from "react-to-pdf";
 import Download from "../../Containers/Download";
 import Template4 from "../../assets/Template4.PNG";
 import TemplateFour from "./CVTemplates/Template4/Template4";
+
 export default function TemplateList(props) {
+
   const [selectTemplate, setSelectTempalte] = useState("");
   console.log(props, "template list");
   const images = [

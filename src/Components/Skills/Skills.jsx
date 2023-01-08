@@ -9,7 +9,12 @@ import VideoLabelIcon from "@material-ui/icons/VideoLabel";
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import { useDispatch, useSelector } from "react-redux";
+import { cvDataState,
+  addSkillFields,
+  removeSkillFields,
+  handleChangeSkillsField,
+} from "../../redux/slices/createCv";
 import "./Skills.scss";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,15 +29,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Skills({
-  handleLangaugeFields,
-  skills,
-  handleSkillsFields,
-  addSkillFields,
-  removeSkills,
-}) {
+export default function Skills(
+) {
+  const state = useSelector(cvDataState)
+
+  const {njohuri} =state
+  const dispatch = useDispatch()
   const classes = useStyles();
 
+  const handleSkillsFields=(e,index) =>{
+    const {name,value}=e.target
+    dispatch(handleChangeSkillsField({index,name,value}))
+  }
+  const addSkillsFields = () => dispatch(addSkillFields())
+  const removeSkills=(index) => dispatch(removeSkillFields(index))
   return (
     <div className="skills-container">
       <Accordion style={{ marginTop: 15 }}>
@@ -46,15 +56,15 @@ export default function Skills({
         </AccordionSummary>
         <AccordionDetails>
           <Grid container>
-            {skills.length > 0 &&
-              skills.map((data, index) => (
+            {njohuri.length > 0 &&
+              njohuri.map((data, index) => (
                 <Grid item md={12} style={{ marginTop: 15 }}>
                   <TextField
                     id="outlined-basic"
                     label="Njohuri"
                     variant="outlined"
-                    value={data.njohuri}
-                    name="njohuri"
+                    value={data.title}
+                    name="title"
                     onChange={(value) => handleSkillsFields(value, index)}
                     className={classes.input}
                   />
@@ -70,7 +80,7 @@ export default function Skills({
                 </Grid>
               ))}
 
-            <button className="skills-btn" onClick={addSkillFields}>
+            <button className="skills-btn" onClick={addSkillsFields}>
               Shto Njohuri
             </button>
           </Grid>

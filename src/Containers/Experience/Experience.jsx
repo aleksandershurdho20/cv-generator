@@ -37,13 +37,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Experience(props) {
-  const {
-    skills,
-    handleSkillsFields,
-    addSkillFields,
-    removeSkills,
-  } = props;
+export default function Experience() {
+
   const state = useSelector(cvDataState)
   const dispatch = useDispatch()
   const {eksperienca}= state
@@ -265,12 +260,9 @@ export default function Experience(props) {
         </Accordion>{" "}
         <Edukimi  />
         <Gjuhet/>
-        <Skills
-          skills={skills}
-          handleSkillsFields={handleSkillsFields}
-          addSkillFields={addSkillFields}
-          removeSkills={removeSkills}
-        />
+        <Skills/>
+        
+    
       </Container>
     </div>
   );

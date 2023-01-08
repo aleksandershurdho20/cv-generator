@@ -3,7 +3,11 @@ import TemplateTwo from "../../Components/SelectTemplates/CVTemplates/Template2/
 import CV from "react-cv";
 import Template3 from "../../Components/SelectTemplates/CVTemplates/Template3/Template3";
 import TemplateFour from "../../Components/SelectTemplates/CVTemplates/Template4/Template4";
+import {useSelector } from "react-redux";
+import { cvDataState} from "../../redux/slices/createCv";
 export default function Download(props) {
+  const state = useSelector(cvDataState)
+
   return (
     <div style={{ display: "inline" }}>
       {props.selectTemplate === 2 && (
@@ -15,13 +19,13 @@ export default function Download(props) {
         <div ref={props.bodyRef}>
           <CV
             personalData={{
-              name: props.emer,
-              title: props.pozicioni,
+              name: state.emer,
+              title: state.pozicioni,
               image: props.imageFiles,
               contacts: [
-                { type: "email", value: props.email },
-                { type: "phone", value: props.telefon },
-                { type: "location", value: props.qyteti },
+                { type: "email", value: state.email },
+                { type: "phone", value: state.telefon },
+                { type: "location", value: state.qyteti },
               ],
             }}
             sections={[
@@ -38,7 +42,7 @@ export default function Download(props) {
                 //   },
                 // ],
 
-                items: props.eksperienca.map((data) => {
+                items: state.eksperienca.map((data) => {
                   return {
                     title: data.pozicioni,
                     company: data.kompania,
@@ -59,7 +63,7 @@ export default function Download(props) {
                 //   },
                 // ],
 
-                items: props.edukimi.map((data) => {
+                items: state.edukimi.map((data) => {
                   return {
                     title: data.diploma,
                     authority: data.universiteti,
@@ -71,9 +75,9 @@ export default function Download(props) {
                 type: "common-list",
                 title: "Njohuri Gjuhesore",
                 icon: "language",
-                items: props.languageKnowledges.map((data) => {
+                items: state.gjuhet.map((data) => {
                   return {
-                    authority: data.gjuha,
+                    authority: data.title,
                     authorityMeta: data.niveli,
                   };
                 }),
@@ -82,7 +86,7 @@ export default function Download(props) {
                 type: "tag-list",
                 title: "Aftesi Profesionale",
                 icon: "rocket",
-                items: props.skills.map((skill) => skill.njohuri),
+                items: state.njohuri.map((skill) => skill.title),
               },
             ]}
             branding={true} // or false to hide it.
