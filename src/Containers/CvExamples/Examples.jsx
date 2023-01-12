@@ -1,8 +1,5 @@
 import React from "react";
 import Hero from "./ExamplesHero/Index";
-import TemplateList from "../../Components/SelectTemplates/TemplateList";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
 import Template2 from "../../assets/template2.png";
 import Template3 from "../../assets/template3.png";
 import Container from "@material-ui/core/Container";

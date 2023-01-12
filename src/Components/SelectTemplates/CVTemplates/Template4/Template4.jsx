@@ -10,30 +10,33 @@ import {
   faGlobe,
   faPencilAlt,
 } from "@fortawesome/free-solid-svg-icons";
-
+import {useSelector } from "react-redux";
+import { cvDataState} from "../../../../redux/slices/createCv";
 export default function Template4(props) {
+  const state = useSelector(cvDataState)
+
   return (
     <div className="two-column resume">
       <section className="resume__section resume__header">
         <div className="resume__content">
-          <h1>{props.emer + "" + props.mbiemer}</h1>
+          <h1>{state.emer + "" + state.mbiemer}</h1>
           <div className="info-item">
             <span className="info-label">
               <FontAwesomeIcon className="i" icon={faLocationArrow} />
             </span>
-            <span className="info-text">{props.adresa}</span>
+            <span className="info-text">{state.adresa}</span>
           </div>
           <div className="info-item">
             <span className="info-label">
               <FontAwesomeIcon className="i" icon={faEnvelope} />
             </span>
-            <span className="info-text">{props.email}</span>
+            <span className="info-text">{state.email}</span>
           </div>
           <div className="info-item">
             <span className="info-label">
               <FontAwesomeIcon className="i" icon={faPhone} />
             </span>
-            <span className="info-text">{props.telefon}</span>
+            <span className="info-text">{state.telefon}</span>
           </div>
         </div>
       </section>
@@ -72,12 +75,11 @@ export default function Template4(props) {
               </div>
               <div className="xp-item">
                 <div className="xp-job">
-                  {props.eksperienca &&
-                    props.eksperienca.map((data, index) => (
+                  {state.eksperienca &&
+                    state.eksperienca.map((data, index) => (
                       <React.Fragment key={index}>
                         <span> {data.pozicioni}</span>
                         <span>@ {data.kompania}</span>
-                        {console.log(data)}
                         <br />
                         <div className="xp-date">{`${data.muajiFillimit} ${data.dataEFillimi} - ${data.muajiMbarimit} ${data.dataEmbarimit} `}</div>
                         <div className="xp-detail">{data.pershkrimi}</div>
@@ -99,9 +101,9 @@ export default function Template4(props) {
               <div className="resume__text">
                 <div className="extra">
                   <div className="extra-info">
-                    {props.skills &&
-                      props.skills.map((data, index) => (
-                        <div key={index}>{data.njohuri}</div>
+                    {state.njohuri &&
+                      state.njohuri.map((data, index) => (
+                        <div key={index}>{data.title}</div>
                       ))}
                   </div>
                   {/* <div className="extra-details">
@@ -140,9 +142,9 @@ export default function Template4(props) {
               </div>
               <div className="extra">
                 <div className="extra-info">
-                  {props.languageKnowledges.map((data, index) => (
+                  {state.gjuhet.map((data, index) => (
                     <div key={index}>
-                      <p>{data.gjuha}</p>
+                      <p>{data.title}</p>
                       <p>{data.niveli}</p>
                     </div>
                   ))}{" "}

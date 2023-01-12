@@ -33,14 +33,7 @@ export default function Download(props) {
                 type: "experiences-list",
                 title: "Eksperienca",
                 icon: "archive",
-                // items: [
-                //   {
-                //     title: props.pozicioni,
-                //     company: props.kompania,
-                //     description: props.pershkrimi,
-                //     datesBetween: `${props.muajiFillimit} ${props.dataEFillimi} - ${props.muajiMbarimit} ${props.dataEmbarimit} `,
-                //   },
-                // ],
+          
 
                 items: state.eksperienca.map((data) => {
                   return {
@@ -55,13 +48,7 @@ export default function Download(props) {
                 type: "common-list",
                 title: "Edukimi",
                 icon: "graduation",
-                // items: [
-                //   {
-                //     title: props.diploma,
-                //     authority: props.universiteti,
-                //     rightSide: `${props.educationDataeFillimit} ${props.educationMuajiFillimit} - ${props.educationDataeMbarimit} ${props.educationMuajiMbarimit}`,
-                //   },
-                // ],
+            
 
                 items: state.edukimi.map((data) => {
                   return {
@@ -91,44 +78,10 @@ export default function Download(props) {
             ]}
             branding={true} // or false to hide it.
           />
-          {/* <TemplateOne {...props} skills={props.skills} />
-      {/* <TemplateTwo {...props} /> */}
+ 
         </div>
       )}
-      {/* <Resume
-            name={props.emer + "" + props.mbiemer}
-            firstName={props.emer}
-            tel={props.telefon}
-            email={props.email}
-            address="New York, NY"
-            profileImage={props.imageFiles}
-            profession="Business magnate, playboy and scientist"
-            skills={props.skills.map((skill) => {
-              return {
-                name: skill.njohuri,
-              };
-            })}
-            experiences={props.eksperienca.map((data) => {
-              return {
-                title: data.pozicioni,
-                company: data.kompania,
-                description: (
-                  <div>
-                    <p>{data.pershkrimi}</p>
-                  </div>
-                ),
-                period: `${data.muajiFillimit} ${data.dataEFillimi} - ${data.muajiMbarimit} ${data.dataEmbarimit} `,
-              };
-            })}
-            education={[
-              {
-                school: "MIT",
-                department: "Electrical engineering",
-                degree: "Master's degree",
-                period: "1970-1971",
-              },
-            ]}
-          /> */}
+   
       {props.selectTemplate === 3 && (
         <div ref={props.bodyRef}>
           <Template3 {...props} />

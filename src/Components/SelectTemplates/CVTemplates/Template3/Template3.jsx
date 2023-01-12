@@ -6,8 +6,11 @@ import {
   faPhoneAlt,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
-
+import {useSelector } from "react-redux";
+import { cvDataState} from "../../../../redux/slices/createCv";
 export default function Template3(props) {
+  const state = useSelector(cvDataState)
+
   return (
     <div className="grid-container">
       <div className="zone-1">
@@ -22,12 +25,12 @@ export default function Template3(props) {
           </div>
           <div className="call">
             <FontAwesomeIcon icon={faPhoneAlt} />
-            <div className="text">{props.telefon}</div>
+            <div className="text">{state.telefon}</div>
           </div>
 
           <div className="email">
             <FontAwesomeIcon icon={faEnvelope} />
-            <div className="text">{props.adresa}</div>
+            <div className="text">{state.adresa}</div>
           </div>
         </div>
         <div className="personal-box">
@@ -35,9 +38,9 @@ export default function Template3(props) {
             <h2>Njohuri Gjuhesore</h2>
           </div>
           <div className="skill-1">
-            {props.languageKnowledges.map((data, index) => (
+            {state.gjuhet.map((data, index) => (
               <div key={index}>
-                <p>{data.gjuha}</p>
+                <p>{data.title}</p>
                 <p>{data.niveli}</p>
               </div>
             ))}
@@ -66,13 +69,13 @@ export default function Template3(props) {
       <div className="zone-2">
         <div className="headTitle">
           <h1>
-            {props.emer}
+            {state.emer}
             <br />
-            <b>{props.mbiemer}</b>
+            <b>{state.mbiemer}</b>
           </h1>
         </div>
         <div className="subTitle">
-          <h1>{props.pozicioni}</h1>
+          <h1>{state.pozicioni}</h1>
           <h1></h1>
         </div>
         {/* <div className="group-1">
@@ -96,8 +99,8 @@ export default function Template3(props) {
             </div>
           </div>
           <div className="desc">
-            {props.edukimi &&
-              props.edukimi.map((data, index) => (
+            {state.edukimi &&
+              state.edukimi.map((data, index) => (
                 <ul key={index}>
                   <li>
                     <div className="msg-1">{`${data.educationDataeFillimit} ${data.educationMuajiFillimit} - ${data.educationDataeMbarimit} ${data.educationMuajiMbarimit}`}</div>
@@ -138,8 +141,8 @@ export default function Template3(props) {
             </div>
           </div>
           <div className="desc">
-            {props.eksperienca &&
-              props.eksperienca.map((data, index) => (
+            {state.eksperienca &&
+              state.eksperienca.map((data, index) => (
                 <ul key={index}>
                   <li>
                     <div className="msg-1">{data.pozicioni}</div>

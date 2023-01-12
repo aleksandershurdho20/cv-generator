@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 
 import InitialCvTempalte from "../../assets/cv_preview.png";
 import Template2 from "../../assets/template2.png";
@@ -17,7 +17,8 @@ import TemplateFour from "./CVTemplates/Template4/Template4";
 export default function TemplateList(props) {
 
   const [selectTemplate, setSelectTempalte] = useState("");
-  console.log(props, "template list");
+
+  const cvResult = useRef(null)
   const images = [
     { url: InitialCvTempalte },
     { url: Template2 },
@@ -28,11 +29,15 @@ export default function TemplateList(props) {
     { url: "images/7.jpg" },
   ];
 
+  const selectCvTemplate = (cv) =>{
+    setSelectTempalte(cv)
+    cvResult && cvResult.current.lastElementChild.scrollIntoView({ behavior: 'smooth' });
+  }
   return (
     <Container>
       <Carousel
         selectedItem={0}
-        onClickItem={(item) => setSelectTempalte(item)}
+        onClickItem={(item) => selectCvTemplate(item)}
       >
         <div style={{ height: "400px" }}>
           <img src={InitialCvTempalte} />
@@ -57,7 +62,7 @@ export default function TemplateList(props) {
 
         {/* {selectTemplate === 0 && bodyRef} */}
       </Carousel>
-      <div>
+      <div ref={cvResult}>
         <Download {...props} selectTemplate={selectTemplate} />
       </div>
     </Container>
