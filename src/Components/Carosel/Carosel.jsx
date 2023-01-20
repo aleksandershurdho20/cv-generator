@@ -3,7 +3,6 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
-import Slide from "@material-ui/core/Slide";
 import Snackbar from "@material-ui/core/Snackbar";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -13,7 +12,6 @@ import TextField from "@material-ui/core/TextField";
 import FaceIcon from "@material-ui/icons/Face";
 import MuiAlert from "@material-ui/lab/Alert";
 import React, { useRef, useState } from "react";
-import "react-alice-carousel/lib/scss/alice-carousel.scss";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../Components/Modal/Modal";
 import Experience from "../../Containers/Experience/Experience";
@@ -40,15 +38,10 @@ const useclasses = makeStyles((theme) => ({
 
 export default function SimpleTabs(props) {
   
-  const [value, setValue] = React.useState(0);
   const classes = useclasses();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [activateExtraInfo, setActivateExtraInfo] = useState(false);
   const steps = getSteps();
-  const [files, setFiles] = useState([]);
-  const [displayUploadedPhoto, setDisplayUploadedPhoto] = useState("");
-  const [fileName, setFileName] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
+
   const [errorrMessage, setErrorrMessage] = useState("");
   const [display, setDisplay] = useState(false);
   
@@ -59,11 +52,9 @@ export default function SimpleTabs(props) {
   }
 
 
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [validateName, setValidateName] = useState("");
   const [validateSurname, setValidateSurname] = useState("");
-  const ref = useRef();
   const bodyRef = useRef();
   const createPdfs = () => {
     if (!bodyRef.current) {
@@ -106,14 +97,10 @@ export default function SimpleTabs(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  function TransitionLeft(props) {
-    return <Slide {...props} direction="left" />;
-  }
 
   async function handleFiles(e, success, failure) {
     let headers = new Headers();
     headers.append("Accept", "Application/JSON");
-    setLoading(true);
     let formdata = new FormData();
 
     formdata.append("file", e.target.files[0]);
@@ -122,7 +109,6 @@ export default function SimpleTabs(props) {
     const preview = URL.createObjectURL(e.target.files[0]);
     if (preview) {
       setImageFiles(preview);
-      setLoading(false);
     }
   }
  
@@ -167,7 +153,7 @@ export default function SimpleTabs(props) {
               <div className="avatar-wrapper">
                 {imageFiles.length > 0 ? (
                   <>
-                    <img src={imageFiles} />
+                    <img src={imageFiles} alt="foto-cv" />
                     <a onClick={() => setImageFiles("")}>Fshi</a>
                   </>
                 ) : (

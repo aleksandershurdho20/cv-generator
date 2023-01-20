@@ -1,26 +1,22 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import WorkIcon from "@material-ui/icons/Work";
 import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Container from "@material-ui/core/Container";
-import { SpeakerNotesOffOutlined } from "@material-ui/icons";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
-import Edukimi from "../../Components/Edukimi/Edukimi";
+import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import DeleteIcon from "@material-ui/icons/Delete";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import WorkIcon from "@material-ui/icons/Work";
+import { useDispatch, useSelector } from "react-redux";
+import { monthNames, years } from "utils/PdfGenerator/generateDate";
+import Edukimi from "../../Components/Edukimi/Edukimi";
 import Gjuhet from "../../Components/Gjuhet";
 import Skills from "../../Components/Skills/Index";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
-import { useDispatch, useSelector } from "react-redux";
-import { cvDataState,handleChangeExperienceFields,
-  addExperienceFields,
-  removeExperienceDataFields
+import {
+  addExperienceFields, cvDataState, handleChangeExperienceFields, removeExperienceDataFields
 } from "../../redux/slices/createCv";
 import "./Experience.scss";
 const useStyles = makeStyles((theme) => ({
@@ -55,25 +51,9 @@ export default function Experience() {
   const removeExperienceFields = (index) =>{
     dispatch(removeExperienceDataFields(index))
   }
-  const currentYear = new Date().getUTCFullYear();
-  const years = Array(currentYear - (currentYear - 20))
-    .fill("")
-    .map((v, idx) => currentYear - idx);
+  
   const classes = useStyles();
-  const monthNames = [
-    "Janar",
-    "Shkurt",
-    "Mars",
-    "Prill",
-    "Maj",
-    "Qershor",
-    "Korrik",
-    "Gusht",
-    "Shtator",
-    "Tetor",
-    "Nentor",
-    "Dhjetor",
-  ];
+  
   return (
     <div className={classes.root}>
       <Container>

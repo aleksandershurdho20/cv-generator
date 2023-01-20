@@ -8578,13 +8578,6 @@ jss@10.5.0, jss@^10.0.3:
     array-includes "^3.1.1"
     object.assign "^4.1.1"
 
-jsx-pdf@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/jsx-pdf/-/jsx-pdf-2.3.0.tgz#dfc91f1790d895056f1619dfb0eff8e5a2f6485b"
-  integrity sha512-wT5675PEnZD3HTrn24IZC8PiE504oCMHcbYCHzlCLnHyMBapzodB8o9BnQh5BT8EI9yvOcIq9D5gMs2PGB1Gdw==
-  dependencies:
-    lodash "^4.17.20"
-
 jwa@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jwa/-/jwa-1.4.1.tgz#743c32985cb9e98655530d53641b66c8645b039a"
