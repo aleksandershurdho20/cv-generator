@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import Teplate from "../../../assets/template.svg";
 import "./HeroCards.scss";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import Fade from "react-reveal/Fade";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HeroCard() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
 
   return (
@@ -50,7 +50,7 @@ export default function HeroCard() {
             <div className="sub-main">
               <button
                 className="button-two"
-                onClick={() => history.push("/Cv/shembuj")}
+                onClick={() => navigate("/Cv/shembuj")}
               >
                 <span>Shiko Shembujt</span>
               </button>
