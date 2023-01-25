@@ -216,7 +216,7 @@ export default function Experience() {
                         />
                       </Grid>
                     </Grid>
-                    <Grid container justify="center">
+                    <Grid container justifyContent="center">
                       {index !== 0 && (
                         <IconButton
                           aria-label="delete"

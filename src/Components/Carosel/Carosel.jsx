@@ -1,22 +1,22 @@
 import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Divider from "@material-ui/core/Divider";
-import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
 import Snackbar from "@material-ui/core/Snackbar";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Stepper from "@material-ui/core/Stepper";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import FaceIcon from "@material-ui/icons/Face";
 import MuiAlert from "@material-ui/lab/Alert";
-import React, { useRef, useState } from "react";
+import InformacioniPersonal from "Components/InformacioniPersonal";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "../../Components/Modal/Modal";
+import {
+  cvFieldsState,
+  goToPreviousStep,
+  validateFormFields,
+} from "redux/slices/cvFieldsError";
 import Experience from "../../Containers/Experience/Experience";
 import Footer from "../../Containers/Footer/Footer";
-import { changeCvData, cvDataState } from "../../redux/slices/createCv";
+import { cvDataState } from "../../redux/slices/createCv";
+
 import Doc from "../../utils/PdfGenerator/DocService";
 import TemplateList from "../SelectTemplates/TemplateList";
 import "./Carosel.scss";
@@ -36,25 +36,21 @@ const useclasses = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleTabs(props) {
-  
+export default function SimpleTabs() {
   const classes = useclasses();
-  const [activeStep, setActiveStep] = React.useState(0);
+  // const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
   const [errorrMessage, setErrorrMessage] = useState("");
   const [display, setDisplay] = useState(false);
-  
-  const state = useSelector(cvDataState)
-  const dispatch = useDispatch()
+
+  const state = useSelector(cvDataState);
+  const { activeStep } = useSelector(cvFieldsState);
+  const dispatch = useDispatch();
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
 
-
-  const [open, setOpen] = React.useState(false);
-  const [validateName, setValidateName] = useState("");
-  const [validateSurname, setValidateSurname] = useState("");
   const bodyRef = useRef();
   const createPdfs = () => {
     if (!bodyRef.current) {
@@ -65,66 +61,20 @@ export default function SimpleTabs(props) {
     // setDisplay(false);
   };
   const [imageFiles, setImageFiles] = useState("");
-  const handleCVFields = (e) => {
-    const { name, value } = e.target;
-  
-    dispatch(changeCvData({
-      ...state,
-      key:name,value})
-    )
-    setValidateName("");
-    setValidateSurname("");
-  };
+
   const handleNext = () => {
-    if (!state.emer) {
-      setValidateName("Emri nuk mund te jete bosh !");
-      setActiveStep(0);
-    } else if (!state.mbiemer) {
-      setValidateSurname("Mbiemri nuk mund te jete bosh !");
-      setActiveStep(0);
-    } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
+    dispatch(validateFormFields({ fields: state }));
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    dispatch(goToPreviousStep());
+    // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  async function handleFiles(e, success, failure) {
-    let headers = new Headers();
-    headers.append("Accept", "Application/JSON");
-    let formdata = new FormData();
-
-    formdata.append("file", e.target.files[0]);
-    formdata.append("upload_preset", "ngarko");
-
-    const preview = URL.createObjectURL(e.target.files[0]);
-    if (preview) {
-      setImageFiles(preview);
-    }
-  }
- 
 
   const createPdf = (html) => Doc.createPdf(html);
 
   return (
     <div className={classes.root}>
-      <Modal
-        open={open}
-        handleClickOpen={handleClickOpen}
-        handleClose={handleClose}
-        modalTitle="Ngarko Foto"
-        handleFiles={handleFiles}
-      />
-
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
@@ -133,118 +83,12 @@ export default function SimpleTabs(props) {
         ))}
       </Stepper>
 
-      {activeStep === 1 && (
-        <Experience/>
-      )}
+      {activeStep === 1 && <Experience />}
       {activeStep === 2 && (
-        <TemplateList
-          bodyRef={bodyRef}
-          imageFiles={imageFiles}
-          displayCV={props.displayCV}
-        />
+        <TemplateList bodyRef={bodyRef} imageFiles={imageFiles} />
       )}
 
-      {activeStep === 0 && (
-        <Container style={{ marginTop: 10 }}>
-          <Grid container spacing={3}>
-            <Grid item md={4} sm={12} xs={12}>
-              <InputLabel id="demo-simple-select-label">Ngarko</InputLabel>
-
-              <div className="avatar-wrapper">
-                {imageFiles.length > 0 ? (
-                  <>
-                    <img src={imageFiles} alt="foto-cv" />
-                    <a onClick={() => setImageFiles("")}>Fshi</a>
-                  </>
-                ) : (
-                  <div className="avatar-wrapper" onClick={handleClickOpen}>
-                    <FaceIcon className="avatar-center" />
-                    <span>Shto Fotografi</span>
-                  </div>
-                )}
-              </div>
-              {/* {imageFiles.length > 0 && (
-                <a onClick={() => setImageFiles("")}>Fshi</a>
-              )} */}
-            </Grid>
-            <Grid item md={4}>
-              <div>
-                <TextField
-                  className={classes.cvFields}
-                  id="outlined-basic"
-                  label="Emer"
-                  variant="outlined"
-                  error={validateName}
-                  name="emer"
-                  value={state.emer}
-                  onChange={handleCVFields}
-                  fullWidth
-                  helperText={validateName}
-                />
-                <TextField
-                  className={classes.cvFields}
-                  id="outlined-basic"
-                  label="Email"
-                  variant="outlined"
-                  fullWidth
-                  name="email"
-                  value={state.email}
-                  onChange={handleCVFields}
-                />
-                <TextField
-                  className={classes.cvFields}
-                  id="outlined-basic"
-                  label="Adresa"
-                  variant="outlined"
-                  name="adresa"
-                  value={state.adresa}
-                  onChange={handleCVFields}
-                  fullWidth
-                />
-              </div>
-            </Grid>
-
-            <Grid item md={4}>
-              <div>
-                <TextField
-                  className={classes.cvFields}
-                  id="outlined-basic"
-                  label="Mbiemer"
-                  variant="outlined"
-                  fullWidth
-                  name="mbiemer"
-                  error={validateSurname}
-                  helperText={validateSurname}
-                  value={state.mbiemer}
-                  onChange={handleCVFields}
-                />
-                <TextField
-                  className={classes.cvFields}
-                  id="outlined-basic"
-                  label="Telefon  "
-                  fullWidth
-                  variant="outlined"
-                  name="telefon"
-                  value={state.telefon}
-                  onChange={handleCVFields}
-                />
-                <TextField
-                  className={classes.cvFields}
-                  id="outlined-basic"
-                  label="Qyteti"
-                  variant="outlined"
-                  fullWidth
-                  name="qyteti"
-                  value={state.qyteti}
-                  onChange={handleCVFields}
-                />
-              </div>
-            </Grid>
-
-            <Divider />
-          </Grid>
-        </Container>
-      )}
+      {activeStep === 0 && <InformacioniPersonal />}
       <div className="step-btns">
         <Button
           disabled={activeStep === 0}
@@ -271,11 +115,11 @@ export default function SimpleTabs(props) {
         >
           Submit
         </Button>
-        <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
+        {/* <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={() => setDisplay(false)} severity="error">
             {errorrMessage}
           </Alert>
-        </Snackbar>
+        </Snackbar> */}
       </div>
 
       <Footer backgroundColor={`#FAFAFA`} />

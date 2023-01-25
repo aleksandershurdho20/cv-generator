@@ -35,6 +35,7 @@ export const cvData ={
     pozicioni: "",
     qytetiPuna: "",
     profili: "",
+    image:"",
     eksperienca: [
         experienceData
     ],

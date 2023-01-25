@@ -31,7 +31,7 @@ export default function Routes() {
 
                 <RoutesComponents>
 
-                    <Route exact path="" element={<Home/>} />
+                    <Route  path="" element={<Home/>} />
                     {/* <Route path="/RrethNesh" component={() => <h2>Rreth nesh</h2>} /> */}
                     <Route path="/Krijo" element={<CreateCv/>} />
                     <Route path="/Cv/shembuj" element={<CvExamples/>} />

@@ -36,7 +36,7 @@ export default function Cards() {
     <>
       <CssBaseline />
       <Container>
-        <Grid container justify="center" className={classes.main} spacing={2}>
+        <Grid container justifyContent="center" className={classes.main} spacing={2}>
           <Grid item xs={12} sm={12} md={4} lg={4}>
             <Card className={classes.root}>
               <CardActionArea>

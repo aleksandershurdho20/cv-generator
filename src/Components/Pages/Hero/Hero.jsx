@@ -15,18 +15,18 @@ export default function Hero() {
   return (
     <main>
       <section className="hero-wrapper">
-        <div class="introduction">
-          <div class="hero-container">
+        <div className="introduction">
+          <div className="hero-container">
             <h1>Krijo CV</h1>
             <p>Krijoni modelin e CV qe cdo rekrutues e adhuron ate! </p>
           </div>
-          <div class="cta">
-            <button class="cta1">
+          <div className="cta">
+            <button className="cta1">
               <Link to="/Krijo" style={linkStyles}>
                 Krijo CV{" "}
               </Link>
             </button>
-            <button class="cta2">
+            <button className="cta2">
               <Link
                 to="/Cv/shembuj"
                 style={{ textDecoration: "none", color: "#FFF" }}
