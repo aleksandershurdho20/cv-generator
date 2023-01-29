@@ -1,53 +1,38 @@
-import React, { useState } from 'react'
-import "./Header.scss"
-import LanguageSwitcher from "../../LanguageSwitcher/Index"
-import {
-    Nav,
-    NavLink,
-    Bars,
-    NavMenu,
-    NavBtn,
-    NavBtnLink
-} from './HeaderItems';
-import Logo from "../../../assets/Logo2.png"
-import SideBar from './MobileMenu/Sidebar'
+import React, { useState } from "react";
+import "./Header.scss";
+import LanguageSwitcher from "../../LanguageSwitcher/Index";
+import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from "./HeaderItems";
+import Logo from "../../../assets/Logo2.png";
+import SideBar from "./MobileMenu/Sidebar";
 
 export default function Index() {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
     const handleOpen = () => {
-        setOpen(!open)
-    }
+        setOpen(!open);
+    };
     return (
         <>
             <Nav>
-                <NavLink exact to='/'>
-                    <img src={Logo} style={{ width: '40%' }} />
+                <NavLink to="/">
+                    <img src={Logo} style={{ width: "40%" }} />
                 </NavLink>
                 <Bars onClick={handleOpen} />
                 <NavMenu>
-                    <NavLink exact to='/' activeStyle>
+                    <NavLink to="/" activestyle={{color:" #e74645"}}>
                         Kryefaqja
-          </NavLink>
-                    {/* <NavLink to='/RrethNesh' activeStyle>
-                        Rreth Nesh
-          </NavLink> */}
-                    <NavLink to='/Krijo' activeStyle>
+                    </NavLink>
+      
+                    <NavLink to="/Krijo" activestyle={{color:" #e74645"}}>
                         Krijo
-          </NavLink>
-                    <NavLink to='/Cv/shembuj' activeStyle>
+                    </NavLink>
+                    <NavLink to="/Cv/shembuj" activestyle={{color:" #e74645"}}>
                         Shembuj
-          </NavLink>
-                    {/* Second Nav */}
-                    <NavBtnLink to='/Regjistrohu'>Regjistrohu</NavBtnLink>
+                    </NavLink>
+                    <NavBtnLink to="/Regjistrohu">Regjistrohu</NavBtnLink>
                 </NavMenu>
-                {/* <NavBtn>
-                    <NavBtnLink to='/signin'>Sign In</NavBtnLink>
-                </NavBtn> */}
+
             </Nav>
             <SideBar open={open} handleOpen={handleOpen} />
-
         </>
-
-
-    )
+    );
 }

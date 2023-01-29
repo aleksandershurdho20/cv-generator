@@ -30,7 +30,7 @@ export default function HeroCard() {
 
   return (
     <>
-      <Grid container className={classes.main} justify="center" spacing={12}>
+      <Grid container className={classes.main} justifyContent="center" spacing={12}>
         <Grid item md={6}>
           <Container>
             <div className="wrapper-description">

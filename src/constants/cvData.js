@@ -1,3 +1,5 @@
+import { monthNames,years } from "utils/PdfGenerator/generateDate"
+
 
  export const educationData =  {
   diploma: "",
@@ -12,10 +14,10 @@
  
 export const experienceData = {
       kompania: "",
-      dataEFillimi: "",
-      muajiFillimit: "",
-      muajiMbarimit: "",
-      dataEmbarimit: "",
+      dataEFillimi: years[0],
+      muajiFillimit: monthNames[0],
+      muajiMbarimit: monthNames[0],
+      dataEmbarimit: years[0],
       pershkrimi: "",
   
 }
@@ -35,6 +37,7 @@ export const cvData ={
     pozicioni: "",
     qytetiPuna: "",
     profili: "",
+    image:"",
     eksperienca: [
         experienceData
     ],

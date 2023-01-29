@@ -76,6 +76,10 @@ export const createCvSlice = createSlice({
         tempArr.splice(action.payload, 1);
         state.edukimi = tempArr;
     },
+    handleImageFiles:(state,action) =>{
+        state.image=action.payload
+    },
+    removeImageFiles:(state) =>state.image=null
     },
 });
 
@@ -92,7 +96,9 @@ export const {
     removeLanguageFields,
     addEducationFields,
     handleChangeEducationFields,
-    removeEducationFields
+    removeEducationFields,
+    handleImageFiles,
+    removeImageFiles
     
 } = createCvSlice.actions;
 

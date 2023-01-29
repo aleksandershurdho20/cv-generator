@@ -19,6 +19,8 @@ import {
   addExperienceFields, cvDataState, handleChangeExperienceFields, removeExperienceDataFields
 } from "../../redux/slices/createCv";
 import "./Experience.scss";
+import { cvFieldsState,resetFormFields } from "redux/slices/cvFieldsError";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -37,12 +39,16 @@ export default function Experience() {
 
   const state = useSelector(cvDataState)
   const dispatch = useDispatch()
+  const {dataEFillimi,pozicioni,kompania} = useSelector(cvFieldsState)
+
   const {eksperienca}= state
+  
 
   const handleExperienceFields = (e, index) => {
     const { name, value } = e.target;
     dispatch(handleChangeExperienceFields({index,name,value}))
- 
+    dispatch(resetFormFields({key:name}))
+
   };
   const handleAddExperienceFields = () =>{
     dispatch(addExperienceFields())
@@ -75,13 +81,15 @@ export default function Experience() {
                       <Grid item md={6} sm={12} xs={12}>
                         <TextField
                           id="outlined-basic"
-                          label="Pozicioni"
+                          label="Pozicioni*"
                           variant="outlined"
                           name="pozicioni"
                           value={data.pozicioni}
                           onChange={(value) =>
                             handleExperienceFields(value, index)
                           }
+                          error={pozicioni? true : false}
+                          helperText={pozicioni}
                           fullWidth
                         />
                       </Grid>
@@ -104,7 +112,7 @@ export default function Experience() {
                       <Grid item md={12} style={{ marginTop: 15 }}>
                         <TextField
                           id="outlined-basic"
-                          label="Kompania"
+                          label="Kompania*"
                           variant="outlined"
                           name="kompania"
                           fullWidth
@@ -112,6 +120,8 @@ export default function Experience() {
                           onChange={(value) =>
                             handleExperienceFields(value, index)
                           }
+                          error={kompania? true : false}
+                          helperText={kompania}
                         />
                       </Grid>
                     </Grid>
@@ -155,6 +165,7 @@ export default function Experience() {
                             </option>
                           ))}
                         </select>
+
                       </Grid>
                       <Grid item md={6} sm={12} xs={12}>
                         <InputLabel
@@ -196,6 +207,8 @@ export default function Experience() {
                           ))}
                         </select>
                       </Grid>
+                      {dataEFillimi && <span>{dataEFillimi}</span>}
+
                     </Grid>
                     <Grid container>
                       <Grid item md={12}>
@@ -216,7 +229,7 @@ export default function Experience() {
                         />
                       </Grid>
                     </Grid>
-                    <Grid container justify="center">
+                    <Grid container justifyContent="center">
                       {index !== 0 && (
                         <IconButton
                           aria-label="delete"
