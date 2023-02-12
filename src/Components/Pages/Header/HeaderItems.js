@@ -1,6 +1,6 @@
 import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
 export const Nav = styled.nav`
   background: white;
   height: 80px;

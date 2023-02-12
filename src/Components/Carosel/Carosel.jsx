@@ -1,10 +1,7 @@
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Stepper from "@material-ui/core/Stepper";
-import { makeStyles } from "@material-ui/core/styles";
-import MuiAlert from "@material-ui/lab/Alert";
+import Button from "@mui/material/Button";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 import InformacioniPersonal from "Components/InformacioniPersonal";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +13,7 @@ import {
 import Experience from "../../Containers/Experience/Experience";
 import Footer from "../../Containers/Footer/Footer";
 import { cvDataState } from "../../redux/slices/createCv";
+import Box from "@mui/material/Box";
 
 import Doc from "../../utils/PdfGenerator/DocService";
 import TemplateList from "../SelectTemplates/TemplateList";
@@ -24,21 +22,7 @@ function getSteps() {
   return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
 }
 
-const useclasses = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow:
-      " 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2)",
-  },
-  cvFields: {
-    marginBottom: 15,
-  },
-}));
-
 export default function SimpleTabs() {
-  const classes = useclasses();
-  // const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
   const [errorrMessage, setErrorrMessage] = useState("");
@@ -47,9 +31,6 @@ export default function SimpleTabs() {
   const state = useSelector(cvDataState);
   const { activeStep } = useSelector(cvFieldsState);
   const dispatch = useDispatch();
-  function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
 
   const bodyRef = useRef();
   const createPdfs = () => {
@@ -74,7 +55,11 @@ export default function SimpleTabs() {
   const createPdf = (html) => Doc.createPdf(html);
 
   return (
-    <div className={classes.root}>
+    <Box
+      flexGrow="1"
+      boxShadow=" 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2)"
+      backgroundColor="#FFF"
+    >
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
@@ -93,7 +78,7 @@ export default function SimpleTabs() {
         <Button
           disabled={activeStep === 0}
           onClick={handleBack}
-          className={classes.backButton}
+          style={{ color: "#000" }}
         >
           Back
         </Button>
@@ -121,8 +106,7 @@ export default function SimpleTabs() {
           </Alert>
         </Snackbar> */}
       </div>
-
       <Footer backgroundColor={`#FAFAFA`} />
-    </div>
+    </Box>
   );
 }

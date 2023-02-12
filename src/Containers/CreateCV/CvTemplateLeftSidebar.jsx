@@ -1,6 +1,6 @@
 import React from "react";
 import "./LeftCv.scss";
-import Divider from "@material-ui/core/Divider";
+import Divider from '@mui/material/Divider';
 
 export default function CvTemplateLeftSidebar() {
   return (

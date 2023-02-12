@@ -1,36 +1,24 @@
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import React from "react";
 import Teplate from "../../../assets/template.svg";
 import "./HeroCards.scss";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Fade from "react-reveal/Fade";
-
-const useStyles = makeStyles((theme) => ({
-  main: {
-    flexGrow: 1,
-    marginTop: "7%",
-    background: "#F0F0F1",
-  },
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
-  img: {
-    width: "70%",
-  },
-}));
 
 export default function HeroCard() {
   const navigate = useNavigate();
-  const classes = useStyles();
 
   return (
     <>
-      <Grid container className={classes.main} justifyContent="center" spacing={12}>
+      <Grid
+         marginTop="7%"
+        background="#F0F0F1"
+        flexGrow={1}
+        container
+        justifyContent="center"
+        spacing={12}
+      >
         <Grid item md={6}>
           <Container>
             <div className="wrapper-description">
@@ -58,7 +46,7 @@ export default function HeroCard() {
           </Container>
         </Grid>
         <Grid item md={6}>
-          <img src={Teplate} className={classes.img} />
+          <img src={Teplate} style={{ width: "70%" }} />
         </Grid>
       </Grid>
     </>

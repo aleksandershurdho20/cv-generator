@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Carosel from "../../Components/Carosel/Carosel";
-import Grid from "@material-ui/core/Grid";
+import Grid from '@mui/material/Grid';
 // import AdSense from "react-ssr-adsense";
 import AdSense from "react-adsense";
 

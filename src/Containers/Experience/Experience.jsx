@@ -1,15 +1,16 @@
-import Accordion from "@material-ui/core/Accordion";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import InputLabel from "@material-ui/core/InputLabel";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import DeleteIcon from "@material-ui/icons/Delete";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import WorkIcon from "@material-ui/icons/Work";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import WorkIcon from '@mui/icons-material/Work';
+import Box from '@mui/material/Box';
+
 import { useDispatch, useSelector } from "react-redux";
 import { monthNames, years } from "utils/PdfGenerator/generateDate";
 import Edukimi from "../../Components/Edukimi/Edukimi";
@@ -21,19 +22,7 @@ import {
 import "./Experience.scss";
 import { cvFieldsState,resetFormFields } from "redux/slices/cvFieldsError";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
-  experienceWrapper: {
-    width: "100%",
-  },
-}));
+
 
 export default function Experience() {
 
@@ -58,10 +47,9 @@ export default function Experience() {
     dispatch(removeExperienceDataFields(index))
   }
   
-  const classes = useStyles();
   
   return (
-    <div className={classes.root}>
+    <Box  flexGrow="1">
       <Container>
         <Accordion>
           <AccordionSummary
@@ -76,7 +64,7 @@ export default function Experience() {
             <Grid container>
               {eksperienca &&
                 eksperienca.map((data, index) => (
-                  <div key={index} className={classes.experienceWrapper}>
+                  <Box key={index} width="100%">
                     <Grid container spacing={2}>
                       <Grid item md={6} sm={12} xs={12}>
                         <TextField
@@ -234,13 +222,12 @@ export default function Experience() {
                         <IconButton
                           aria-label="delete"
                           onClick={() => removeExperienceFields(index)}
-                          className={classes.button}
                         >
                           <DeleteIcon />
                         </IconButton>
                       )}
                     </Grid>
-                  </div>
+                  </Box>
                 ))}
               <button
                 className="extra-info-btn"
@@ -257,6 +244,6 @@ export default function Experience() {
         
     
       </Container>
-    </div>
+    </Box>
   );
 }

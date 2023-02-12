@@ -1,18 +1,13 @@
-import React, { useState,useRef } from "react";
+import { useRef, useState } from "react";
 
+import Container from '@mui/material/Container';
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import InitialCvTempalte from "../../assets/cv_preview.png";
 import Template2 from "../../assets/template2.png";
 import Template3 from "../../assets/template3.png";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
-import Container from "@material-ui/core/Container";
-import CV from "react-cv";
-import TemplateOne from "./CVTemplates/TemplateOne";
-import TemplateTwo from "./CVTemplates/Template2/TemplateTwo";
-import Pdf from "react-to-pdf";
-import Download from "../../Containers/Download";
 import Template4 from "../../assets/Template4.PNG";
-import TemplateFour from "./CVTemplates/Template4/Template4";
+import Download from "../../Containers/Download";
 
 export default function TemplateList(props) {
 

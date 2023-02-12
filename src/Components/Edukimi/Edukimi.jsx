@@ -1,26 +1,19 @@
-import Accordion from "@material-ui/core/Accordion";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import { makeStyles } from "@material-ui/core/styles";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import SchoolIcon from "@material-ui/icons/School";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SchoolIcon from '@mui/icons-material/School';
 import EdukimiFormFields from "./EdukimiFormFields";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
-}));
+import Box from '@mui/material/Box';
+
+
 
 export default function Edukimi() {
-  const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Box
+      flexGrow="1"
+    >
       <Accordion style={{ marginTop: 15 }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -34,6 +27,6 @@ export default function Edukimi() {
           <EdukimiFormFields/>
         </AccordionDetails>
       </Accordion>{" "}
-    </div>
+    </Box>
   );
 }

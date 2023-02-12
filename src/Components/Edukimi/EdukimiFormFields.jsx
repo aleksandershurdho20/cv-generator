@@ -1,16 +1,16 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import Grid from "@material-ui/core/Grid";
+import Grid from '@mui/material/Grid';
 import {
     cvDataState,
     addEducationFields,
     handleChangeEducationFields,
     removeEducationFields
 } from "../../redux/slices/createCv";
-import TextField from "@material-ui/core/TextField";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import InputLabel from "@material-ui/core/InputLabel";
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import InputLabel from '@mui/material/InputLabel';
 import { years,monthNames } from 'utils/PdfGenerator/generateDate';
 
 export default function EdukimiFormFields() {

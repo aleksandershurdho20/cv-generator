@@ -79,7 +79,8 @@ export const createCvSlice = createSlice({
     handleImageFiles:(state,action) =>{
         state.image=action.payload
     },
-    removeImageFiles:(state) =>state.image=null
+    removeImageFiles: (state, action) => void(state.image = "")
+
     },
 });
 

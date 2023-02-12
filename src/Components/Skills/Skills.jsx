@@ -1,14 +1,14 @@
-import Accordion from "@material-ui/core/Accordion";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import VideoLabelIcon from "@material-ui/icons/VideoLabel";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import React from "react";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { useDispatch, useSelector } from "react-redux";
 import { cvDataState,
   addSkillFields,
@@ -16,18 +16,7 @@ import { cvDataState,
   handleChangeSkillsField,
 } from "../../redux/slices/createCv";
 import "./Skills.scss";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  button: {
-    background: "rgba(0, 0, 0, 0.04)",
-    marginLeft: 10,
-  },
-  input: {
-    width: "50%",
-  },
-}));
+
 
 export default function Skills(
 ) {
@@ -35,7 +24,6 @@ export default function Skills(
 
   const {njohuri} =state
   const dispatch = useDispatch()
-  const classes = useStyles();
 
   const handleSkillsFields=(e,index) =>{
     const {name,value}=e.target
@@ -66,13 +54,20 @@ export default function Skills(
                     value={data.title}
                     name="title"
                     onChange={(value) => handleSkillsFields(value, index)}
-                    className={classes.input}
+                    sx={{
+                      width:"50%"
+                    }}
                   />
                   {index !== 0 && (
                     <IconButton
                       aria-label="delete"
                       onClick={(index) => removeSkills(index)}
-                      className={classes.button}
+                      sx={
+                        {
+                          background: "rgba(0, 0, 0, 0.04)",
+                          marginLeft: 10,
+                        }
+                      }
                     >
                       <DeleteIcon />
                     </IconButton>

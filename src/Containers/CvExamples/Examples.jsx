@@ -2,10 +2,10 @@ import React from "react";
 import Hero from "./ExamplesHero/Index";
 import Template2 from "../../assets/template2.png";
 import Template3 from "../../assets/template3.png";
-import Container from "@material-ui/core/Container";
+import Container from '@mui/material/Container';
 import Template4 from "../../assets/Template4.PNG";
 
-import Grid from "@material-ui/core/Grid";
+import Grid from '@mui/material/Grid';
 import Footer from "../Footer/Footer";
 export default function Examples() {
   const handleOnDragStart = (e) => e.preventDefault();

@@ -1,24 +1,22 @@
-import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 import React from "react";
 
-const useclasses = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow:
-      " 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2)",
-  },
-  cvFields: {
-    marginBottom: 15,
-  },
-}));
+// const useclasses = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//     backgroundColor: theme.palette.background.paper,
+//     boxShadow:
+//       " 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2)",
+//   },
+//   cvFields: {
+//     marginBottom: 15,
+//   },
+// }));
 export default function ExtraInformation({ cvData, handleCVFields }) {
-  const classes = useclasses();
 
   console.log(cvData, "cv props");
   return (
@@ -26,7 +24,7 @@ export default function ExtraInformation({ cvData, handleCVFields }) {
       <Grid item md={4} className="animate__fadeInDown">
         <div>
           <TextField
-            className={classes.cvFields}
+            // className={classes.cvFields}
             id="outlined-basic"
             label="Data e Lindjes"
             variant="outlined"
@@ -36,7 +34,7 @@ export default function ExtraInformation({ cvData, handleCVFields }) {
             onChange={handleCVFields}
           />
           <TextField
-            className={classes.cvFields}
+            // className={classes.cvFields}
             id="outlined-basic"
             label="Patenta"
             variant="outlined"
@@ -46,7 +44,7 @@ export default function ExtraInformation({ cvData, handleCVFields }) {
             onChange={handleCVFields}
           />
           <TextField
-            className={classes.cvFields}
+            // className={classes.cvFields}
             id="outlined-basic"
             label="Komebsia"
             variant="outlined"
@@ -58,7 +56,7 @@ export default function ExtraInformation({ cvData, handleCVFields }) {
       <Grid item md={4} className="animate__fadeInDown">
         <div>
           <TextField
-            className={classes.cvFields}
+            // className={classes.cvFields}
             id="outlined-basic"
             label="Vendi i Lindjes"
             variant="outlined"
@@ -76,7 +74,7 @@ export default function ExtraInformation({ cvData, handleCVFields }) {
             <MenuItem value={30}>Femer</MenuItem>
           </Select>
           <TextField
-            className={classes.cvFields}
+            // className={classes.cvFields}
             id="outlined-basic"
             label="Statusi Martesor"
             variant="outlined"

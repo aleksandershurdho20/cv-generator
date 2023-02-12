@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 import { NavLink as LinkR } from 'react-router-dom';
 
 export const SidebarContainer = styled.aside`

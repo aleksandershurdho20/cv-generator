@@ -1,5 +1,4 @@
 import React from "react";
-import { DropzoneArea } from "material-ui-dropzone";
 
 export default function Index({ handleFiles }) {
   console.log(handleFiles, "handle");

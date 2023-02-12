@@ -1,15 +1,17 @@
 import React from "react";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import PublicIcon from "@material-ui/icons/Public";
-import DeleteIcon from "@material-ui/icons/Delete";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import PublicIcon from '@mui/icons-material/Public';
+import DeleteIcon from '@mui/icons-material/Delete';
 import "./Gjuhet.scss";
-import IconButton from "@material-ui/core/IconButton";
+import IconButton from '@mui/material/IconButton';
+import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
+
 import { useDispatch, useSelector } from "react-redux";
 import {
     cvDataState,
@@ -17,22 +19,15 @@ import {
     handleChangeLanguageField,
     removeLanguageFields,
 } from "../../redux/slices/createCv";
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    button: {
-        marginLeft: theme.spacing(1),
-        background: "rgba(0, 0, 0, 0.04)",
-    },
-}));
+
 
 export default function Gjuhet() {
     const state = useSelector(cvDataState);
 
     const { gjuhet } = state;
+    const theme = useTheme()
+
     const dispatch = useDispatch();
-    const classes = useStyles();
     const addMoreLanguages = () => {
         dispatch(addMoreLangauges());
     };
@@ -45,7 +40,10 @@ export default function Gjuhet() {
         dispatch(handleChangeLanguageField({ index, name, value }));
     };
     return (
-        <div className={classes.root}>
+        <Box
+        flexGrow="1"
+        
+        >
             <Accordion style={{ marginTop: 15 }}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -106,7 +104,10 @@ export default function Gjuhet() {
                                                             index
                                                         )
                                                     }
-                                                    className={classes.button}
+                                                    sx={{
+                                                        marginLeft: theme.spacing(1),
+                                                        background: "rgba(0, 0, 0, 0.04)",
+                                                    }}
                                                 >
                                                     <DeleteIcon />
                                                 </IconButton>
@@ -124,6 +125,6 @@ export default function Gjuhet() {
                     </Grid>
                 </AccordionDetails>
             </Accordion>{" "}
-        </div>
+        </Box>
     );
 }
