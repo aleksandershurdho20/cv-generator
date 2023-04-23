@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Carosel from "../../Components/Carosel/Carosel";
 import Grid from '@mui/material/Grid';
 // import AdSense from "react-ssr-adsense";
-import AdSense from "react-adsense";
 
 export default function Create() {
   return (

@@ -28,11 +28,11 @@ export default function Index() {
                     <NavLink to="/Cv/shembuj" activestyle={{color:" #e74645"}}>
                         Shembuj
                     </NavLink>
-                    <NavBtnLink to="/Regjistrohu">Regjistrohu</NavBtnLink>
+                    <NavBtnLink to="/auth">Regjistrohu</NavBtnLink>
                 </NavMenu>
 
             </Nav>
-            <SideBar open={open} handleOpen={handleOpen} />
+            {/* <SideBar open={open} handleOpen={handleOpen} /> */}
         </>
     );
 }

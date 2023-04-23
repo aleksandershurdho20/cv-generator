@@ -22,8 +22,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-
-
 function BootstrapDialogTitle(props) {
   const { children, onClose, ...other } = props;
 
@@ -61,7 +59,7 @@ export default function CustomizedDialogs({open,handleClose,handleFiles}) {
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-         Shto fotografi
+           
         </BootstrapDialogTitle>
         <DialogContent dividers>
   
