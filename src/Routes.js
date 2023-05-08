@@ -12,6 +12,12 @@ import JobListingPage from 'Containers/JobListingPage/JobListingPage';
 import Dashboard from 'Containers/Dashboard/Dashboard';
 import CreateJob from 'Containers/Jobs/CreateJobs';
 import UpdateJob from 'Containers/Jobs/UpdateJob';
+import PrivateRoutes from 'routes/privateRoutes';
+import GetAllJobs from 'Containers/Jobs/GetAllJobs';
+import Applicants from 'Containers/Applicants';
+import Messages from 'Containers/Messages';
+import Profile from 'Containers/Profile';
+
 const imageStyles = {
     width: '27%',
     position: 'relative',
@@ -44,9 +50,23 @@ export default function Routes() {
                     <Route path="/CV/Download" element={<Download/>} />
                     <Route path="/auth" element={<Auth/>} />
                     <Route path="/jobs/list" element={<JobListingPage/>} />
-                    <Route path="/dashboard" element={<Dashboard/>} />
-                    <Route path="/job/create" element={<CreateJob/>} />
-                    <Route path="/job/update/:id" element={<UpdateJob/>} />
+                    <Route path="dashboard" element={<PrivateRoutes roles={["company","user"]}> <Dashboard/> </PrivateRoutes>} />
+                    <Route path="/job/create" element={<PrivateRoutes roles={["company"]}>
+                        <CreateJob/>
+                    </PrivateRoutes>} />
+                    <Route path="/jobs/all" element={<PrivateRoutes roles={["company"]}>
+                        <GetAllJobs/>
+                    </PrivateRoutes>} />
+                    <Route path="applicants" element={<PrivateRoutes roles={["company","user"]}>
+                        <Applicants/>
+                    </PrivateRoutes>} />
+                    <Route path="messages" element={<PrivateRoutes roles={["company","user"]}>
+                        <Messages/>
+                    </PrivateRoutes>} />
+                    <Route path="profile" element={<PrivateRoutes roles={["company","user"]}>
+                        <Profile/>
+                    </PrivateRoutes>} />
+                    <Route path="/job/update/:id" element={<UpdateJob/>}  />
 
                     <Route path="*" element={ <div>
                         <img src={NotFound} style={imageStyles} />

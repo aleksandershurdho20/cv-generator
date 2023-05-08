@@ -43,7 +43,7 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
         console.log(res,'jksjksdjk')
         localStorage.setItem("token",res.data.token)
         dispatch(authenticateUser(res.data))
-        // navigate("/dashboard")
+        navigate("/dashboard")
       }
       else{
         alert("Regjistrimi u be me sukses")
@@ -115,7 +115,7 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
     
               >
                 <FormControlLabel
-                  value="User"
+                  value="user"
                   control={<Radio    />}
                   label="Perdorues"
                 />

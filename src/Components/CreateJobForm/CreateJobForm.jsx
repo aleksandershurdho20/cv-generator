@@ -106,7 +106,9 @@ export default function CreateJobForm({
             value={jobData.experience}
             onChange={handleFormFields}
             sx={{ width: "90%" }}
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: true, }}
+            InputProps={{ inputProps: { min: 0 } }}
+
 
           />
         </Grid>
@@ -151,7 +153,7 @@ export default function CreateJobForm({
           <Button variant="contained" onClick={handleSubmit}>
             {isEditing ? "Modifiko" : "Krijo"}
           </Button>
-          <Button variant="outlined" onClick={() => navigate("/jobs/list")}>
+          <Button variant="outlined" onClick={() => navigate(-1)}>
             Kthehu
           </Button>
         </Stack>

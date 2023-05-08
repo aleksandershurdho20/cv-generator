@@ -1,13 +1,13 @@
 import { Container } from '@mui/material'
 import UpdateJobForm from 'Components/CreateJobForm/CreateJobForm'
 import React,{useState,useEffect} from 'react'
+import { useParams } from 'react-router-dom'
 import { api } from 'utils/api/api'
 
 export default function UpdateJob() {
-    const id = "6441753ba2e560eb6b14b442"
+    const {id} = useParams()
     const [jobData, setJobData] = useState({});
     const [errors, setErrors] = useState({});
-
   useEffect(() => {
     api
       .get(`job/${id}`)

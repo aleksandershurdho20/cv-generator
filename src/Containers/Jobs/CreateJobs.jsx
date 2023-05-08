@@ -3,14 +3,15 @@ import CreateJobForm from "Components/CreateJobForm/CreateJobForm";
 import { jobData as jobDataState } from "constants/jobs";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createJob } from "redux/slices/Jobs";
 
 export default function CreateJob() {
   const dispatch = useDispatch();
   const [jobData, setJobData] = useState(jobDataState);
-  const { error, jobs } = useSelector((state) => state.jobSlice);
+  const { error } = useSelector((state) => state.jobSlice);
+  const { userInfo } = useSelector((state) => state.userSlice);
+
   const handleFormFields = (e) => {
     const { name, value } = e.target;
     setJobData({
@@ -75,6 +76,7 @@ export default function CreateJob() {
 
     const params = {
       ...jobData,
+      company:userInfo?._id,
       skills: jobData.skills.map((job) => job.value),
     };
 

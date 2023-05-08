@@ -14,9 +14,13 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import {  parsedCategoryTitle } from "constants/jobs";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function ViewJob({ open, onClose, id }) {
   const [jobData, setJobData] = useState({});
+  const { userInfo } = useSelector((state) => state.userSlice);
+
   useEffect(() => {
     api
       .get(`job/${id}`)
@@ -25,6 +29,17 @@ export default function ViewJob({ open, onClose, id }) {
   }, [id]);
 
   const categoryTitle = parsedCategoryTitle(jobData?.category)
+
+  const handleApply = () =>{
+    const data ={
+      candidate:userInfo?._id,
+      job:jobData?._id,
+      is_confirmed:true
+    }
+    api.post("job/apply",data).then(res =>{
+      toast.success("Aplikimi u krye me sukses!")
+    }).catch (err => toast.error(err.response.data))
+  }
   return (
     <Drawer
       anchor="right"
@@ -64,7 +79,7 @@ export default function ViewJob({ open, onClose, id }) {
           </Grid>
           <Grid item xs={3}>
             <Stack spacing={2}>
-              <Button variant="contained" fullWidth>
+              <Button variant="contained" fullWidth onClick={handleApply}>
                 Apliko
               </Button>
               <Button variant="bordered" fullWidth>
