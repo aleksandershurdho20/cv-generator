@@ -15,66 +15,66 @@ export const createCvSlice = createSlice({
         },
         handleChangeExperienceFields: (state, action) => {
             const { index, name, value } = action.payload;
-            let tempArr = state.eksperienca;
+            let tempArr = state.experience;
             tempArr[index][name] = value;
 
-            state.eksperienca = tempArr;
+            state.experience = tempArr;
         },
         addExperienceFields: (state) => {
-            state.eksperienca = [...state.eksperienca, experienceData];
+            state.experience = [...state.eksperienca, experienceData];
         },
         removeExperienceDataFields: (state, action) => {
-            const tempArr = [...state.eksperienca];
+            const tempArr = [...state.experience];
             tempArr.splice(action.payload, 1);
-            state.eksperienca = tempArr;
+            state.experience = tempArr;
         },
 
         addSkillFields: (state) => {
-            state.njohuri = [...state.njohuri, { title: "" }];
+            state.skills = [...state.skills, { title: "" }];
         },
 
         removeSkillFields: (state, action) => {
-            const tempArr = [...state.njohuri];
+            const tempArr = [...state.skills];
             tempArr.splice(action.payload, 1);
-            state.njohuri = tempArr;
+            state.skills = tempArr;
         },
 
         handleChangeSkillsField: (state, action) => {
             const { index, name, value } = action.payload;
-            let tempArr = state.njohuri;
+            let tempArr = state.skills;
             tempArr[index][name] = value;
-            state.njohuri = tempArr;
+            state.skills = tempArr;
         },
 
         addMoreLangauges: (state) => {
-            state.gjuhet = [...state.gjuhet, { title: "", niveli: "" }];
+            state.languages = [...state.languages, { title: "", level: "" }];
         },
         handleChangeLanguageField: (state, action) => {
             const { index, name, value } = action.payload;
-            let tempArr = state.gjuhet;
+            let tempArr = state.languages;
             tempArr[index][name] = value;
-            state.gjuhet = tempArr;
+            state.languages = tempArr;
         },
 
         removeLanguageFields: (state, action) => {
-            const tempArr = [...state.gjuhet];
+            const tempArr = [...state.languages];
             tempArr.splice(action.payload, 1);
-            state.gjuhet = tempArr;
+            state.languages = tempArr;
         },
 
         addEducationFields:(state) =>{
-          state.edukimi = [...state.edukimi,educationData]
+          state.education = [...state.education,educationData]
         },
         handleChangeEducationFields: (state, action) => {
           const { index, name, value } = action.payload;
-          let tempArr = state.edukimi;
+          let tempArr = state.education;
           tempArr[index][name] = value;
-          state.edukimi = tempArr;
+          state.education = tempArr;
       },
       removeEducationFields: (state, action) => {
-        const tempArr = [...state.edukimi];
+        const tempArr = [...state.education];
         tempArr.splice(action.payload, 1);
-        state.edukimi = tempArr;
+        state.education = tempArr;
     },
     handleImageFiles:(state,action) =>{
         state.image=action.payload

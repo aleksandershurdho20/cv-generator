@@ -9,12 +9,12 @@ export const cvFieldsError = createSlice({
         validateFormFields : (state,action) =>{
             const {fields}=action.payload
             console.log(current(state));
-            if(!fields.emer){
-                state.emer = "Emri nuk mund te jete bosh!"
+            if(!fields.name){
+                state.name = "Emri nuk mund te jete bosh!"
                 state.activeStep = 0
             }
-            else if (!fields.mbiemer){
-                state.mbiemer = "Mbiemri nuk mund te jete bosh!"
+            else if (!fields.last_name){
+                state.last_name = "Mbiemri nuk mund te jete bosh!"
                 state.activeStep = 0
             }
             else if(!fields.email){
@@ -27,19 +27,19 @@ export const cvFieldsError = createSlice({
                 state.activeStep = 0
             }
      
-            else if (fields.eksperienca.find(el => el.dataEmbarimit < el.dataEFillimi)){
-                state.dataEFillimi = "Muaji i fillimit nuk mund te jete me i madh se muaji i mbarimit!"
-                state.activeStep = 1
-            }
+            // else if (fields.eksperienca.find(el => el.dataEmbarimit < el.dataEFillimi)){
+            //     state.dataEFillimi = "Muaji i fillimit nuk mund te jete me i madh se muaji i mbarimit!"
+            //     state.activeStep = 1
+            // }
          
-            else if (fields.eksperienca.find(el => !el.pozicioni)){
-                state.pozicioni = "Pozicioni nuk mund te jete bosh!"
-                state.activeStep = 1
-            }
-            else if (fields.eksperienca.find(el => !el.kompania)){
-                state.kompania = "Kompania nuk mund te jete bosh!"
-                state.activeStep = 1
-            }
+            // else if (fields.eksperienca.find(el => !el.pozicioni)){
+            //     state.pozicioni = "Pozicioni nuk mund te jete bosh!"
+            //     state.activeStep = 1
+            // }
+            // else if (fields.eksperienca.find(el => !el.kompania)){
+            //     state.kompania = "Kompania nuk mund te jete bosh!"
+            //     state.activeStep = 1
+            // }
             
             else {
                 state.activeStep= state.activeStep + 1

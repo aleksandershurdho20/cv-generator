@@ -4,7 +4,7 @@ export function interceptorRequest(request) {
         request.headers = { 
                 'Authorization': `${isLoggedIn}`,
                 'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
               }
             
             console.log(isLoggedIn)

@@ -1,5 +1,6 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import { api } from 'utils/api/api'
+import { cvData, experienceData,educationData } from "constants/cvData";
 
 // initialize userToken from local storage
 const userToken = localStorage.getItem('token')
@@ -8,7 +9,10 @@ const userToken = localStorage.getItem('token')
 
 const initialState = {
   loading: false,
-  userInfo: null,
+  userInfo: {
+    userProfileId:cvData
+
+  },
   userToken,
   error: null,
   success: false,
@@ -36,15 +40,21 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     authenticateUser:(state,action) =>{
-      const obj = {
-        ...action.payload.userData,
-        profile:action.payload.profile
-      }
-      state.userInfo = obj
+      // const obj = {
+      //   ...action.payload.userData,
+      //   profile:action.payload.profile
+      // }
+      // state.userInfo = obj
         state.loading = false
-        state.userInfo = obj
+        state.userInfo = action.payload.userData
         state.userToken = action.payload.userToken
     },
+
+    logUserOut:(state) =>{
+      state = initialState
+      localStorage.removeItem("token")
+      window.location.reload()
+    }
   },
     extraReducers: builder => {
       builder
@@ -52,14 +62,13 @@ const userSlice = createSlice({
           state=initialState
         })
         .addCase(getUserProfile.fulfilled, (state, action) => {
-          console.log(state)
           state.loading = false
           state.userToken = action.payload.token 
-          const obj = {
-            ...action.payload.userData,
-            profile:action.payload.profile
-          }
-          state.userInfo = obj
+          // const obj = {
+          //   ...action.payload.userData,
+          //   profile:action.payload.profile
+          // }
+          state.userInfo = action.payload.userData
         
         })
         .addCase(getUserProfile.rejected, (state, action) => {
@@ -73,7 +82,7 @@ const userSlice = createSlice({
  
 })
 
-export const {authenticateUser} = userSlice.actions;
+export const {authenticateUser,logUserOut} = userSlice.actions;
 export const profileState = (state) => state.userSlice;
 
 export default userSlice.reducer

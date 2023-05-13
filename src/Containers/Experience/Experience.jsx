@@ -1,15 +1,15 @@
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import WorkIcon from '@mui/icons-material/Work';
-import Box from '@mui/material/Box';
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import TextField from "@mui/material/TextField";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import WorkIcon from "@mui/icons-material/Work";
+import Box from "@mui/material/Box";
 
 import { useDispatch, useSelector } from "react-redux";
 import { monthNames, years } from "utils/PdfGenerator/generateDate";
@@ -17,39 +17,35 @@ import Edukimi from "../../Components/Edukimi/Edukimi";
 import Gjuhet from "../../Components/Gjuhet";
 import Skills from "../../Components/Skills/Index";
 import {
-  addExperienceFields, cvDataState, handleChangeExperienceFields, removeExperienceDataFields
+  addExperienceFields,
+  cvDataState,
+  handleChangeExperienceFields,
+  removeExperienceDataFields,
 } from "../../redux/slices/createCv";
 import "./Experience.scss";
-import { cvFieldsState,resetFormFields } from "redux/slices/cvFieldsError";
-
-
+import { cvFieldsState, resetFormFields } from "redux/slices/cvFieldsError";
 
 export default function Experience() {
+  const state = useSelector(cvDataState);
+  const dispatch = useDispatch();
+  const { start_date, pozicioni, kompania } = useSelector(cvFieldsState);
 
-  const state = useSelector(cvDataState)
-  const dispatch = useDispatch()
-  const {dataEFillimi,pozicioni,kompania} = useSelector(cvFieldsState)
-
-  const {eksperienca}= state
-  
+  const { experience } = state;
 
   const handleExperienceFields = (e, index) => {
     const { name, value } = e.target;
-    dispatch(handleChangeExperienceFields({index,name,value}))
-    dispatch(resetFormFields({key:name}))
-
+    dispatch(handleChangeExperienceFields({ index, name, value }));
+    dispatch(resetFormFields({ key: name }));
   };
-  const handleAddExperienceFields = () =>{
-    dispatch(addExperienceFields())
-    
-  }
-  const removeExperienceFields = (index) =>{
-    dispatch(removeExperienceDataFields(index))
-  }
-  
-  
+  const handleAddExperienceFields = () => {
+    dispatch(addExperienceFields());
+  };
+  const removeExperienceFields = (index) => {
+    dispatch(removeExperienceDataFields(index));
+  };
+
   return (
-    <Box  flexGrow="1">
+    <Box flexGrow="1">
       <Container>
         <Accordion>
           <AccordionSummary
@@ -62,8 +58,8 @@ export default function Experience() {
           </AccordionSummary>
           <AccordionDetails>
             <Grid container>
-              {eksperienca &&
-                eksperienca.map((data, index) => (
+              {experience &&
+                experience.map((data, index) => (
                   <Box key={index} width="100%">
                     <Grid container spacing={2}>
                       <Grid item md={6} sm={12} xs={12}>
@@ -71,12 +67,12 @@ export default function Experience() {
                           id="outlined-basic"
                           label="Pozicioni*"
                           variant="outlined"
-                          name="pozicioni"
-                          value={data.pozicioni}
+                          name="position"
+                          value={data.position}
                           onChange={(value) =>
                             handleExperienceFields(value, index)
                           }
-                          error={pozicioni? true : false}
+                          error={pozicioni ? true : false}
                           helperText={pozicioni}
                           fullWidth
                         />
@@ -84,19 +80,20 @@ export default function Experience() {
                       <Grid item md={6} sm={12} xs={12}>
                         <TextField
                           id="outlined-basic"
-                          label="Qyteti"
+                          label="Kompania*"
                           variant="outlined"
-                          name="qyteti"
+                          name="company"
                           fullWidth
-                          value={data.qyteti}
-                          // onChange={props.handleCVFields}
+                          value={data.company}
                           onChange={(value) =>
                             handleExperienceFields(value, index)
                           }
+                          error={kompania ? true : false}
+                          helperText={kompania}
                         />
                       </Grid>
                     </Grid>
-                    <Grid container>
+                    {/* <Grid container>
                       <Grid item md={12} style={{ marginTop: 15 }}>
                         <TextField
                           id="outlined-basic"
@@ -112,7 +109,7 @@ export default function Experience() {
                           helperText={kompania}
                         />
                       </Grid>
-                    </Grid>
+                    </Grid> */}
                     <Grid container spacing={2}>
                       <Grid item md={6} sm={12} xs={12}>
                         <InputLabel
@@ -124,8 +121,8 @@ export default function Experience() {
 
                         <select
                           className="select"
-                          name="muajiFillimit"
-                          value={data.muajiFillimit}
+                          name="month_start_date"
+                          value={data.month_start_date}
                           // onChange={props.handleCVFields}
                           onChange={(value) =>
                             handleExperienceFields(value, index)
@@ -140,8 +137,8 @@ export default function Experience() {
                         <select
                           className="select"
                           style={{ marginLeft: 20 }}
-                          name="dataEFillimi"
-                          value={data.dataEFillimi}
+                          name="start_date"
+                          value={data.start_date}
                           // onChange={props.handleCVFields}
                           onChange={(value) =>
                             handleExperienceFields(value, index)
@@ -153,7 +150,6 @@ export default function Experience() {
                             </option>
                           ))}
                         </select>
-
                       </Grid>
                       <Grid item md={6} sm={12} xs={12}>
                         <InputLabel
@@ -165,8 +161,8 @@ export default function Experience() {
 
                         <select
                           className="select"
-                          name="muajiMbarimit"
-                          value={data.muajiMbarimit}
+                          name="month_end_date"
+                          value={data.month_end_date}
                           // onChange={props.handleCVFields}
                           onChange={(value) =>
                             handleExperienceFields(value, index)
@@ -181,8 +177,8 @@ export default function Experience() {
                         <select
                           className="select"
                           style={{ marginLeft: 20 }}
-                          name="dataEmbarimit"
-                          value={data.dataEmbarimit}
+                          name="end_date"
+                          value={data.end_date}
                           // onChange={props.handleCVFields}
                           onChange={(value) =>
                             handleExperienceFields(value, index)
@@ -195,8 +191,7 @@ export default function Experience() {
                           ))}
                         </select>
                       </Grid>
-                      {dataEFillimi && <span>{dataEFillimi}</span>}
-
+                      {start_date && <span>{start_date}</span>}
                     </Grid>
                     <Grid container>
                       <Grid item md={12}>
@@ -209,8 +204,8 @@ export default function Experience() {
                         <textarea
                           id="outlined-basic"
                           className="textarea-description"
-                          name="pershkrimi"
-                          value={data.pershkrimi}
+                          name="description"
+                          value={data.description}
                           onChange={(value) =>
                             handleExperienceFields(value, index)
                           }
@@ -238,11 +233,9 @@ export default function Experience() {
             </Grid>
           </AccordionDetails>
         </Accordion>{" "}
-        <Edukimi  />
-        <Gjuhet/>
-        <Skills/>
-        
-    
+        <Edukimi />
+        <Gjuhet />
+        <Skills />
       </Container>
     </Box>
   );

@@ -1,61 +1,44 @@
-import { monthNames,years } from "utils/PdfGenerator/generateDate"
+import { monthNames, years } from "utils/PdfGenerator/generateDate";
 
-
- export const educationData =  {
+export const educationData = {
   diploma: "",
-  universiteti: "",
-  educationQyteti: "",
-  educationDataeFillimit: "",
-  educationDataeMbarimit: "",
-  educationMuajiFillimit: "",
-  educationMuajiMbarimit: "",
-  educationPershkrimi: "",
-}
- 
+  university: "",
+  city: "",
+  start_date: "",
+  end_date: "",
+  month_start_date: "",
+  month_end_date: "",
+  description: "",
+};
+
 export const experienceData = {
-      kompania: "",
-      dataEFillimi: years[0],
-      muajiFillimit: monthNames[0],
-      muajiMbarimit: monthNames[0],
-      dataEmbarimit: years[0],
-      pershkrimi: "",
-  
-}
-export const cvData ={
-    emer: "",
-    mbiemer: "",
-    email: "",
-    telefon: "",
-    adresa: "",
-    qyteti: "",
-    dataElindjes: "",
-    vendiILindejs: "",
-    Patenta: "",
-    Gjinia: "",
-    Kombesia: "",
-    statusiMartesor: "",
-    pozicioni: "",
-    qytetiPuna: "",
-    profili: "",
-    image:"",
-    eksperienca: [
-        experienceData
-    ],
-    edukimi: [
-        educationData
-    ],
-    njohuri:[
-        {
-            title:''
-        }
-    ],
-    gjuhet:[
-        {
-            title:'',niveli:''
-        }
-    ]
-    
-  }
+  company: "",
+  start_date: years[0],
+  month_start_date: monthNames[0],
+  month_end_date: monthNames[0],
+  end_date: years[0],
+  description: "",
+};
+export const cvData = {
+  name: "",
+  last_name: "",
+  email: "",
+  phone: "",
+  address: "",
+  city: "",
+  // gender: "",
+  Kombesia: "",
+  statusiMartesor: "",
+  profili: "",
+  image: "",
+  experience: [experienceData],
+  education: [educationData],
 
-
- 
+  skills: [{ title: "" }],
+  languages: [
+    {
+      title: "",
+      level: "",
+    },
+  ],
+};

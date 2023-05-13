@@ -19,6 +19,9 @@ export default function Applicants() {
     api
       .get(`applicants/${userInfo._id}`)
       .then((res) => setApplicants(res.data));
+      api
+      .get(`company/${userInfo._id}/applicants`)
+      .then((res) => console.log(res.data,'res'));
   }, []);
   const fitleredItems = query ? applicants.filter(el => el.job.category == query) : applicants
   const handleCancelApplication = (row) =>{

@@ -18,12 +18,14 @@ import Box from "@mui/material/Box";
 import Doc from "../../utils/PdfGenerator/DocService";
 import TemplateList from "../SelectTemplates/TemplateList";
 import "./Carosel.scss";
+import { api } from "utils/api/api";
 function getSteps() {
   return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
 }
 
 export default function SimpleTabs() {
   const steps = getSteps();
+  const { userInfo } = useSelector((state) => state.userSlice);
 
   const [errorrMessage, setErrorrMessage] = useState("");
   const [display, setDisplay] = useState(false);
@@ -46,12 +48,22 @@ export default function SimpleTabs() {
   const handleNext = () => {
     dispatch(validateFormFields({ fields: state }));
   };
-
+  console.log(useSelector((state) => state.userSlice),'state')
   const handleBack = () => {
     dispatch(goToPreviousStep());
     // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
+  console.log(state,'state')
+  const handleCreate = () =>{
+    const params = {...state,user: userInfo?._id}
+    console.log(params,'params')
+    api
+    .post("profile/create", params)
+    .then((res) => {
+      console.log("resko",res,params);
+    })
+    .catch((err) => console.log("errko"));
+  }
   const createPdf = (html) => Doc.createPdf(html);
 
   return (
@@ -82,24 +94,24 @@ export default function SimpleTabs() {
         >
           Back
         </Button>
-        <Button
+        {activeStep === 1 ?   <Button
+          variant="contained"
+          color="primary"
+          className="step-btn"
+          onClick={handleCreate}
+        >
+          Krijo
+        </Button> :     <Button
           variant="contained"
           color="primary"
           onClick={handleNext}
           className="step-btn"
-          style={activeStep === 2 ? { display: "none" } : { display: "inline" }}
+
         >
           Next
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          className="step-btn"
-          style={activeStep !== 2 ? { display: "none" } : { display: "inline" }}
-          onClick={createPdfs}
-        >
-          Submit
-        </Button>
+        </Button>}
+     
+       
         {/* <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={() => setDisplay(false)} severity="error">
             {errorrMessage}

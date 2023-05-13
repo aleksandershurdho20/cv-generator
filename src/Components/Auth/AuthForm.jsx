@@ -120,7 +120,7 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
                   label="Perdorues"
                 />
                 <FormControlLabel
-                  value="Company"
+                  value="company"
                   control={<Radio  />}
                   label="Kompani"
                 />

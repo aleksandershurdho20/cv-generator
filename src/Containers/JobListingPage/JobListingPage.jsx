@@ -58,7 +58,7 @@ export default function JobListing() {
             jobs.map((job) => (
               <Fade in={true} key={job._id}>
 
-                  <Box backgroundColor="white" padding="20px" >
+                  <Box backgroundColor="white" padding="20px" marginBottom="5px" >
                     <Box
                       display="flex"
                       justifyContent="space-between"

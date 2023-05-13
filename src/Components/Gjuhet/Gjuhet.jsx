@@ -24,7 +24,7 @@ import {
 export default function Gjuhet() {
     const state = useSelector(cvDataState);
 
-    const { gjuhet } = state;
+    const { languages } = state;
     const theme = useTheme()
 
     const dispatch = useDispatch();
@@ -56,8 +56,8 @@ export default function Gjuhet() {
                 <AccordionDetails>
                     <Grid container>
                         <Grid container spacing={2}>
-                            {gjuhet.length > 0 &&
-                                gjuhet.map((data, index) => (
+                            {languages.length > 0 &&
+                                languages.map((data, index) => (
                                     <>
                                         <Grid item md={6} sm={12} xs={12}>
                                             <TextField
@@ -82,8 +82,8 @@ export default function Gjuhet() {
                                                     marginTop: 0,
                                                     width: "60%",
                                                 }}
-                                                name="niveli"
-                                                value={data.niveli}
+                                                name="level"
+                                                value={data.level}
                                                 onChange={(value) =>
                                                     handleLangaugeFields(
                                                         value,

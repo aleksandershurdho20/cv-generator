@@ -14,9 +14,10 @@ import { cvFieldsState,resetFormFields } from "redux/slices/cvFieldsError";
 
 export default function InformacioniPersonal() {
     const state = useSelector(cvDataState)
+    console.log(state,'s')
     const dispatch = useDispatch()
     const {visible, toggle, setVisibility} = useToggle(false)
-    const {emer:errorName,mbiemer:errorSurname,email:errorEmail} = useSelector(cvFieldsState)
+    const {name:errorName,last_name:errorSurname,email:errorEmail} = useSelector(cvFieldsState)
     const handleCVFields = (e) => {
         const { name, value } = e.target;
       
@@ -73,8 +74,8 @@ export default function InformacioniPersonal() {
             label="Emer*"
             variant="outlined"
             error={errorName ? true : false}
-            name="emer"
-            value={state.emer}
+            name="name"
+            value={state.name}
             onChange={handleCVFields}
             fullWidth
             helperText={errorName}
@@ -99,8 +100,8 @@ export default function InformacioniPersonal() {
             id="outlined-basic"
             label="Adresa"
             variant="outlined"
-            name="adresa"
-            value={state.adresa}
+            name="address"
+            value={state.address}
             onChange={handleCVFields}
             fullWidth
           />
@@ -115,10 +116,10 @@ export default function InformacioniPersonal() {
             label="Mbiemer*"
             variant="outlined"
             fullWidth
-            name="mbiemer"
+            name="last_name"
             error={errorSurname ? true : false}
             helperText={errorSurname}
-            value={state.mbiemer}
+            value={state.last_name}
             onChange={handleCVFields}
           />
           <TextField
@@ -127,8 +128,8 @@ export default function InformacioniPersonal() {
             label="Telefon  "
             fullWidth
             variant="outlined"
-            name="telefon"
-            value={state.telefon}
+            name="phone"
+            value={state.phone}
             onChange={handleCVFields}
           />
           <TextField
@@ -137,8 +138,8 @@ export default function InformacioniPersonal() {
             label="Qyteti"
             variant="outlined"
             fullWidth
-            name="qyteti"
-            value={state.qyteti}
+            name="city"
+            value={state.city}
             onChange={handleCVFields}
           />
         </div>

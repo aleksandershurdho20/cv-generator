@@ -17,7 +17,7 @@ export default function EdukimiFormFields() {
     const state = useSelector(cvDataState);
     const dispatch = useDispatch()
 
-    const { edukimi } = state;
+    const { education } = state;
     const addEducationDataFields =() =>{
         dispatch(addEducationFields())
       }
@@ -31,8 +31,8 @@ export default function EdukimiFormFields() {
    
   return (
     <Grid container>
-    {edukimi &&
-      edukimi.map((data, index) => (
+    {education &&
+      education.map((data, index) => (
         <div key={index} style={{ width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item md={6} sm={12} xs={12}>
@@ -54,8 +54,8 @@ export default function EdukimiFormFields() {
                 id="outlined-basic"
                 label="Universiteti"
                 variant="outlined"
-                name="universiteti"
-                value={data.universiteti}
+                name="university"
+                value={data.university}
                 onChange={(value) =>
                   handleEducationFields(value, index)
                 }
@@ -69,8 +69,8 @@ export default function EdukimiFormFields() {
                 id="outlined-basic"
                 label="Qyteti"
                 variant="outlined"
-                name="educationQyteti"
-                value={data.educationQyteti}
+                name="city"
+                value={data.city}
                 onChange={(value) =>
                   handleEducationFields(value, index)
                 }
@@ -89,8 +89,8 @@ export default function EdukimiFormFields() {
 
               <select
                 className="select"
-                name="educationMuajiFillimit"
-                value={data.educationMuajiFillimit}
+                name="month_start_date"
+                value={data.month_start_date}
                 onChange={(value) =>
                   handleEducationFields(value, index)
                 }
@@ -104,8 +104,8 @@ export default function EdukimiFormFields() {
               <select
                 className="select"
                 style={{ marginLeft: 20 }}
-                name="educationDataeFillimit"
-                value={data.educationDataeFillimit}
+                name="start_date"
+                value={data.start_date}
                 onChange={(value) =>
                   handleEducationFields(value, index)
                 }
@@ -127,8 +127,8 @@ export default function EdukimiFormFields() {
 
               <select
                 className="select"
-                name="educationMuajiMbarimit"
-                value={data.educationMuajiMbarimit}
+                name="month_end_date"
+                value={data.month_end_date}
                 onChange={(value) =>
                   handleEducationFields(value, index)
                 }
@@ -142,8 +142,8 @@ export default function EdukimiFormFields() {
               <select
                 className="select"
                 style={{ marginLeft: 20 }}
-                name="educationDataeMbarimit"
-                value={data.educationDataeMbarimit}
+                name="end_date"
+                value={data.end_date}
                 onChange={(value) =>
                   handleEducationFields(value, index)
                 }
@@ -165,8 +165,8 @@ export default function EdukimiFormFields() {
             </InputLabel>
             <Grid item md={12}>
               <textarea
-                name="educationPershkrimi"
-                value={data.educationPershkrimi}
+                name="description"
+                value={data.description}
                 onChange={(value) =>
                   handleEducationFields(value, index)
                 }

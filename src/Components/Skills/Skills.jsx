@@ -22,7 +22,7 @@ export default function Skills(
 ) {
   const state = useSelector(cvDataState)
 
-  const {njohuri} =state
+  const {skills} =state
   const dispatch = useDispatch()
 
   const handleSkillsFields=(e,index) =>{
@@ -44,9 +44,9 @@ export default function Skills(
         </AccordionSummary>
         <AccordionDetails>
           <Grid container>
-            {njohuri.length > 0 &&
-              njohuri.map((data, index) => (
-                <Grid item md={12} style={{ marginTop: 15 }}>
+            {skills.length > 0 &&
+              skills.map((data, index) => (
+                <Grid item md={12} style={{ marginTop: 15 }} key={index}>
                   <TextField
                     id="outlined-basic"
                     label="Njohuri"

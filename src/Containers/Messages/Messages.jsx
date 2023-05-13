@@ -1,85 +1,167 @@
 import React from "react";
 import {
-  AppBar,
-  Drawer,
-  IconButton,
-  CssBaseline,
-  Toolbar,
+  Paper,
+  Grid,
+  Box,
+  ListItemButton,
+  Divider,
+  TextField,
   Typography,
   List,
   ListItem,
+  ListItemIcon,
   ListItemText,
-  ListSubheader,
-  Box,
+  Avatar,
+  Fab,
+  Container,
 } from "@mui/material";
 
+import SendIcon from "@mui/icons-material/Send";
 
-import MoreIcon from "@mui/icons-material/MoreVert"; 
-
-
-const drawerWidth = 250;
 
 const Messages = () => {
+
   return (
-    <Box marginTop="50px">
-      {/* <CssBaseline /> */}
-      <AppBar
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, marginLeft: drawerWidth,marginTop:50 }}
-        color="primary"
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap>
-            #geheimorganisation
+    <Container>
+      <Grid container>
+        <Grid item xs={12}>
+          <Typography variant="h5" className="header-message">
+            Chat
           </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
+        </Grid>
+      </Grid>
+      <Grid
+        container
+        component={Paper}
         sx={{
-          width: drawerWidth,
-          marginTop:50
+          width: "100%",
+          height: "80vh",
         }}
-        variant="permanent"
       >
-        <AppBar position="static" sx={{marginTop:50}}>
-          <Toolbar sx={{marginTop:50}}>
-            <Typography sx={{ flexGrow: 1 }} variant="h6" noWrap>
-              WeeChat
-            </Typography>
-            <IconButton color="inherit" edge="end">
-              <MoreIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <React.Fragment>
+        <Grid
+          item
+          xs={3}
+          sx={{
+            borderRight: "1px solid #e0e0e0",
+          }}
+        >
+          <List>
+            <ListItemButton key="RemySharp">
+              <ListItemIcon>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://material-ui.com/static/images/avatar/1.jpg"
+                />
+              </ListItemIcon>
+              <ListItemText primary="John Wick"></ListItemText>
+            </ListItemButton>
+          </List>
+          <Divider />
+          <Grid item xs={12} style={{ padding: "10px" }}>
+            <TextField
+              id="outlined-basic-email"
+              label="Search"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+          <Divider />
+          <List>
+            <ListItemButton key="RemySharp">
+              <ListItemIcon>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://material-ui.com/static/images/avatar/1.jpg"
+                />
+              </ListItemIcon>
+              <ListItemText primary="Remy Sharp">Remy Sharp</ListItemText>
+              <ListItemText secondary="online" align="right"></ListItemText>
+            </ListItemButton>
+            <ListItemButton key="Alice">
+              <ListItemIcon>
+                <Avatar
+                  alt="Alice"
+                  src="https://material-ui.com/static/images/avatar/3.jpg"
+                />
+              </ListItemIcon>
+              <ListItemText primary="Alice">Alice</ListItemText>
+            </ListItemButton>
+            <ListItemButton key="CindyBaker">
+              <ListItemIcon>
+                <Avatar
+                  alt="Cindy Baker"
+                  src="https://material-ui.com/static/images/avatar/2.jpg"
+                />
+              </ListItemIcon>
+              <ListItemText primary="Cindy Baker">Cindy Baker</ListItemText>
+            </ListItemButton>
+          </List>
+        </Grid>
+        <Grid item xs={9}>
           <List
-            dense
-            subheader={<ListSubheader>WeeChat</ListSubheader>}
-            style={{ padding: 0 }}
+            sx={{
+              height: "70vh",
+              overflowY: "auto",
+            }}
           >
-            <ListItem button>
-              <ListItemText primary="hackint" />
+            <ListItem key="1">
+              <Grid container>
+                <Grid item xs={12}>
+                  <ListItemText
+                    align="right"
+                    primary="Hey man, What's up ?"
+                  ></ListItemText>
+                </Grid>
+                <Grid item xs={12}>
+                  <ListItemText align="right" secondary="09:30"></ListItemText>
+                </Grid>
+              </Grid>
             </ListItem>
-            <ListItem button>
-              <ListItemText primary="freenode" />
+            <ListItem key="2">
+              <Grid container>
+                <Grid item xs={12}>
+                  <ListItemText
+                    align="left"
+                    primary="Hey, Iam Good! What about you ?"
+                  ></ListItemText>
+                </Grid>
+                <Grid item xs={12}>
+                  <ListItemText align="left" secondary="09:31"></ListItemText>
+                </Grid>
+              </Grid>
+            </ListItem>
+            <ListItem key="3">
+              <Grid container>
+                <Grid item xs={12}>
+                  <ListItemText
+                    align="right"
+                    primary="Cool. i am good, let's catch up!"
+                  ></ListItemText>
+                </Grid>
+                <Grid item xs={12}>
+                  <ListItemText align="right" secondary="10:30"></ListItemText>
+                </Grid>
+              </Grid>
             </ListItem>
           </List>
-          <List
-            dense
-            subheader={<ListSubheader>irc.hackint.org</ListSubheader>}
-          >
-            <ListItem button>
-              <ListItemText primary="#geheimorganisation" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="#ccchh" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="#ffhh" />
-            </ListItem>
-          </List>
-        </React.Fragment>{" "}
-      </Drawer>
-    </Box>
+          <Divider />
+          <Grid container style={{ padding: "20px" }}>
+            <Grid item xs={11}>
+              <TextField
+                id="outlined-basic-email"
+                label="Type Something"
+                fullWidth
+              />
+            </Grid>
+            <Grid xs={1} align="right">
+              <Fab color="primary" aria-label="add">
+                <SendIcon />
+              </Fab>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
