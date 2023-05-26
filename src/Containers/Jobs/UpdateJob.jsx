@@ -41,7 +41,7 @@ export default function UpdateJob() {
   const handleAddSkills = () =>
     setJobData({
       ...jobData,
-      skills: [...jobData.skills, { name: "aftesi", value: "" }],
+      skills: [...jobData.skills, { title: "aftesi", value: "" }],
     });
 
   const removeSkils = (i) => {
@@ -54,7 +54,12 @@ export default function UpdateJob() {
 
 
   const handleSubmit = () =>{
-    api.put(`job/${id}`,jobData).then(res =>{
+    const params = {
+      ...jobData,
+      skills: jobData.skills.map((job) => job.value),
+
+    }
+    api.put(`job/${id}`,params).then(res =>{
       console.log("res",res)
     }).catch(err => err)
   }

@@ -1,3 +1,27 @@
+export const jobApplicantsTableColumns = [
+  {
+    title: "Emri",
+    key: "name",
+  },
+  {
+    title: "Mbiemri",
+    key: "last_name",
+  },
+
+  {
+    title: "Email",
+    key: "email",
+  },
+
+  {
+    title: "Telefoni",
+    key: "phone",
+  },
+  {
+    title: "Actions",
+    key: "actions",
+  },
+]
 export const  applicantsTableColumns = [
     {
       title: "Titulli",

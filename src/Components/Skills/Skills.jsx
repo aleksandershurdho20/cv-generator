@@ -8,19 +8,21 @@ import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import React from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { TransitionGroup } from 'react-transition-group';
+import Collapse from '@mui/material/Collapse';
 
 import { useDispatch, useSelector } from "react-redux";
 import { cvDataState,
   addSkillFields,
   removeSkillFields,
   handleChangeSkillsField,
-} from "../../redux/slices/createCv";
+} from "../../redux/slices/User";
 import "./Skills.scss";
 
 
 export default function Skills(
 ) {
-  const state = useSelector(cvDataState)
+  const state = useSelector((state) => state.userSlice.userInfo.userProfileId);
 
   const {skills} =state
   const dispatch = useDispatch()
@@ -43,42 +45,45 @@ export default function Skills(
           <span style={{ paddingLeft: 10 }}>Aftesi Profesionale</span>
         </AccordionSummary>
         <AccordionDetails>
-          <Grid container>
-            {skills.length > 0 &&
-              skills.map((data, index) => (
-                <Grid item md={12} style={{ marginTop: 15 }} key={index}>
-                  <TextField
-                    id="outlined-basic"
-                    label="Njohuri"
-                    variant="outlined"
-                    value={data.title}
-                    name="title"
-                    onChange={(value) => handleSkillsFields(value, index)}
-                    sx={{
-                      width:"50%"
-                    }}
-                  />
-                  {index !== 0 && (
-                    <IconButton
-                      aria-label="delete"
-                      onClick={(index) => removeSkills(index)}
-                      sx={
-                        {
-                          background: "rgba(0, 0, 0, 0.04)",
-                          marginLeft: 10,
-                        }
-                      }
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  )}
-                </Grid>
-              ))}
+          <TransitionGroup>
 
-            <button className="skills-btn" onClick={addSkillsFields}>
-              Shto Njohuri
-            </button>
-          </Grid>
+            <Grid container>
+              {skills?.length > 0 &&
+                skills.map((data, index) => (
+                      <Grid item md={12} style={{ marginTop: 15 }} >
+                        <TextField
+                          id="outlined-basic"
+                          label="Njohuri"
+                          variant="outlined"
+                          value={data.title}
+                          name="title"
+                          onChange={(value) => handleSkillsFields(value, index)}
+                          sx={{
+                            width:"50%"
+                          }}
+                        />
+                        {index !== 0 && (
+                          <IconButton
+                            aria-label="delete"
+                            onClick={(index) => removeSkills(index)}
+                            sx={
+                              {
+                                background: "rgba(0, 0, 0, 0.04)",
+                                marginLeft: 10,
+                              }
+                            }
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        )}
+                      </Grid>
+                ))}
+
+              <button className="skills-btn" onClick={addSkillsFields}>
+                Shto Njohuri
+              </button>
+            </Grid>
+          </TransitionGroup>
         </AccordionDetails>
       </Accordion>{" "}
     </div>

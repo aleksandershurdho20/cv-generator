@@ -12,6 +12,11 @@ export const getJobs = createAsyncThunk('jobs/getAllJobs', async () => {
     return response.data
   })
 
+  export const getMatchedJobBySkills = createAsyncThunk('jobs/getMatchedJobs', async (id) => {
+    const response = await api.get(`/jobs/user/${id}`)
+    return response.data
+  })
+
   export const getFilteredJobs = createAsyncThunk('jobs/searchJobs', async (params) => {
     const response = await api.get(`jobs/search?title=${params.title}&jobType=${params.jobType}`)
     return response.data
@@ -50,6 +55,20 @@ export const getJobs = createAsyncThunk('jobs/getAllJobs', async () => {
              state.jobs = action.payload.jobs
           })
           .addCase(getFilteredJobs.rejected, (state, action) => {
+            state.loading = true
+             state.jobs = []
+             state.error = action.payload
+          })
+
+          
+          .addCase(getMatchedJobBySkills.pending, (state, action) => {
+            state=initialState
+          })
+          .addCase(getMatchedJobBySkills.fulfilled, (state, action) => {
+            state.loading = false
+             state.jobs = action.payload
+          })
+          .addCase(getMatchedJobBySkills.rejected, (state, action) => {
             state.loading = true
              state.jobs = []
              state.error = action.payload

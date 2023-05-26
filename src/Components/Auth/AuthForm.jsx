@@ -16,6 +16,7 @@ import { useNavigate  } from "react-router-dom";
 import { api } from 'utils/api/api';
 import {useDispatch} from 'react-redux'
 import { authenticateUser } from "redux/slices/User";
+import { toast } from 'react-toastify';
 
 export default function AuthForm({ isInLoginView, handleAuthState }) {
     const [authData,setAuthData]=useState({
@@ -54,7 +55,7 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
         })
       }
     
-    }).catch(err => console.log(err))
+    }).catch(err => toast.error(err.response.data))
 
   };
   return (

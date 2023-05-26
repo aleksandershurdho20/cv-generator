@@ -18,11 +18,11 @@ import {
     addMoreLangauges,
     handleChangeLanguageField,
     removeLanguageFields,
-} from "../../redux/slices/createCv";
+} from "../../redux/slices/User";
 
 
 export default function Gjuhet() {
-    const state = useSelector(cvDataState);
+    const state = useSelector((state) => state.userSlice.userInfo.userProfileId);
 
     const { languages } = state;
     const theme = useTheme()
@@ -56,7 +56,7 @@ export default function Gjuhet() {
                 <AccordionDetails>
                     <Grid container>
                         <Grid container spacing={2}>
-                            {languages.length > 0 &&
+                            {languages?.length > 0 &&
                                 languages.map((data, index) => (
                                     <>
                                         <Grid item md={6} sm={12} xs={12}>

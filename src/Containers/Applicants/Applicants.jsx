@@ -8,32 +8,44 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { toast } from "react-toastify";
 import { jobCategories } from "constants/jobs";
 import Dropdown from "Components/Select/Select";
-import { applicantsTableColumns } from "constants/applicants";
+import { applicantsTableColumns,jobApplicantsTableColumns } from "constants/applicants";
+import UserJobsApplicants from "Components/Applicants/UserJobsApplicants";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import { useNavigate } from "react-router-dom";
 
 export default function Applicants() {
   const [query,setQuery]=useState("")
   const { userInfo } = useSelector((state) => state.userSlice);
   const [applicants, setApplicants] = useState([]);
- 
+  const navigate = useNavigate()
   useEffect(() => {
-    api
-      .get(`applicants/${userInfo._id}`)
-      .then((res) => setApplicants(res.data));
+    if(userInfo.role[0] === "company"){
       api
       .get(`company/${userInfo._id}/applicants`)
-      .then((res) => console.log(res.data,'res'));
+      .then((res) => setApplicants(res.data));
+      
+    }
+    else return undefined
   }, []);
+
+
   const fitleredItems = query ? applicants.filter(el => el.job.category == query) : applicants
-  const handleCancelApplication = (row) =>{
-    api.post(`application/cancel/${row._id}`,{job:row.job._id,candidate:row.candidate}).then(res => {
-      toast.success("Aplikimi u anullua!")
-      const allApplications = [...applicants].filter(el => el._id !== row._id)
-      setApplicants(allApplications)
-    }).catch(err => err)
-  }
+
+  const something = applicants.map(el => el.applicants).flat().map(el => el.userProfileId).filter (x => x !== undefined)
+  // .map((el) =>{
+  //   const {_id,...rest}=el.job
+  //   return {
+  //     ...el,
+  //     ...rest
+  //   };
+  // }) 
+  console.log(something,"kkk")
   return (
     <Container>
-      <Box
+      {userInfo.role[0] === "company" ? 
+      <>
+        <Box
         marginTop="20px"
         marginLeft="auto"
         display="flex"
@@ -41,36 +53,33 @@ export default function Applicants() {
         backgroundColor="white"
         padding="20px"
       >
-     <Box>
+    <Box>
 
-     <Typography variant="h5">Shfaq Aplikimet sipas :</Typography>
+    <Typography variant="h5">Shfaq Aplikimet sipas :</Typography>
         <Dropdown
-             value={query}
-             name="category"
-             onChange={(e) => setQuery(e.target.value)}
-             options={jobCategories}
+            value={query}
+            name="category"
+            onChange={(e) => setQuery(e.target.value)}
+            options={jobCategories}
         />
         {query && <Button variant="text" onClick={()=>setQuery("")}>Pastro Kerkimin</Button>}
-     </Box>
+    </Box>
       </Box>
       <Table
-        columns={applicantsTableColumns}
-        data={fitleredItems.
-          filter(el => el.is_confirmed).
-          map((el) => {
-          const {_id,...rest}=el.job
-          return {
-            ...el,
-            ...rest
-          };
-        })}
+        columns={jobApplicantsTableColumns}
+        data={something}
         actions={[
           {
             render: (rowData) => (
               <>
-                <Tooltip title="Anullo Aplikimin">
-                  <IconButton onClick={() =>handleCancelApplication(rowData)}>
-                    <CancelIcon />
+                <Tooltip title="Shiko">
+                  <IconButton onClick={() =>navigate(`/applicant/${rowData._id}`,{state:rowData.user})}>
+                    <VisibilityIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Kontakto">
+                  <IconButton onClick={() =>{}}>
+                    <ContactMailIcon />
                   </IconButton>
                 </Tooltip>
               </>
@@ -78,6 +87,10 @@ export default function Applicants() {
           },
         ]}
       />
+      </>
+      
+      : <UserJobsApplicants/>}
+    
     </Container>
   );
 }

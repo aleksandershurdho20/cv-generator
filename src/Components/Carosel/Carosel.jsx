@@ -19,6 +19,7 @@ import Doc from "../../utils/PdfGenerator/DocService";
 import TemplateList from "../SelectTemplates/TemplateList";
 import "./Carosel.scss";
 import { api } from "utils/api/api";
+import { toast } from "react-toastify";
 function getSteps() {
   return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
 }
@@ -30,10 +31,11 @@ export default function SimpleTabs() {
   const [errorrMessage, setErrorrMessage] = useState("");
   const [display, setDisplay] = useState(false);
 
-  const state = useSelector(cvDataState);
+  const state = useSelector((state) => state.userSlice.userInfo.userProfileId);
   const { activeStep } = useSelector(cvFieldsState);
   const dispatch = useDispatch();
 
+  const isInEditMode = state?._id ? "Modifiko" : "Krijo"
   const bodyRef = useRef();
   const createPdfs = () => {
     if (!bodyRef.current) {
@@ -55,15 +57,25 @@ export default function SimpleTabs() {
   };
   console.log(state,'state')
   const handleCreate = () =>{
-    const params = {...state,user: userInfo?._id}
-    console.log(params,'params')
-    api
-    .post("profile/create", params)
-    .then((res) => {
-      console.log("resko",res,params);
-    })
-    .catch((err) => console.log("errko"));
-  }
+    if(isInEditMode === "Modifiko"){
+      api.put(`/profile/${userInfo?._id}`,state).then(res =>{
+        toast.success("Profili u modifikua me sukses!")
+      }).catch(err =>err)
+    }
+    else{
+      console.log("should be here")
+      const params = {...state,user: userInfo?._id}
+      console.log(params,'params')
+      api
+      .post("profile/create", params)
+      .then((res) => {
+        toast.success("Profili u krijua me sukses!")
+
+      })
+      .catch((err) => console.log("errko"));
+    }
+
+    }
   const createPdf = (html) => Doc.createPdf(html);
 
   return (
@@ -100,7 +112,7 @@ export default function SimpleTabs() {
           className="step-btn"
           onClick={handleCreate}
         >
-          Krijo
+          {isInEditMode}
         </Button> :     <Button
           variant="contained"
           color="primary"

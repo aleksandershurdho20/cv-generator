@@ -6,7 +6,7 @@ import {
     addEducationFields,
     handleChangeEducationFields,
     removeEducationFields
-} from "../../redux/slices/createCv";
+} from "../../redux/slices/User";
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -14,7 +14,7 @@ import InputLabel from '@mui/material/InputLabel';
 import { years,monthNames } from 'utils/PdfGenerator/generateDate';
 
 export default function EdukimiFormFields() {
-    const state = useSelector(cvDataState);
+  const state = useSelector((state) => state.userSlice.userInfo.userProfileId);
     const dispatch = useDispatch()
 
     const { education } = state;

@@ -45,6 +45,7 @@ export default function ViewJob({ open, onClose, id }) {
       candidate: userInfo?._id,
       job: jobData?._id,
       is_confirmed: true,
+      status:"applied"
     };
     api
       .post("job/apply", data)

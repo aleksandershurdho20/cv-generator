@@ -8,8 +8,19 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  PieChart,
+  Pie,
+  Legend,
+  Cell,
 } from "recharts";
 export default function Chart({ title, data, dataKey, grid, type }) {
+  const parsePieOutPut = (value) => {
+    if (value === "rejected") return "Refuzuar";
+    else if (value === "applied") return "Aplikuar";
+    else return "Ska te dhena!";
+  };
+  const COLORS = ["#FF0000", "#61bf93"];
+
   return (
     <>
       {type === "bar " ? (
@@ -44,6 +55,70 @@ export default function Chart({ title, data, dataKey, grid, type }) {
               dataKey={dataKey}
             />
           </AreaChart>
+        </ResponsiveContainer>
+      ) : type === "pie" ? (
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart height={300} margin={{ top: 15 }}>
+            {/* <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              fill="#8884d8"
+              dataKey={dataKey}
+              label={({
+                cx,
+                cy,
+                midAngle,
+                innerRadius,
+                outerRadius,
+                value,
+                index,
+              }) => {
+                console.log("handling label?");
+                const RADIAN = Math.PI / 180;
+                // eslint-disable-next-line
+                const radius = 25 + innerRadius + (outerRadius - innerRadius);
+                // eslint-disable-next-line
+                const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                // eslint-disable-next-line
+                const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                return (
+                  <>
+                  <text
+                    x={x}
+                    y={y}
+                    fill="#8884d8"
+                    textAnchor={x > cx ? "start" : "end"}
+                    dominantBaseline="central"
+                  >
+                    {parsePieOutPut(data[index]._id)} ({value})
+                  </text>
+                  </>
+                );
+              }}
+            /> */}
+
+            <Pie
+              data={data}
+              color="#000000"
+              dataKey={dataKey}
+              nameKey="_id"
+              cx="50%"
+              cy="50%"
+              outerRadius={120}
+              fill="#8884d8"
+            >
+              {data?.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Legend />
+          </PieChart>
         </ResponsiveContainer>
       ) : (
         "Dicka shkoi gabim!"

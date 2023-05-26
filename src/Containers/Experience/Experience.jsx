@@ -21,12 +21,12 @@ import {
   cvDataState,
   handleChangeExperienceFields,
   removeExperienceDataFields,
-} from "../../redux/slices/createCv";
+} from "../../redux/slices/User";
 import "./Experience.scss";
 import { cvFieldsState, resetFormFields } from "redux/slices/cvFieldsError";
 
 export default function Experience() {
-  const state = useSelector(cvDataState);
+  const state = useSelector((state) => state.userSlice.userInfo.userProfileId);
   const dispatch = useDispatch();
   const { start_date, pozicioni, kompania } = useSelector(cvFieldsState);
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { changeCvData, cvDataState,handleImageFiles,removeImageFiles } from "../../redux/slices/createCv";
+import { changeCvData, profileState,handleImageFiles,removeImageFiles } from "../../redux/slices/User";
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -13,8 +13,8 @@ import { cvFieldsState,resetFormFields } from "redux/slices/cvFieldsError";
 
 
 export default function InformacioniPersonal() {
-    const state = useSelector(cvDataState)
-    console.log(state,'s')
+  const state = useSelector((state) => state.userSlice.userInfo?.userProfileId);
+  console.log(state)
     const dispatch = useDispatch()
     const {visible, toggle, setVisibility} = useToggle(false)
     const {name:errorName,last_name:errorSurname,email:errorEmail} = useSelector(cvFieldsState)
@@ -50,7 +50,7 @@ export default function InformacioniPersonal() {
       <Grid item md={4} sm={12} xs={12}>
         <InputLabel id="demo-simple-select-label">Ngarko</InputLabel>
         <div className="avatar-wrapper">
-          {state.image.length > 0 ? (
+          {state?.image?.length > 0 ? (
             <>
               <img src={state.image} alt="foto-cv" />
               <button onClick={() => dispatch(removeImageFiles())}>Fshi</button>
@@ -75,7 +75,7 @@ export default function InformacioniPersonal() {
             variant="outlined"
             error={errorName ? true : false}
             name="name"
-            value={state.name}
+            value={state?.name}
             onChange={handleCVFields}
             fullWidth
             helperText={errorName}
@@ -89,7 +89,7 @@ export default function InformacioniPersonal() {
             variant="outlined"
             fullWidth
             name="email"
-            value={state.email}
+            value={state?.email}
             onChange={handleCVFields}
             error={errorEmail ? true : false}
 
@@ -101,7 +101,7 @@ export default function InformacioniPersonal() {
             label="Adresa"
             variant="outlined"
             name="address"
-            value={state.address}
+            value={state?.address}
             onChange={handleCVFields}
             fullWidth
           />
@@ -119,7 +119,7 @@ export default function InformacioniPersonal() {
             name="last_name"
             error={errorSurname ? true : false}
             helperText={errorSurname}
-            value={state.last_name}
+            value={state?.last_name}
             onChange={handleCVFields}
           />
           <TextField
@@ -129,7 +129,7 @@ export default function InformacioniPersonal() {
             fullWidth
             variant="outlined"
             name="phone"
-            value={state.phone}
+            value={state?.phone}
             onChange={handleCVFields}
           />
           <TextField
@@ -139,7 +139,7 @@ export default function InformacioniPersonal() {
             variant="outlined"
             fullWidth
             name="city"
-            value={state.city}
+            value={state?.city}
             onChange={handleCVFields}
           />
         </div>

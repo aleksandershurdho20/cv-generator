@@ -17,6 +17,8 @@ import GetAllJobs from 'Containers/Jobs/GetAllJobs';
 import Applicants from 'Containers/Applicants';
 import Messages from 'Containers/Messages';
 import Profile from 'Containers/Profile';
+import ViewAppicant from 'Containers/Applicants/ViewAppicant';
+import SavedJobs from 'Containers/JobListingPage/SavedJobs';
 
 const imageStyles = {
     width: '27%',
@@ -60,11 +62,17 @@ export default function Routes() {
                     <Route path="applicants" element={<PrivateRoutes roles={["company","user"]}>
                         <Applicants/>
                     </PrivateRoutes>} />
+                    <Route path="applicant/:id" element={<PrivateRoutes roles={["company","user"]}>
+                        <ViewAppicant/>
+                    </PrivateRoutes>} />
                     <Route path="messages" element={<PrivateRoutes roles={["company","user"]}>
                         <Messages/>
                     </PrivateRoutes>} />
                     <Route path="profile" element={<PrivateRoutes roles={["company","user"]}>
                         <Profile/>
+                    </PrivateRoutes>} />
+                    <Route path="/jobs/saved" element={<PrivateRoutes roles={["user"]}>
+                        <SavedJobs/>
                     </PrivateRoutes>} />
                     <Route path="/job/update/:id" element={<UpdateJob/>}  />
 

@@ -7,11 +7,13 @@ import SideBar from "./MobileMenu/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserProfile, logUserOut } from "redux/slices/User";
+import useSocket from "hooks/useSocket";
 
 export default function Index() {
   const [open, setOpen] = useState(false);
   const { userInfo } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
+  // useSocket()
   const handleOpen = () => {
     setOpen(!open);
   };
@@ -59,13 +61,18 @@ export default function Index() {
                 <NavLink to="/jobs/list" activestyle={{ color: " #e74645" }}>
                     Kryefaqja
                 </NavLink>
+                     <NavLink to="/dashboard" activestyle={{ color: " #e74645" }}>
+                  Statistika
+                </NavLink>
                 <NavLink to="/applicants" activestyle={{ color: " #e74645" }}>
                   Aplikimet
                 </NavLink>
                 <NavLink to="/messages" activestyle={{ color: " #e74645" }}>
                   Mesazhet
                 </NavLink>
-
+                <NavLink to="/jobs/saved" activestyle={{ color: " #e74645" }}>
+                  Punet E preferuara
+                </NavLink>
                 <NavLink to="/profile" activestyle={{ color: " #e74645" }}>
                   Profili
                 </NavLink>
