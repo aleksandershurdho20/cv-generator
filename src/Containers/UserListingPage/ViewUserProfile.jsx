@@ -17,20 +17,16 @@ import Fade from "react-reveal/Fade";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { api } from "utils/api/api";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 
-export default function ViewAppicant() {
+export default function ViewUserProfile() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [applicantData, setApplicantData] = useState({});
-  const [isRejected,setIRrejected] = useState(false)
   const navigate = useNavigate("");
-  const {state}= useLocation()
+  const { state } = useLocation();
   const { id } = useParams();
-  const { userInfo } = useSelector((state) => state.userSlice);
-
   useEffect(() => {
     api
-      .get(`applicant/${id}`)
+      .get(`users/profile/${id}`)
       .then((res) => {
         setApplicantData(res.data);
       })
@@ -45,25 +41,13 @@ export default function ViewAppicant() {
     setAnchorEl(null);
   };
 
-  const handleReject = () => {
-    const data ={
-      company:userInfo?.companyProfileId?.name
-
-    }
-    api.put(`/reject/applicant/${applicantData?.user}`,data).then(() =>{
-      toast.success("Aplikanti u refuzua me sukses!")
-    }).catch(err => err)
-  }
-
-  
-
   return (
     <Container sx={{ background: "#FFF" }}>
       <Box marginTop="15px">
-        <IconButton onClick={() => navigate("/applicants")}>
+        <IconButton onClick={() => navigate("/users/list")}>
           <ArrowBackIcon />
         </IconButton>
-        Kthehu tek lista e aplikanteve
+        Kthehu tek lista e perdoruesve
       </Box>
       <Grid container spacing={2}>
         <Grid item md={8}>
@@ -223,17 +207,21 @@ export default function ViewAppicant() {
             marginTop="15px"
             display="flex"
             flexWrap="wrap"
-            maxWidth="100%"  
-
+            maxWidth="100%"
           >
             <Typography variant="h5" fontWeight="500" marginBottom="20px">
               {" "}
               Aftesi Profesionale
             </Typography>
 
-            <Stack direction="row" spacing={1} flexWrap="wrap">
+            <Stack flexWrap="wrap" direction="row" spacing={1}>
               {applicantData?.skills?.map((skill) => (
-                <Chip label={skill.title} key={skill._id} variant="outlined" sx={{marginBottom:2}} />
+                <Chip
+                  label={skill.title}
+                  key={skill._id}
+                  sx={{ marginBottom: 1 }}
+                  variant="outlined"
+                />
               ))}
             </Stack>
           </Box>
@@ -243,44 +231,29 @@ export default function ViewAppicant() {
             borderRadius="8px"
             padding="10px"
             marginTop="15px"
-      
           >
             <Typography variant="h5" marginBottom="20px">
               Njohurite Gjuhesore
             </Typography>
-            <Box
-                  display="flex"
-                  flexWrap="wrap"
-                  maxWidth="100%"  
-                  alignItems="center"
-                  alignContent="center"
+            <Stack
+              spacing={2}
+              direction="row"
+              alignItems="center"
+              border="1px solid #D5E0D5"
+              maxWidth="150px"
+              padding="10px"
+              height="53px"
             >
-
-              <Stack
-                spacing={2}
-                direction="row"
-                alignItems="center"
-                alignContent="center"
-                flexWrap="wrap"
-              >
-                {applicantData?.languages?.map(language => <Box
-                
-                border="1px solid #D5E0D5"
-                maxWidth="150px"
-                padding="10px"
-                display="flex"
-                height="53px"
-                marginBottom="5px"
-                key={language._id}>
-                <Avatar>{language.title.charAt(0).toUpperCase()}</Avatar>
-                <Box paddingLeft="5px">
-                  <Typography noWrap>{language.title}</Typography>
-                  <Typography noWrap>{language.level}</Typography>
-                </Box>
-
-                </Box>)}
-              </Stack>
-            </Box>
+              {applicantData?.languages?.map((language) => (
+                <Fragment key={language._id}>
+                  <Avatar>{language.title.charAt(0).toUpperCase()}</Avatar>
+                  <Box>
+                    <Typography noWrap>{language.title}</Typography>
+                    <Typography noWrap>{language.level}</Typography>
+                  </Box>
+                </Fragment>
+              ))}
+            </Stack>
           </Box>
 
           <Box
@@ -293,8 +266,12 @@ export default function ViewAppicant() {
               <Button variant="contained" onClick={handleClick}>
                 Kontakto
               </Button>
-              <ChatPopover anchorEl={anchorEl} handleClose={handleClose} receiver={state} applicantData={applicantData} />
-              <Button variant="bordered" onClick={handleReject} >Refuzo</Button>
+              <ChatPopover
+                anchorEl={anchorEl}
+                handleClose={handleClose}
+                receiver={applicantData?.user}
+                isInViewMode
+              />
             </Stack>
           </Box>
         </Grid>

@@ -1,23 +1,28 @@
 import CompanyProfile from "Components/Profile/CompanyProfile";
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { api } from "utils/api/api";
 import Carosel from "../../Components/Carosel/Carosel";
 import { toast } from "react-toastify";
+import { validateCompanyFields } from "redux/slices/User";
 
 export default function Profile() {
 
   const state = useSelector((state) => state.userSlice.userInfo.companyProfileId);
-
-  const { userInfo } = useSelector((state) => state.userSlice);
+  const { userInfo,companyProfileErrors } = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch()
   const isInEditMode = state?._id ? "Modifiko" : "Krijo"
 
 
-
-  console.log(userInfo,'userInfo')
-
   const handleSubmit = () => {
     if (!userInfo) return;
+    const {_id,user,...rest}=state
+    dispatch(validateCompanyFields(state));
+    const hasErrors = Object.values(rest).some((error) => error.length  === 0);
+    // If there are errors, return or handle them as needed
+    if (hasErrors) {
+      return;
+    }
     if(isInEditMode === "Modifiko"){
       api.put(`/profile/${userInfo?._id}`,state).then(res =>{
         toast.success("Profili u modifikua me sukses!")
@@ -36,6 +41,7 @@ export default function Profile() {
       .catch((err) => console.log("errko"));
     }
   };
+  console.log(userInfo.companyProfileId,'oo')
   return (
     <div>
       {userInfo.role[0] == "company" ? (

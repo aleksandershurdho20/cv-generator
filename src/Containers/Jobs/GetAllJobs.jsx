@@ -12,23 +12,30 @@ import {
   Button,
   Box,
   Typography,
+  Fade,
+  CircularProgress
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "utils/api/api";
-
+import moment from "moment"
 export default function GetAllJobs() {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.userSlice);
   const [jobs, setJobs] = useState([]);
+  const [loading,setLoading]=useState(true)
   useEffect(() => {
     if (!userInfo) return undefined;
     api
       .get(`/jobs/company/${userInfo._id}`)
       .then((res) => setJobs(res.data.jobs))
       .catch((err) => err);
+      const timer = setTimeout(()=>{
+        setLoading(false)
+      },1000)
+      return () =>clearTimeout(timer)
   }, [userInfo]);
 
   const handleDelete = (id) =>{
@@ -41,66 +48,75 @@ export default function GetAllJobs() {
   return (
     <Container sx={{ height: "100%" }}>
       <Box
-        marginTop="20px"
-        marginLeft="auto"
-        display="flex"
-        justifyContent="space-between"
-        backgroundColor="white"
-        padding="20px"
-      >
-        <Typography variant="h5">Te gjitha punet</Typography>
-        <Button variant="outlined" onClick={() => navigate("/job/create")}>
-          Krijo pune Te re{" "}
-        </Button>
-      </Box>
-      <TableContainer
-        sx={{
-          background: "#FFF",
-          borderRadius: "10px",
-          marginTop: "15px",
-          height: "100%",
-        }}
-      >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Titulli</TableCell>
-              <TableCell>Tipi i punes </TableCell>
-              <TableCell>Qyteti</TableCell>
-              <TableCell>Krijuar</TableCell>
+          marginTop="20px"
+          marginLeft="auto"
+          display="flex"
+          justifyContent="space-between"
+          backgroundColor="white"
+          padding="20px"
+        >
+          <Typography variant="h5">Te gjitha punet</Typography>
+          <Button variant="outlined" onClick={() => navigate("/job/create")}>
+            Krijo pune Te re{" "}
+          </Button>
+        </Box>
+      {loading ? <Box sx={{marginTop:10,display:"flex",justifyContent:"center"}}>
+        <CircularProgress />
+      </Box> : 
+      <>
+        <Fade in={true}>
 
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {jobs.length > 0
-              ? jobs.map((job) => (
-                  <TableRow key={job._id}>
-                    <TableCell>{job._id}</TableCell>
-                    <TableCell>{job.title}</TableCell>
-                    <TableCell>{job.jobType}</TableCell>
-                    <TableCell>{job.location}</TableCell>
-                    <TableCell>{job.createdAt}</TableCell>
+          <TableContainer
+            sx={{
+              background: "#FFF",
+              borderRadius: "10px",
+              marginTop: "15px",
+              height: "100%",
+            }}
+          >
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>ID</TableCell>
+                  <TableCell>Titulli</TableCell>
+                  <TableCell>Tipi i punes </TableCell>
+                  <TableCell>Qyteti</TableCell>
+                  <TableCell>Krijuar</TableCell>
 
-                    <TableCell>
-                      <IconButton
-                        onClick={() => navigate(`/job/update/${job._id}`)}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
-                        onClick={()=>handleDelete(job._id)}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))
-              : "Nuk u gjet asnje pune!"}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                  <TableCell>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {jobs.length > 0
+                  ? jobs.map((job) => (
+                      <TableRow key={job._id}>
+                        <TableCell>{job._id}</TableCell>
+                        <TableCell>{job.title}</TableCell>
+                        <TableCell>{job.jobType}</TableCell>
+                        <TableCell>{job.location}</TableCell>
+                        <TableCell>{moment(job.createdAt).format("YYYY-MM-DD")}</TableCell>
+
+                        <TableCell>
+                          <IconButton
+                            onClick={() => navigate(`/job/update/${job._id}`)}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton
+                            onClick={()=>handleDelete(job._id)}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  : "Nuk u gjet asnje pune!"}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Fade>
+      </>
+      }
     </Container>
   );
 }

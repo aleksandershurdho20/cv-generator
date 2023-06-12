@@ -4,14 +4,15 @@ export const educationData = {
   diploma: "",
   university: "",
   city: "",
-  start_date: "",
-  end_date: "",
-  month_start_date: "",
-  month_end_date: "",
+  start_date: years[0],
+  end_date:  years[0],
+  month_start_date:monthNames[0],
+  month_end_date: monthNames[0],
   description: "",
 };
 
 export const experienceData = {
+  position:"",
   company: "",
   start_date: years[0],
   month_start_date: monthNames[0],

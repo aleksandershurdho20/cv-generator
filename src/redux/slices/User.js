@@ -16,6 +16,7 @@ const initialState = {
   userToken,
   error: null,
   success: false,
+  companyProfileErrors:{}
 };
 
 export const getUserProfile = createAsyncThunk("auth/profile", async () => {
@@ -23,17 +24,6 @@ export const getUserProfile = createAsyncThunk("auth/profile", async () => {
   return response.data;
 });
 
-// export const getUserProfile = createAsyncThunk(
-//   'pokemon/fetchByName',
-//   async (name, { rejectWithValue }) => {
-//     const response = await api.get('profile')
-//     const data = await response.data
-//     if (response.status < 200 || response.status >= 300) {
-//       return rejectWithValue(data)
-//     }
-//     return data
-//   }
-// )
 
 const userSlice = createSlice({
   name: "auth",
@@ -97,7 +87,11 @@ export const {
   removeEducationFields,
   handleImageFiles,
   removeImageFiles,
-  changeCompanyProfile
+  changeCompanyProfile,
+  handleCompanyImageFiles,
+  removeCompanyImageFiles,
+  validateCompanyFields,
+  resetCompanyFields
 } = userSlice.actions;
 export const profileState = (state) => state.userSlice;
 

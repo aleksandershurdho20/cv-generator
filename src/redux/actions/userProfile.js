@@ -1,4 +1,3 @@
-import { current } from "@reduxjs/toolkit";
 import { experienceData, educationData } from "constants/cvData";
 
 export const userProfileActions = {
@@ -62,8 +61,10 @@ export const userProfileActions = {
   },
 
   removeSkillFields: (state, action) => {
+    const {index} = action.payload
+
     const tempArr = [...state.userInfo.userProfileId.skills];
-    tempArr.splice(action.payload, 1);
+    tempArr.splice(index, 1);
     state.userInfo.userProfileId.skills = tempArr;
   },
 
@@ -92,8 +93,9 @@ export const userProfileActions = {
   },
 
   removeLanguageFields: (state, action) => {
+    const {index} = action.payload
     const tempArr = [...state.userInfo.userProfileId.languages];
-    tempArr.splice(action.payload, 1);
+    tempArr.splice(index, 1);
     state.userInfo.userProfileId.languages = tempArr;
   },
 
@@ -128,4 +130,55 @@ export const userProfileActions = {
   },
   removeImageFiles: (state, action) =>
     void (state.userInfo.userProfileId.image = ""),
+
+    handleCompanyImageFiles: (state, action) => {
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          companyProfileId: {
+            ...state.userInfo.companyProfileId,
+            image: action.payload,
+          },
+        },
+      };
+    },
+    removeCompanyImageFiles: (state, action) => {
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          companyProfileId: {
+            ...state.userInfo.companyProfileId,
+            image:""
+          },
+        },
+      };
+    },
+
+    validateCompanyFields:(state,payload) =>{
+      const company = payload.payload
+      if(!company.name){
+        state.companyProfileErrors.name = "Emri nuk mund te jete bosh!";
+        return;
+      }
+      else if (!company.size){
+        state.companyProfileErrors.size = "Madhesia nuk mund te jete bosh!";
+        return;
+      }
+      else if (!company.location){
+        state.companyProfileErrors.location = "Vendodhja nuk mund te jete bosh!";
+        return;
+      }
+      else if (!company.industry){
+        state.companyProfileErrors.industry = "Industria nuk mund te jete bosh!";
+        return;
+      }
+    },
+
+    resetCompanyFields : (state,payload) =>{
+      console.log(payload.payload,"s")
+       state.companyProfileErrors[payload.payload] = ""
+    }
+    
 };

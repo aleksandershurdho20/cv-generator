@@ -2,6 +2,7 @@ import { Container } from '@mui/material'
 import UpdateJobForm from 'Components/CreateJobForm/CreateJobForm'
 import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { api } from 'utils/api/api'
 
 export default function UpdateJob() {
@@ -31,7 +32,7 @@ export default function UpdateJob() {
 
     const fields = [...jobData.skills];
 
-    fields[i][name] = value;
+    fields[i] = value;
 
     setJobData({
       ...jobData,
@@ -41,7 +42,7 @@ export default function UpdateJob() {
   const handleAddSkills = () =>
     setJobData({
       ...jobData,
-      skills: [...jobData.skills, { title: "aftesi", value: "" }],
+      skills: [...jobData.skills, ""],
     });
 
   const removeSkils = (i) => {
@@ -54,13 +55,8 @@ export default function UpdateJob() {
 
 
   const handleSubmit = () =>{
-    const params = {
-      ...jobData,
-      skills: jobData.skills.map((job) => job.value),
-
-    }
-    api.put(`job/${id}`,params).then(res =>{
-      console.log("res",res)
+    api.put(`job/${id}`,jobData).then(res =>{
+      toast.success("Puna u modifikua me sukses!")
     }).catch(err => err)
   }
   return (

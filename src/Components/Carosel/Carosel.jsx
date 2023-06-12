@@ -3,7 +3,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import InformacioniPersonal from "Components/InformacioniPersonal";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cvFieldsState,
@@ -12,40 +12,34 @@ import {
 } from "redux/slices/cvFieldsError";
 import Experience from "../../Containers/Experience/Experience";
 import Footer from "../../Containers/Footer/Footer";
-import { cvDataState } from "../../redux/slices/createCv";
 import Box from "@mui/material/Box";
 
-import Doc from "../../utils/PdfGenerator/DocService";
 import TemplateList from "../SelectTemplates/TemplateList";
 import "./Carosel.scss";
 import { api } from "utils/api/api";
 import { toast } from "react-toastify";
+import { validateUserProfileFields } from "helpers/validateUserProfileFields";
+
 function getSteps() {
-  return ["Informacioni Personal", "Eksperienca", "Zgjidh Formatin e CV"];
+  return ["Informacioni Personal", "Eksperienca"];
 }
 
 export default function SimpleTabs() {
   const steps = getSteps();
   const { userInfo } = useSelector((state) => state.userSlice);
 
-  const [errorrMessage, setErrorrMessage] = useState("");
-  const [display, setDisplay] = useState(false);
 
   const state = useSelector((state) => state.userSlice.userInfo.userProfileId);
-  const { activeStep } = useSelector(cvFieldsState);
-  const dispatch = useDispatch();
 
+  const { activeStep,start_date,
+    month_start_date,
+    month_end_date,
+    position } = useSelector((state) => state.cvFieldsError);
+    
+  const dispatch = useDispatch();
   const isInEditMode = state?._id ? "Modifiko" : "Krijo"
   const bodyRef = useRef();
-  const createPdfs = () => {
-    if (!bodyRef.current) {
-      setDisplay(true);
-      setErrorrMessage("Ju lutem zgjidhni nje template!");
-    }
-    createPdf(bodyRef.current);
-    // setDisplay(false);
-  };
-  const [imageFiles, setImageFiles] = useState("");
+
 
   const handleNext = () => {
     dispatch(validateFormFields({ fields: state }));
@@ -55,8 +49,11 @@ export default function SimpleTabs() {
     dispatch(goToPreviousStep());
     // setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  console.log(state,'state')
+  
   const handleCreate = () =>{
+    dispatch(validateFormFields({ fields: state }));
+    console.log(state,'state')
+    if(!validateUserProfileFields(state)) return;
     if(isInEditMode === "Modifiko"){
       api.put(`/profile/${userInfo?._id}`,state).then(res =>{
         toast.success("Profili u modifikua me sukses!")
@@ -76,7 +73,6 @@ export default function SimpleTabs() {
     }
 
     }
-  const createPdf = (html) => Doc.createPdf(html);
 
   return (
     <Box
@@ -93,9 +89,9 @@ export default function SimpleTabs() {
       </Stepper>
 
       {activeStep === 1 && <Experience />}
-      {activeStep === 2 && (
-        <TemplateList bodyRef={bodyRef} imageFiles={imageFiles} />
-      )}
+      {/* {activeStep === 2 && (
+        <TemplateList bodyRef={bodyRef}  />
+      )} */}
 
       {activeStep === 0 && <InformacioniPersonal />}
       <div className="step-btns">

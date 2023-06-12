@@ -73,7 +73,7 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          {isInLoginView ? "Sign in" : "Register"}
+          {isInLoginView ? "Kycu" : "Regjistrohu"}
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
@@ -85,7 +85,6 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
             name="email"
             value={authData.email}
             onChange={handleFormChange}
-            autoComplete="email"
             autoFocus
           />
           <TextField
@@ -100,7 +99,6 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
           />
 
           {!isInLoginView && (
@@ -135,7 +133,7 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            {isInLoginView ? "Sign In " : "Register"}
+            {isInLoginView ? "Kycu " : "Regjistrohu"}
           </Button>
           <Grid container>
             <Grid item xs>
@@ -146,7 +144,7 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
           
             <Grid item>
               <Link href="#" variant="body2" onClick={handleAuthState}>
-                {isInLoginView ? "Don't have an account? Sign Up" : "Log in"}
+                {isInLoginView ? "Nuk ke nje llogari? Rregjistrohu" : "Kycu"}
               </Link>
             </Grid>
           </Grid>

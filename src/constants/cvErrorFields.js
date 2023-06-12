@@ -4,4 +4,7 @@ export const data ={
     start_date: "",
     month_start_date: "",
     month_end_date: "",
+    position:"",
+    diploma:"",
+    skill:""
 }

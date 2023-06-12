@@ -26,6 +26,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { toast } from "react-toastify";
 const Messages = () => {
   const { userInfo } = useSelector((state) => state.userSlice);
+  const [search,setSearch]=useState("")
   const [conversation, setConversation] = useState([]);
   const [messages, setMessages] = useState([]);
   const [conversationData, setConversationData] = useState("");
@@ -45,6 +46,7 @@ const Messages = () => {
     
     },[userInfo])
     
+    console.log(userInfo,'user')
     useEffect(()=>{
       if(!socket) return undefined
       socket.emit("addNewUser",userInfo._id)
@@ -104,6 +106,16 @@ const Messages = () => {
       .filter((member) => member._id !== userInfo?._id)
       .map((member) => ({ conversation: conv._id, ...member }))
   );
+  console.log(filteredConversationMembers,'filteredConversationMembers')
+
+  const asdasdsa = search ? filteredConversationMembers.filter(el =>{
+    if(el?.userProfileId){
+      return el.userProfileId.name.toLowerCase().includes(search.toLowerCase())
+    }
+    else if (el?.companyProfileId){
+      return el.companyProfileId.name.toLowerCase().includes(search.toLocaleLowerCase())
+    }
+  }) : filteredConversationMembers
 
   const getActiveUsers = (user) => {
     return onlineUsers.some((users) => users.userId == user._id);
@@ -186,10 +198,13 @@ const Messages = () => {
               <ListItemIcon>
                 <Avatar
                   alt="Remy Sharp"
-                  src="https://material-ui.com/static/images/avatar/1.jpg"
+                  src={userInfo?.companyProfileId?userInfo.companyProfileId.image : userInfo.userProfileId?.image }
                 />
               </ListItemIcon>
-              <ListItemText primary="John Wick"></ListItemText>
+              <ListItemText >
+                {userInfo?.companyProfileId?userInfo.companyProfileId.name ?? "Perdorues" : !userInfo?.userProfileId?.name ? "Perdorues" :userInfo?.userProfileId?.name + " " + userInfo.userProfileId?.last_name }
+
+              </ListItemText>
             </ListItemButton>
           </List>
           <Divider />
@@ -198,13 +213,15 @@ const Messages = () => {
               id="outlined-basic-email"
               label="Search"
               variant="outlined"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               fullWidth
             />
           </Grid>
           <Divider />
           <List>
-            {filteredConversationMembers.length > 0
-              ? filteredConversationMembers.map((conversation) => (
+            {asdasdsa.length > 0
+              ? asdasdsa.map((conversation) => (
                   <ListItemButton
                     key={conversation._id}
                     onClick={() => setConversationData(conversation)}
@@ -212,7 +229,7 @@ const Messages = () => {
                     <ListItemIcon>
                       <Avatar
                         alt="Remy Sharp"
-                        src="https://material-ui.com/static/images/avatar/1.jpg"
+                        src={conversation.userProfileId? conversation.userProfileId.image : conversation.companyProfileId.image                        }
                       />
                     </ListItemIcon>
                     <ListItemText>

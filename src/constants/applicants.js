@@ -47,7 +47,12 @@ export const  applicantsTableColumns = [
       key: "wage",
     },
     {
+      title: "Statusi",
+      key: "status",  
+    },
+    {
       title: "Actions",
       key: "actions",
     },
+
   ];

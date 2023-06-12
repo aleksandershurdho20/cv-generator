@@ -14,11 +14,11 @@ import { useTheme } from '@mui/material/styles';
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-    cvDataState,
     addMoreLangauges,
     handleChangeLanguageField,
     removeLanguageFields,
 } from "../../redux/slices/User";
+import { resetFormFields } from "redux/slices/cvFieldsError";
 
 
 export default function Gjuhet() {
@@ -26,19 +26,32 @@ export default function Gjuhet() {
 
     const { languages } = state;
     const theme = useTheme()
-
+    const { language} = useSelector((state) => state.cvFieldsError);
     const dispatch = useDispatch();
     const addMoreLanguages = () => {
         dispatch(addMoreLangauges());
     };
     const deleteAddedLanguages = (index) => {
-        dispatch(removeLanguageFields(index));
+        dispatch(removeLanguageFields({index}));
     };
 
     const handleLangaugeFields = (e, index) => {
         const { name, value } = e.target;
         dispatch(handleChangeLanguageField({ index, name, value }));
+        if(language){
+            dispatch(resetFormFields({key:language[index],params:{index,key:"language"}}))
+
+        }
+
+       
     };
+
+    const getFieldErrorMessage = (i) =>{
+        if(typeof language === "object"){
+            return language[i]
+        }
+   
+    }
     return (
         <Box
         flexGrow="1"
@@ -72,6 +85,8 @@ export default function Gjuhet() {
                                                         index
                                                     )
                                                 }
+                                                error={ getFieldErrorMessage(index) ? true : false}
+                                                helperText={getFieldErrorMessage(index)}
                                                 fullWidth
                                             />
                                         </Grid>
@@ -99,7 +114,7 @@ export default function Gjuhet() {
                                             {index !== 0 && (
                                                 <IconButton
                                                     aria-label="delete"
-                                                    onClick={(index) =>
+                                                    onClick={() =>
                                                         deleteAddedLanguages(
                                                             index
                                                         )

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 
-export default function ChatPopOver({handleClose,anchorEl,receiver}) {
+export default function ChatPopOver({handleClose,anchorEl,receiver,applicantData,isInViewMode}) {
 
   const [message,setMessage]=useState("")
   
@@ -35,25 +35,17 @@ export default function ChatPopOver({handleClose,anchorEl,receiver}) {
       sender:userInfo?._id,
       receiver:receiver,
       message,
-      ...(conversation.length>0 && {conversation:conversation[0]?._id})
     }
-    if(conversation.length > 0){
-      
-      api.post("message",params).then(res => {
-        toast.success("Mesazhi u dergua me sukses!")
-        setMessage("")
-      }).catch(err => err)
-    }
-    else{
+    
+    api.post("conversation",{members:[userInfo?._id,receiver],params}).then(() =>{
+      toast.success("Mesazhi u dergua me sukses!")
+      setMessage("")
 
-      api.post("conversation",{members:[userInfo?._id,receiver]}).then(() =>{
-  
-        api.post("message",params).then(res => {
-          toast.success("Mesazhi u dergua me sukses!")
-          setMessage("")
-        }).catch(err => err)
-      }).catch(err => err)
-    }
+    }).catch(err => err)
+   if(applicantData?.status !== "shortlisted" && !isInViewMode){
+
+     api.put(`/contact/applicant/${applicantData?.user}`).then(res =>res).catch(err => err)
+   }
   }
   return (
     <Popover

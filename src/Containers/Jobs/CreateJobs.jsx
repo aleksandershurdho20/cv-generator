@@ -43,7 +43,9 @@ export default function CreateJob() {
     });
 
   const removeSkils = (i) => {
-    const removedSkills = [...jobData.skills].splice(i, 1);
+    
+    const removedSkills = [...jobData.skills]
+    removedSkills.splice(i, 1);
     setJobData({
       ...jobData,
       skills: removedSkills,
@@ -52,6 +54,10 @@ export default function CreateJob() {
 
   const [errors, setErrors] = useState({});
   const handleSubmit = () => {
+    if(!userInfo.companyProfileId){
+      toast.error("Ju lutem plotesoni profilin per te vazhduar me krijimin e puneve!")
+      return;
+    }
     let errors = {};
     if (!jobData.title) {
       errors.title = "Titulli nuk mund te jete bosh!";

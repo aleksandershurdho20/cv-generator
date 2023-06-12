@@ -28,10 +28,8 @@ import { cvFieldsState, resetFormFields } from "redux/slices/cvFieldsError";
 export default function Experience() {
   const state = useSelector((state) => state.userSlice.userInfo.userProfileId);
   const dispatch = useDispatch();
-  const { start_date, pozicioni, kompania } = useSelector(cvFieldsState);
-
+  const { start_date, position, company } = useSelector(cvFieldsState);
   const { experience } = state;
-
   const handleExperienceFields = (e, index) => {
     const { name, value } = e.target;
     dispatch(handleChangeExperienceFields({ index, name, value }));
@@ -72,8 +70,8 @@ export default function Experience() {
                           onChange={(value) =>
                             handleExperienceFields(value, index)
                           }
-                          error={pozicioni ? true : false}
-                          helperText={pozicioni}
+                          error={position ? true : false}
+                          helperText={position}
                           fullWidth
                         />
                       </Grid>
@@ -88,8 +86,8 @@ export default function Experience() {
                           onChange={(value) =>
                             handleExperienceFields(value, index)
                           }
-                          error={kompania ? true : false}
-                          helperText={kompania}
+                          error={company ? true : false}
+                          helperText={company}
                         />
                       </Grid>
                     </Grid>

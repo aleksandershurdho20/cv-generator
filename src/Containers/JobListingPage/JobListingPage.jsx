@@ -18,6 +18,8 @@ import { toast } from "react-toastify";
 import { getFilteredJobs, getJobs } from "redux/slices/Jobs";
 import { api } from "utils/api/api";
 import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
+import moment from "moment"
+import JobItem from "./JobItem";
 
 export default function JobListing() {
   const dispatch = useDispatch();
@@ -28,6 +30,8 @@ export default function JobListing() {
   const [jobId, setJobId] = useState({});
   const { visible, toggle, setVisibility } = useToggle(false);
   const [savedJobs, setSavedJobs] = useState([]);
+  const [isClicked,setIsClicked]=useState(false)
+  moment().locale("sq")
   useEffect(() => {
     dispatch(getJobs());
   }, []);
@@ -63,25 +67,35 @@ export default function JobListing() {
       .then((res) => {
         console.log(res);
         toast.success("Puna u shtua tek te preferuarat me sukses!");
-        setSavedJobs([...savedJobs,res.data]);
+        setIsClicked(true)
+        api
+        .get(`/jobs/saved/${userInfo?._id}`)
+        .then((res) => setSavedJobs(res.data))
+        .catch((err) => err);
+
       })
       .catch((err) => err);
+      setIsClicked(false)
   };
   const removeSavedJob = (id) => {
     api.delete(`/job/saved/${id}`).then((res) => {
-      const filteredSavedJobs = [...savedJobs].filter((el) => el._id !== id);
-      toast.success("Puna u hoq nga te preferuarat me sukses!");
+      const filteredSavedJobs = [...savedJobs].filter((el) => el.job._id !== id);
 
-      setSavedJobs(filteredSavedJobs);
+      toast.success("Puna u hoq nga te preferuarat me sukses!");
+      api
+      .get(`/jobs/saved/${userInfo?._id}`)
+      .then((res) => setSavedJobs(res.data))
+      .catch((err) => err);
+      
+      // setSavedJobs(filteredSavedJobs);
     });
   };
 
   const isJobSaved = (id) => {
-    const savedJob = savedJobs.some((el) => el.job._id === id);
-    console.log(savedJob,'asas')
+    const savedJob = savedJobs.find((el) => el.job._id === id);
     if (savedJob) {
       return (
-        <IconButton  onClick={() => removeSavedJob(id)}>
+        <IconButton  onClick={() => removeSavedJob(savedJob._id)}>
           <BookmarkRemoveIcon />
         </IconButton>
       );
@@ -112,6 +126,7 @@ export default function JobListing() {
           ) : jobs?.length === 0 ? (
             "Nuk u gjet asnje pune"
           ) : (
+
             jobs?.map((job) => (
               <Fade in={true} key={job._id}>
                 <Box backgroundColor="white" padding="20px" marginBottom="5px">
@@ -155,13 +170,22 @@ export default function JobListing() {
                         ))}
                     </Box>
 
-                    <span>{job.createdAt}</span>
+                    <span>{moment(job.createdAt).fromNow()}</span>
                   </Box>
                   <Button>Apliko</Button>
                   <Button onClick={() => handleViewJob(job._id)}>Shiko</Button>
                 </Box>
               </Fade>
             ))
+          
+            // jobs?.map((job) => (
+            //   <Fade in={true} key={job._id}>
+            //     <Box backgroundColor="white" padding="20px" marginBottom="5px">
+            //       <JobItem job={job} saveJob={saveJob} removeSavedJob={removeSavedJob} savedJobs={savedJobs} />
+            //       {/* ... */}
+            //     </Box>
+            //   </Fade>
+            // ))
           )}
         </Grid>
       </Grid>

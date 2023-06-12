@@ -17,9 +17,10 @@ export default function Chart({ title, data, dataKey, grid, type }) {
   const parsePieOutPut = (value) => {
     if (value === "rejected") return "Refuzuar";
     else if (value === "applied") return "Aplikuar";
+    else if (value === "shortlisted") return "Perzgjedhur"
     else return "Ska te dhena!";
   };
-  const COLORS = ["#FF0000", "#61bf93"];
+  const COLORS = ["#61bf93","#4285F4","#FF0000"];
 
   return (
     <>
@@ -111,10 +112,13 @@ export default function Chart({ title, data, dataKey, grid, type }) {
               fill="#8884d8"
             >
               {data?.map((entry, index) => (
+                <>
                 <Cell
                   key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
+                  fill={entry._id == "applied" ? COLORS[1] : entry._id == "shortlisted" ? COLORS[0] : COLORS[2]  }
                 />
+                
+                </>
               ))}
             </Pie>
             <Legend />

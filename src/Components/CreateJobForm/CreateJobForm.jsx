@@ -1,6 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography  } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -24,7 +24,7 @@ export default function CreateJobForm({
   const navigate = useNavigate();
   return (
     <Box >
-        <Typography>KJJkkj</Typography>
+        <Typography marginTop="15px" marginBottom="15px" fontWeight="600" fontSize="22px">{!isEditing ? "Krijo pune te re " : "Modifiko punen"}</Typography>
       <Grid
         container
         spacing={2}
@@ -47,12 +47,19 @@ export default function CreateJobForm({
           />
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
-          <textarea
+          <TextField 
             value={jobData.description}
+            multiline
             rows="3"
-            style={{ width: "90%" }}
+            style={{ width: "90%",border:"transparent" }}
             name="description"
+            label="Pershkrimi *"
+            variant="outlined"
             onChange={handleFormFields}
+            error={errors?.description && errors.description}
+            helperText={errors?.description}
+            InputLabelProps={{ shrink: true }}
+
           />
         </Grid>
         <Grid item xs={6}>
@@ -112,17 +119,23 @@ export default function CreateJobForm({
 
           />
         </Grid>
-        <Grid item xs={6}>
-          <FormControl variant="outlined" sx={{ width: "100%" }}>
+        <Grid container spacing={2}
+        sx={{marginTop:1}} 
+>
+        <Grid item xs={6} >
+          <FormControl variant="outlined" sx={{ width: "97%",marginLeft:2 }}>
             <InputLabel id="demo-simple-select-filled-label">Kategori</InputLabel>
             <Dropdown
               value={jobData.category}
               name="category"
               onChange={handleFormFields}
               options={jobCategories}
+              error={errors?.category && errors.category}
+              helperText={errors?.category}
             />
           </FormControl>
         </Grid>
+
         <Grid item xs={6}>
           {jobData?.skills?.map((el, i) => (
             <>
@@ -131,9 +144,9 @@ export default function CreateJobForm({
                 label="Aftesi "
                 variant="outlined"
                 name="value"
-                value={el.value}
+                value={isEditing ? el : el.value}
                 onChange={(e) => handleSkillsFields(e, i)}
-                sx={{ width: "90%" }}
+                sx={{ width: "90%"}}
                 InputLabelProps={{ shrink: true }}
 
               />
@@ -148,6 +161,7 @@ export default function CreateJobForm({
           <IconButton onClick={handleAddSkills}>
             <AddIcon />
           </IconButton>
+        </Grid>
         </Grid>
         <Stack direction="row" spacing={2} margin="20px 15px 0px 15px">
           <Button variant="contained" onClick={handleSubmit}>

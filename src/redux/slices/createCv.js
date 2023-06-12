@@ -57,8 +57,9 @@ export const createCvSlice = createSlice({
         },
 
         removeLanguageFields: (state, action) => {
+            const {index}=action.payload
             const tempArr = [...state.languages];
-            tempArr.splice(action.payload, 1);
+            tempArr.splice(index, 1);
             state.languages = tempArr;
         },
 

@@ -33,7 +33,7 @@ export default function Index() {
           {userInfo ? (
             userInfo.role &&userInfo?.role[0] === "company" ? (
               <>
-                <NavLink to="/jobs/list" activestyle={{ color: " #e74645" }}>
+                <NavLink to="/users/list" activestyle={{ color: " #e74645" }}>
                   Kryefaqja
                 </NavLink>
                 <NavLink to="/dashboard" activestyle={{ color: " #e74645" }}>

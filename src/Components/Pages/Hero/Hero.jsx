@@ -18,7 +18,11 @@ export default function Hero() {
         <div className="introduction">
           <div className="hero-container">
             <h1>Krijo CV</h1>
-            <p>Krijoni modelin e CV qe cdo rekrutues e adhuron ate! </p>
+            <p>
+              Platforma jonë i mundëson punëdhënësit që të kenë akses në një
+              grup profesionistësh shumë të kualifikuar, ndërkohë që u mundëson
+              punëkërkuesve të eksplorojnë mundësi emocionuese karriere.
+            </p>
           </div>
           <div className="cta">
             <button className="cta1">

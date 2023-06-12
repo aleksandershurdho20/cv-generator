@@ -18,7 +18,7 @@ export const getJobs = createAsyncThunk('jobs/getAllJobs', async () => {
   })
 
   export const getFilteredJobs = createAsyncThunk('jobs/searchJobs', async (params) => {
-    const response = await api.get(`jobs/search?title=${params.title}&jobType=${params.jobType}`)
+    const response = await api.get(`jobs/search?title=${params.title}&jobType=${params.jobType}&category=${params.category}`)
     return response.data
   })
 

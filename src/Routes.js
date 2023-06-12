@@ -19,6 +19,8 @@ import Messages from 'Containers/Messages';
 import Profile from 'Containers/Profile';
 import ViewAppicant from 'Containers/Applicants/ViewAppicant';
 import SavedJobs from 'Containers/JobListingPage/SavedJobs';
+import UserListingPage from 'Containers/UserListingPage';
+import ViewUserProfile from 'Containers/UserListingPage/ViewUserProfile';
 
 const imageStyles = {
     width: '27%',
@@ -52,6 +54,9 @@ export default function Routes() {
                     <Route path="/CV/Download" element={<Download/>} />
                     <Route path="/auth" element={<Auth/>} />
                     <Route path="/jobs/list" element={<JobListingPage/>} />
+                    <Route path="/users/list" roles={["company"]} element={<UserListingPage/>} />
+                    <Route path="/users/profile/:id" roles={["company"]} element={<ViewUserProfile/>} />
+
                     <Route path="dashboard" element={<PrivateRoutes roles={["company","user"]}> <Dashboard/> </PrivateRoutes>} />
                     <Route path="/job/create" element={<PrivateRoutes roles={["company"]}>
                         <CreateJob/>

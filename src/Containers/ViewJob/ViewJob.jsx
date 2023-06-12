@@ -41,6 +41,11 @@ export default function ViewJob({ open, onClose, id }) {
   const categoryTitle = parsedCategoryTitle(jobData?.category);
 
   const handleApply = () => {
+    if(!userInfo.userProfileId){
+     toast.error("Ju lutem plotesojeni profilin per te vazhduar aplikimin")
+      return;
+
+    }
     const data = {
       candidate: userInfo?._id,
       job: jobData?._id,

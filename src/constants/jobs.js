@@ -39,6 +39,30 @@ export const jobCategories = [
       title: "Burime Njerezore",
       value: "burime_njerezore",
     },
+    {
+      title: "Horeka (Hoteleri-Restorant-Kafe)",
+      value: "horeka",
+    },
+    {
+      title: "Instalime - Mirembajtje",
+      value: "instalime_mirembajtje",
+    },
+    {
+      title: "Mjekesore - Shendetesore",
+      value: "mjekesore_shendetesore",
+    },
+    {
+      title: "Ligjore",
+      value: "ligjore",
+    },
+    {
+      title: "Agronomi",
+      value: "agronomi",
+    },
+    {
+      title: "Gazetari",
+      value: "gazetari",
+    },
   ];
   
   export const jobType = [
