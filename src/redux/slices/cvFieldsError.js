@@ -27,29 +27,86 @@ export const cvFieldsError = createSlice({
                 state.activeStep = 0
             }
              else if (fields.experience.find(el => parseInt(el.start_date )>  parseInt(el.end_date) ) && state.activeStep === 1){
-                state.start_date = "Muaji i fillimit nuk mund te jete me i madh se muaji i mbarimit!"
-                state.activeStep = 1
+                // state.start_date = "Muaji i fillimit nuk mund te jete me i madh se muaji i mbarimit!"
+                // state.activeStep = 1
+                const validateEducationDate = fields.experience.filter( el => parseInt(el.start_date )>  parseInt(el.end_date));
+                validateEducationDate.forEach((el, index) => {
+
+                    const result = fields.experience.findIndex(el => !el.title);
+                  state.start_date = {
+                    ...state.start_date,
+                    [result]: "Muaji i fillimit nuk mund te jete me i madh se muaji i mbarimit!"
+                  };
+                });
             }
          
             else if (fields.experience.find(el => !el.position)  && state.activeStep === 1){
-                state.position = "Pozicioni nuk mund te jete bosh!"
-                state.activeStep = 1
+                // state.position = "Pozicioni nuk mund te jete bosh!"
+                // state.activeStep = 1
+
+                const validatePostionField = fields.experience.filter( el => !el.position);
+                validatePostionField.forEach((el, index) => {
+
+                    const result = fields.experience.findIndex(el => !el.position);
+                  state.position = {
+                    ...state.position,
+                    [result]: "Pozicioni nuk mund te jete bosh!"
+                  };
+                });
             }
             else if (fields.experience.find(el => !el.company)  && state.activeStep === 1){
-                state.company = "Kompania nuk mund te jete bosh!"
-                state.activeStep = 1
+                // state.company = "Kompania nuk mund te jete bosh!"
+                // state.activeStep = 1
+
+                const validateCompanyFields = fields.experience.filter( el => !el.company);
+                validateCompanyFields.forEach((el, index) => {
+
+                    const result = fields.experience.findIndex(el => !el.company);
+                  state.company = {
+                    ...state.company,
+                    [result]: "Kompania nuk mund te jete bosh!"
+                  };
+                });
             }
             else if (fields.education.find(el => !el.diploma)  && state.activeStep === 1){
-                state.diploma = "Diploma nuk mund te jete bosh!"
-                state.activeStep = 1
+                // state.diploma = "Diploma nuk mund te jete bosh!"
+                // state.activeStep = 1
+                const validateUniversityField = fields.education.filter( el => !el.diploma);
+                validateUniversityField.forEach((el, index) => {
+
+                    const result = fields.education.findIndex(el => !el.diploma);
+                  state.diploma = {
+                    ...state.diploma,
+                    [result]: "Diploma nuk mund te jete bosh!"
+                  };
+                });
             }
             else if (fields.education.find(el => !el.university)  && state.activeStep === 1){
-                state.university = "Universiteti nuk mund te jete bosh!"
-                state.activeStep = 1
+                // state.university = "Universiteti nuk mund te jete bosh!"
+                // state.activeStep = 1
+                const validateUniversityField = fields.education.filter( el => !el.university);
+                validateUniversityField.forEach((el, index) => {
+
+                    const result = fields.education.findIndex(el => !el.university);
+                  state.university = {
+                    ...state.university,
+                    [result]: "Universiteti nuk mund te jete bosh!"
+                  };
+                });
+                
             }
             else if (fields.education.find(el => parseInt(el.start_date )>  parseInt(el.end_date) ) && state.activeStep === 1){
-                state.start_date = "Muaji i fillimit nuk mund te jete me i madh se muaji i mbarimit!"
-                state.activeStep = 1
+                // state.start_date = "Muaji i fillimit nuk mund te jete me i madh se muaji i mbarimit!"
+                // state.activeStep = 1
+                const validateEducationDate = fields.education.filter( el => parseInt(el.start_date )>  parseInt(el.end_date));
+                validateEducationDate.forEach((el, index) => {
+
+                    const a = fields.education.findIndex(el => !el.title);
+                  state.edukimi_start_date = {
+                    ...state.edukimi_start_date,
+                    [a]: "Muaji i fillimit nuk mund te jete me i madh se muaji i mbarimit!"
+                  };
+                });
             }
             else if (fields.languages.filter(el => !el.title)  && state.activeStep === 1){
                 const emptyLanguageFields = fields.languages.filter(el => !el.title);
@@ -90,7 +147,7 @@ export const cvFieldsError = createSlice({
             const {key,params}= action.payload
 
             if(params){
-                state[params.key][params.index] = ""
+               delete state[params.key][params.index] 
             }
             else{
                 state[key] = ""

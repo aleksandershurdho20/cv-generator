@@ -18,12 +18,13 @@ import Gjuhet from "../../Components/Gjuhet";
 import Skills from "../../Components/Skills/Index";
 import {
   addExperienceFields,
-  cvDataState,
   handleChangeExperienceFields,
   removeExperienceDataFields,
 } from "../../redux/slices/User";
 import "./Experience.scss";
 import { cvFieldsState, resetFormFields } from "redux/slices/cvFieldsError";
+import { getFieldErrorMessage } from "helpers/getFieldsErrorMessage";
+import { getNonEmptyKey, getNonEmptyObject } from "helpers/validateObjectKeys";
 
 export default function Experience() {
   const state = useSelector((state) => state.userSlice.userInfo.userProfileId);
@@ -38,10 +39,22 @@ export default function Experience() {
   const handleAddExperienceFields = () => {
     dispatch(addExperienceFields());
   };
+  
+  
   const removeExperienceFields = (index) => {
+    const params = {
+      start_date, position, company
+    }
     dispatch(removeExperienceDataFields(index));
+    const nonEmptyKey = getNonEmptyKey(params);
+    const objectValue = getNonEmptyObject(params)
+    if(nonEmptyKey){
+      dispatch(resetFormFields({key:objectValue[index],params:{index,key:nonEmptyKey}}))
+
+  }
   };
 
+  console.log( start_date, position, company ,' start_date, position, company ')
   return (
     <Box flexGrow="1">
       <Container>
@@ -70,8 +83,9 @@ export default function Experience() {
                           onChange={(value) =>
                             handleExperienceFields(value, index)
                           }
-                          error={position ? true : false}
-                          helperText={position}
+                    
+                          error={ getFieldErrorMessage(position,index) ? true : false}
+                          helperText={getFieldErrorMessage(position,index)}
                           fullWidth
                         />
                       </Grid>
@@ -86,8 +100,8 @@ export default function Experience() {
                           onChange={(value) =>
                             handleExperienceFields(value, index)
                           }
-                          error={company ? true : false}
-                          helperText={company}
+                          error={ getFieldErrorMessage(company,index) ? true : false}
+                          helperText={getFieldErrorMessage(company,index)}
                         />
                       </Grid>
                     </Grid>
@@ -189,7 +203,7 @@ export default function Experience() {
                           ))}
                         </select>
                       </Grid>
-                      {start_date && <span>{start_date}</span>}
+                      {getFieldErrorMessage(start_date,index) && <span style={{color:"red",margin:10}}>{getFieldErrorMessage(start_date,index)}</span>}
                     </Grid>
                     <Grid container>
                       <Grid item md={12}>

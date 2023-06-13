@@ -6,5 +6,6 @@ export const data ={
     month_end_date: "",
     position:"",
     diploma:"",
-    skill:""
+    skill:"",
+    edukimi_start_date:""
 }

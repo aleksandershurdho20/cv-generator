@@ -13,29 +13,63 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import InputLabel from '@mui/material/InputLabel';
 import { years,monthNames } from 'utils/PdfGenerator/generateDate';
 import { resetFormFields } from 'redux/slices/cvFieldsError';
+import { getFieldErrorMessage } from 'helpers/getFieldsErrorMessage';
+import { getNonEmptyKey, getNonEmptyObject } from 'helpers/validateObjectKeys';
 
 export default function EdukimiFormFields() {
   const state = useSelector((state) => state.userSlice.userInfo.userProfileId);
   
-  const { start_date,
+  const { 
     diploma,
     university,
+    edukimi_start_date
      } = useSelector((state) => state.cvFieldsError);
     const dispatch = useDispatch()
 
     const { education } = state;
+//     function getNonEmptyKey(obj) {
+//       for (let key in obj) {
+//           const value = obj[key];
+//           if (typeof value !== "undefined" && Object.keys(value).length > 0) {
+//               return key;
+//           }
+//       }
+//       return null; // Return null if no non-empty key is found
+//   }
+//   function getNonEmptyObject(...objects) {
+//     for (let object of objects) {
+//         if (typeof object !== "undefined" && Object.keys(object).length > 0) {
+//             return object;
+//         }
+//     }
+//     return null; // Return null if no non-empty object is found
+// }
+
+
+  
     const addEducationDataFields =() =>{
         dispatch(addEducationFields())
       }
       const handleEducationFields = (e,index) =>{
         const {name,value}= e.target;
+        const  params = {    diploma,
+          university,
+          edukimi_start_date}
         dispatch(handleChangeEducationFields({index,name,value}))
-        dispatch(resetFormFields({key:name}))
+        // dispatch(resetFormFields({key:name}))
+        const nonEmptyKey = getNonEmptyKey(params);
+        const objectValue = getNonEmptyObject(params)
+        if(nonEmptyKey){
+          dispatch(resetFormFields({key:objectValue[index],params:{index,key:nonEmptyKey}}))
+    
+      }
       }
       const removeEducationDataFields = (index) =>{
         dispatch(removeEducationFields(index))
       }
-   console.log(university,'university')
+      
+  
+
   return (
     <Grid container>
     {education &&
@@ -49,8 +83,8 @@ export default function EdukimiFormFields() {
                 variant="outlined"
                 name="diploma"
                 value={data.diploma}
-                error={diploma ? true : false}
-                helperText={diploma}
+                error={ getFieldErrorMessage(diploma,index) ? true : false}
+                helperText={getFieldErrorMessage(diploma,index)}
                 // onChange={props.handleCVFields}
                 onChange={(value) =>
                   handleEducationFields(value, index)
@@ -68,8 +102,8 @@ export default function EdukimiFormFields() {
                 onChange={(value) =>
                   handleEducationFields(value, index)
                 }
-                error={university ? true : false}
-                helperText={university}
+                error={ getFieldErrorMessage(university,index) ? true : false}
+                helperText={getFieldErrorMessage(university,index)}
                 fullWidth
               />
             </Grid>
@@ -166,6 +200,8 @@ export default function EdukimiFormFields() {
                 ))}
               </select>
             </Grid>
+            {getFieldErrorMessage(edukimi_start_date,index) && <span style={{color:"red",margin:10}}>{getFieldErrorMessage(edukimi_start_date,index)}</span>}
+
           </Grid>
           <Grid container>
             <InputLabel
