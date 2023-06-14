@@ -9,6 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Search from "../../../assets/search.png";
 import Resume from "../../../assets/resume.png";
 import Review from "../../../assets/review.svg";
+import Message from "../../../assets/message.jpg";
 
 export default function Cards() {
   return (
@@ -33,7 +34,7 @@ export default function Cards() {
                 <CardMedia
                   style={{ height: 300 }}
                   image={Search}
-                  title="Contemplative Reptile"
+                  title="Kerkim i lehte"
                 />
                 <CardContent>
                   <h3 style={{ color: "#0000007a" }}>
@@ -60,7 +61,7 @@ export default function Cards() {
                 <CardMedia
                   style={{ height: 300 }}
                   image={Resume}
-                  title="Contemplative Reptile"
+                  title="Akses ne databaze"
                 />
                 <CardContent>
                   <h3 style={{ color: "#0000007a" }}>
@@ -87,8 +88,8 @@ export default function Cards() {
               <CardActionArea>
                 <CardMedia
                   style={{ height: 300 }}
-                  image={Review}
-                  title="Contemplative Reptile"
+                  image={Message}
+                  title="Komunikim pa probleme"
                 />
                 <CardContent>
                   <h3 style={{ color: "#0000007a" }}>Komunikim pa probleme</h3>

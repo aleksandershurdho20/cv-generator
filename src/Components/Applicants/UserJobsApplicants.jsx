@@ -59,7 +59,7 @@ export default function UserJobsApplicants() {
         data={fitleredItems.
           filter(el => el.is_confirmed).
           map((el) => {
-          const {_id,...rest}=el.job
+          const {_id,...rest}=el.job ?? {}
           return {
             ...el,
             status:parseCandidateApplyStatus(el.status),

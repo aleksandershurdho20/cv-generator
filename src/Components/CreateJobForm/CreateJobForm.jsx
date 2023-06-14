@@ -101,6 +101,8 @@ export default function CreateJobForm({
             variant="outlined"
             fullWidth
             InputLabelProps={{ shrink: true }}
+            InputProps={{ inputProps: { min: 0 } }}
+
 
           />
         </Grid>

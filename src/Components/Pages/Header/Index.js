@@ -87,12 +87,12 @@ export default function Index() {
                 Kryefaqja
               </NavLink>
 
-              <NavLink to="/Krijo" activestyle={{ color: " #e74645" }}>
+              {/* <NavLink to="/Krijo" activestyle={{ color: " #e74645" }}>
                 Krijo
               </NavLink>
               <NavLink to="/Cv/shembuj" activestyle={{ color: " #e74645" }}>
                 Shembuj
-              </NavLink>
+              </NavLink> */}
               <NavBtnLink to="/auth">Identifikohu</NavBtnLink>
             </>
           )}

@@ -26,18 +26,18 @@ export default function Hero() {
           </div>
           <div className="cta">
             <button className="cta1">
-              <Link to="/Krijo" style={linkStyles}>
-                Krijo CV{" "}
+              <Link to="/auth" style={linkStyles}>
+                Identifikohu
               </Link>
             </button>
-            <button className="cta2">
+            {/* <button className="cta2">
               <Link
                 to="/Cv/shembuj"
                 style={{ textDecoration: "none", color: "#FFF" }}
               >
                 Shiko Shembuj
               </Link>
-            </button>
+            </button> */}
           </div>
         </div>
 
