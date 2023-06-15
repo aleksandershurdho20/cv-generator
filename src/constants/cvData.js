@@ -27,7 +27,7 @@ export const cvData = {
   phone: "",
   address: "",
   city: "",
-  // gender: "",
+  gender: "",
   Kombesia: "",
   statusiMartesor: "",
   profili: "",

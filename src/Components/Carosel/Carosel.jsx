@@ -1,24 +1,22 @@
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
+import Stepper from "@mui/material/Stepper";
 import InformacioniPersonal from "Components/InformacioniPersonal";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  cvFieldsState,
   goToPreviousStep,
-  validateFormFields,
+  validateFormFields
 } from "redux/slices/cvFieldsError";
 import Experience from "../../Containers/Experience/Experience";
 import Footer from "../../Containers/Footer/Footer";
-import Box from "@mui/material/Box";
 
-import TemplateList from "../SelectTemplates/TemplateList";
-import "./Carosel.scss";
-import { api } from "utils/api/api";
-import { toast } from "react-toastify";
 import { validateUserProfileFields } from "helpers/validateUserProfileFields";
+import { toast } from "react-toastify";
+import { api } from "utils/api/api";
+import "./Carosel.scss";
 
 function getSteps() {
   return ["Informacioni Personal", "Eksperienca"];

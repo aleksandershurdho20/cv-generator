@@ -25,7 +25,11 @@ import {
 import app from "config/firebase";
 import { api } from "utils/api/api";
 import { toast } from "react-toastify";
-
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 export default function InformacioniPersonal() {
   const state = useSelector((state) => state.userSlice.userInfo?.userProfileId);
 
@@ -93,11 +97,13 @@ export default function InformacioniPersonal() {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log({ downloadURL });
           dispatch(handleImageFiles(downloadURL));
-          if(state._id){
-      
-            api.put(`/profile/${state.user}`,{...state,image:downloadURL}).then(res =>{
-              toast.success("Profili u modifikua me sukses!")
-            }).catch(err =>err)
+          if (state._id) {
+            api
+              .put(`/profile/${state.user}`, { ...state, image: downloadURL })
+              .then((res) => {
+                toast.success("Profili u modifikua me sukses!");
+              })
+              .catch((err) => err);
           }
         });
       }
@@ -118,11 +124,13 @@ export default function InformacioniPersonal() {
       .then(() => {
         // File deleted successfully
         dispatch(removeImageFiles());
-        if(state._id){
-
-          api.put(`/profile/${state.user}`,{...state,image:""}).then(res =>{
-            toast.success("Profili u modifikua me sukses!")
-          }).catch(err =>err)
+        if (state._id) {
+          api
+            .put(`/profile/${state.user}`, { ...state, image: "" })
+            .then((res) => {
+              toast.success("Profili u modifikua me sukses!");
+            })
+            .catch((err) => err);
         }
       })
       .catch((error) => {
@@ -192,6 +200,28 @@ export default function InformacioniPersonal() {
                 onChange={handleCVFields}
                 fullWidth
               />
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">
+                  Gjinia
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={state?.gender}
+                  name="gender"
+                  onChange={handleCVFields}
+                >
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio />}
+                    label="Mashkull"
+                  />
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio />}
+                    label="Femer"
+                  />
+                </RadioGroup>
+              </FormControl>
             </div>
           </Grid>
 

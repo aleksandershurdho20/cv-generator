@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "utils/api/api";
 import moment from "moment"
+import { jobType } from "constants/jobs";
 export default function GetAllJobs() {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.userSlice);
@@ -45,6 +46,7 @@ export default function GetAllJobs() {
         setJobs(allJobs)
     }).catch(err => toast.error("Ndodhi nje problem!"))
   }
+  
   return (
     <Container sx={{ height: "100%" }}>
       <Box
@@ -92,7 +94,7 @@ export default function GetAllJobs() {
                       <TableRow key={job._id}>
                         <TableCell>{job._id}</TableCell>
                         <TableCell>{job.title}</TableCell>
-                        <TableCell>{job.jobType}</TableCell>
+                        <TableCell>{jobType?.find((data) => data.value === job.jobType)?.title}</TableCell>
                         <TableCell>{job.location}</TableCell>
                         <TableCell>{moment(job.createdAt).format("YYYY-MM-DD")}</TableCell>
 
