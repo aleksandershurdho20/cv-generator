@@ -17,10 +17,10 @@ export default function Hero() {
       <section className="hero-wrapper">
         <div className="introduction">
           <div className="hero-container">
-            <h1>Krijo CV</h1>
+            {/* <h1>Krijo CV</h1> */}
             <p>
               Platforma jonë i mundëson punëdhënësit që të kenë akses në një
-              grup profesionistësh shumë të kualifikuar, ndërkohë që u mundëson
+              grup profesionistësh shumë të kualifikuar. Gjithashtu u mundëson
               punëkërkuesve të eksplorojnë mundësi emocionuese karriere.
             </p>
           </div>

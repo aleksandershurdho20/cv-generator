@@ -2,7 +2,9 @@ import { IconButton, Typography, Box, Chip, Button, Fade } from "@mui/material";
 import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import moment from "moment";
+import 'moment/locale/sq' 
 import { jobType } from "constants/jobs";
+import { useEffect } from "react";
 
 const JobItem = ({
   job,
@@ -27,6 +29,10 @@ const JobItem = ({
       );
     }
   };
+  useEffect(()=>{
+    moment.locale("sq")
+
+  },[moment])
   return (
     <Fade in={true} key={job._id}>
       <Box
@@ -77,9 +83,8 @@ const JobItem = ({
               ))}
           </Box>
 
-          <span>{moment(job.createdAt).fromNow()}</span>
+          <span>{moment(job.createdAt).locale("sq").fromNow()}</span>
         </Box>
-        <Button>Apliko</Button>
         <Button onClick={() => handleViewJob(job._id)}>Shiko</Button>
       </Box>
     </Fade>

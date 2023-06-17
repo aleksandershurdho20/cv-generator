@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import "./Header.scss";
 import LanguageSwitcher from "../../LanguageSwitcher/Index";
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from "./HeaderItems";
-import Logo from "../../../assets/Logo2.png";
+import Logo from "../../../assets/update2.PNG";
 import SideBar from "./MobileMenu/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserProfile, logUserOut } from "redux/slices/User";
 import useSocket from "hooks/useSocket";
-
 export default function Index() {
   const [open, setOpen] = useState(false);
   const { userInfo } = useSelector((state) => state.userSlice);
@@ -98,7 +97,7 @@ export default function Index() {
           )}
         </NavMenu>
       </Nav>
-      {/* <SideBar open={open} handleOpen={handleOpen} /> */}
+      {open && <SideBar open={open} handleOpen={handleOpen} />}
     </>
   );
 }

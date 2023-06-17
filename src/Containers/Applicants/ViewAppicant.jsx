@@ -254,9 +254,30 @@ export default function ViewAppicant() {
                   maxWidth="100%"  
                   alignItems="center"
                   alignContent="center"
-            >
+                  rowGap="10px"
+                  columnGap="10px"
 
-              <Stack
+            >
+              {applicantData?.languages?.map(language => <Box
+                
+                border="1px solid #D5E0D5"
+                maxWidth="150px"
+                padding="10px"
+                display="flex"
+                height="53px"
+                marginBottom="5px"
+                flex="50%"
+                alignContent="center"
+                alignItems="center"
+                key={language._id}>
+                <Avatar>{language.title.charAt(0).toUpperCase()}</Avatar>
+                <Box paddingLeft="5px">
+                  <Typography noWrap>{language.title}</Typography>
+                  <Typography noWrap>{language.level}</Typography>
+                </Box>
+
+                </Box>)}
+              {/* <Stack
                 spacing={2}
                 direction="row"
                 alignItems="center"
@@ -279,7 +300,7 @@ export default function ViewAppicant() {
                 </Box>
 
                 </Box>)}
-              </Stack>
+              </Stack> */}
             </Box>
           </Box>
 

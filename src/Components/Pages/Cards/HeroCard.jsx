@@ -24,7 +24,7 @@ export default function HeroCard() {
             <div className="wrapper-description">
               <Fade bottom>
                 <h2>
-                  Krijoni CV Profesionale dhe te bukura brenda pak minutash
+                  Krijoni CV Profesionale  brenda pak minutash
                 </h2>
               </Fade>
               <p>
@@ -35,14 +35,14 @@ export default function HeroCard() {
                 kryer.
               </p>
             </div>
-            <div className="sub-main">
+            {/* <div className="sub-main">
               <button
                 className="button-two"
                 onClick={() => navigate("/Cv/shembuj")}
               >
                 <span>Shiko Shembujt</span>
               </button>
-            </div>
+            </div> */}
           </Container>
         </Grid>
         <Grid item md={6}>

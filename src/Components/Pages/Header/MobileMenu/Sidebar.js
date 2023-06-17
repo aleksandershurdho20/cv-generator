@@ -8,21 +8,21 @@ const Sidebar = ({ handleOpen, open }) => {
             </Icon>
             <SidebarWrapper>
                 <SidebarMenu>
-                    <SidebarLink  to='/' activestyle={{color:" #e74645"}} >
+                    <SidebarLink  to='/' activestyle={{color:" #e74645"}} onClick={handleOpen} >
                         Kryefaqja
                     </SidebarLink>
            
-                    <SidebarLink to="/Krijo" activestyle={{color:" #e74645"}}>
-                        Krijo
+                    <SidebarLink to="/auth" activestyle={{color:" #e74645"}} onClick={handleOpen}>
+                        Identifikohu
                     </SidebarLink>
-                    <SidebarLink to="/Cv/shembuj" activestyle={{color:" #e74645"}}>
+                    {/* <SidebarLink to="/Cv/shembuj" activestyle={{color:" #e74645"}}>
                         Shembuj
-                    </SidebarLink>
+                    </SidebarLink> */}
 
                 </SidebarMenu>
-                <SideBtnWrap>
+                {/* <SideBtnWrap>
                     <SidebarRoute to="/Regjistrohu" activestyle={{color:" #e74645"}}>Regjistrohu</SidebarRoute>
-                </SideBtnWrap>
+                </SideBtnWrap> */}
             </SidebarWrapper>
         </SidebarContainer>
     )

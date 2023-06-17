@@ -31,7 +31,8 @@ export default function ViewJob({ open, onClose, id }) {
         api
           .get(`jobs/match/category/${res.data?.category}`)
           .then((response) => {
-            setMatchedJobs(response.data);
+            const jobs = response?.data?.filter(job => job?._id !== id)
+            setMatchedJobs(jobs);
           });
         setJobData(res.data);
       })
@@ -82,8 +83,9 @@ export default function ViewJob({ open, onClose, id }) {
             borderRadius="8px"
             padding="10px"
             marginTop="15px"
+
           >
-            <Grid item xs={9}>
+            <Grid item xs={9} sx={{ overflowWrap: "break-word" }}>
               <Typography color="#000">{jobData.title}</Typography>
               <span style={{ color: "#797070" }}>Kategori</span>
               <Typography color="#000">{categoryTitle}</Typography>

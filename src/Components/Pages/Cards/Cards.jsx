@@ -37,7 +37,7 @@ export default function Cards() {
                   title="Kerkim i lehte"
                 />
                 <CardContent>
-                  <h3 style={{ color: "#0000007a" }}>
+                  <h3 style={{ color: "#0000007a",fontSize:20 }}>
                     Kërkim i lehtë i punëve
                   </h3>
                   <p>
@@ -64,7 +64,7 @@ export default function Cards() {
                   title="Akses ne databaze"
                 />
                 <CardContent>
-                  <h3 style={{ color: "#0000007a" }}>
+                  <h3 style={{ color: "#0000007a",fontSize:20 }}>
                     Akses ne databazën e kandidatit
                   </h3>
                   <p>
@@ -92,7 +92,7 @@ export default function Cards() {
                   title="Komunikim pa probleme"
                 />
                 <CardContent>
-                  <h3 style={{ color: "#0000007a" }}>Komunikim pa probleme</h3>
+                  <h3 style={{ color: "#0000007a",fontSize:20 }}>Komunikim pa probleme</h3>
                   <p>
                     Drejtoni procesin e punësimit me mjetet tona të integruara
                     të komunikimit. Shkëmbeni mesazhe   dhe qëndroni të organizuar, të gjitha brenda platformës sonë
