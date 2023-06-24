@@ -98,7 +98,7 @@ export default function SimpleTabs() {
           onClick={handleBack}
           style={{ color: "#000" }}
         >
-          Back
+          Kthehu Mbrapa
         </Button>
         {activeStep === 1 ?   <Button
           variant="contained"
@@ -114,7 +114,7 @@ export default function SimpleTabs() {
           className="step-btn"
 
         >
-          Next
+          Hapi tjeter
         </Button>}
      
        

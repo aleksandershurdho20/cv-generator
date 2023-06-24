@@ -14,7 +14,7 @@ const JobItem = ({
   handleViewJob,
 }) => {
   const isJobSaved = (id) => {
-    const savedJob = savedJobs.find((el) => el.job._id === id);
+    const savedJob = savedJobs?.find((el) => el?.job?._id === id);
     if (savedJob) {
       return (
         <IconButton onClick={() => removeSavedJob(savedJob._id)}>

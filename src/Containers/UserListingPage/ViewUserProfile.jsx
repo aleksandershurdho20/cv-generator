@@ -235,25 +235,36 @@ export default function ViewUserProfile() {
             <Typography variant="h5" marginBottom="20px">
               Njohurite Gjuhesore
             </Typography>
-            <Stack
-              spacing={2}
-              direction="row"
+            <Box
+              display="flex"
+              flexWrap="wrap"
+              maxWidth="100%"
               alignItems="center"
-              border="1px solid #D5E0D5"
-              maxWidth="150px"
-              padding="10px"
-              height="53px"
+              alignContent="center"
+              rowGap="10px"
+              columnGap="10px"
             >
               {applicantData?.languages?.map((language) => (
-                <Fragment key={language._id}>
+                <Box
+                  border="1px solid #D5E0D5"
+                  maxWidth="150px"
+                  padding="10px"
+                  display="flex"
+                  height="53px"
+                  marginBottom="5px"
+                  flex="50%"
+                  alignContent="center"
+                  alignItems="center"
+                  key={language._id}
+                >
                   <Avatar>{language.title.charAt(0).toUpperCase()}</Avatar>
-                  <Box>
+                  <Box paddingLeft="5px">
                     <Typography noWrap>{language.title}</Typography>
                     <Typography noWrap>{language.level}</Typography>
                   </Box>
-                </Fragment>
+                </Box>
               ))}
-            </Stack>
+            </Box>
           </Box>
 
           <Box

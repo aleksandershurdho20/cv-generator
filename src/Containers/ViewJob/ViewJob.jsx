@@ -100,13 +100,13 @@ export default function ViewJob({ open, onClose, id }) {
               <Typography color="#000">{jobData.description}</Typography>
             </Grid>
             <Grid item xs={3}>
-              <Stack spacing={2}>
+              <Stack spacing={2} marginBottom="10px">
                 <Button variant="contained" fullWidth onClick={handleApply}>
                   Apliko
                 </Button>
-                <Button variant="bordered" fullWidth>
+                {/* <Button variant="bordered" fullWidth>
                   Shperndaje
-                </Button>
+                </Button> */}
               </Stack>
               <span style={{ color: "#797070" }}>Rreth Kompanise</span>
 

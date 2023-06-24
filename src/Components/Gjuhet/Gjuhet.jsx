@@ -106,8 +106,8 @@ export default function Gjuhet() {
                                                     )
                                                 }
                                             >
-                                                <option>Shum mire</option>
-                                                <option>Mire</option>
+                                                <option>Fillestar</option>
+                                                <option>Bazike</option>
                                                 <option>Keq</option>
                                             </select>
 

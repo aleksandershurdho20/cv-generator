@@ -5,15 +5,15 @@ import BugReportIcon from "@mui/icons-material/BugReport"; // material
 import { api } from "utils/api/api";
 import { useSelector } from "react-redux";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
-import moment from "moment";
 import Chart from "Components/Chart";
 import { Typography } from "@mui/material";
 import { getDataByDateAndMonth } from "helpers/getDataByDate";
+import { parseCandidateApplyStatus } from "helpers/parseCandidateApplyStatus";
+
 export default function Dashboard() {
   const { userInfo } = useSelector((state) => state.userSlice);
   const [statistics, setStatistics] = useState({});
   const [userStatistics, setUserStatistics] = useState({});
-
   const isUserCompany = userInfo.role[0] === "company";
   useEffect(() => {
     if (userInfo.role[0] === "company") {
@@ -116,7 +116,7 @@ export default function Dashboard() {
             
           </Typography>
           <Chart
-            data={isUserCompany ? statistics?.applicantStatuses : userStatistics?.applicantStatuses}
+            data={isUserCompany ? parseCandidateApplyStatus(statistics?.applicantStatuses) : parseCandidateApplyStatus(userStatistics?.applicantStatuses)}
             title="User Analytics"
             grid
             dataKey="count"

@@ -115,7 +115,7 @@ export default function Chart({ title, data, dataKey, grid, type }) {
                 <>
                 <Cell
                   key={`cell-${index}`}
-                  fill={entry._id == "applied" ? COLORS[1] : entry._id == "shortlisted" ? COLORS[0] : COLORS[2]  }
+                  fill={entry._id == "Aplikuar" ? COLORS[1] : entry._id == "Perzgjedhur" ? COLORS[0] : COLORS[2]  }
                 />
                 
                 </>

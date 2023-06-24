@@ -18,7 +18,7 @@ export const jobApplicantsTableColumns = [
     key: "phone",
   },
   {
-    title: "Actions",
+    title: "Veprimet",
     key: "actions",
   },
 ]
@@ -51,7 +51,7 @@ export const  applicantsTableColumns = [
       key: "status",  
     },
     {
-      title: "Actions",
+      title: "Veprimet",
       key: "actions",
     },
 

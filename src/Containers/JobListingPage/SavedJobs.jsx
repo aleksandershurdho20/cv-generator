@@ -81,13 +81,13 @@ export default function SavedJobs() {
         columns={columns}
         data={savedJobs.
           map((el) => {
-              const {_id,...rest}=el.job
+              const {_id,...rest}=el.job ?? {}
               console.log(rest,'oo')
           return {
             ...el,
             ...rest,
-            name:rest?.company.companyProfileId?.name,
-            industry:rest.company.companyProfileId?.industry,
+            name:rest?.company?.companyProfileId?.name,
+            industry:rest?.company?.companyProfileId?.industry,
 
           };
         })}
