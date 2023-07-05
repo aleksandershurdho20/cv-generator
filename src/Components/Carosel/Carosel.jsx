@@ -50,7 +50,6 @@ export default function SimpleTabs() {
   
   const handleCreate = () =>{
     dispatch(validateFormFields({ fields: state }));
-    console.log(state,'state')
     if(!validateUserProfileFields(state)) return;
     if(isInEditMode === "Modifiko"){
       api.put(`/profile/${userInfo?._id}`,state).then(res =>{

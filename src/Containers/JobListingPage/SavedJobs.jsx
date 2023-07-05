@@ -80,7 +80,8 @@ export default function SavedJobs() {
          <Table
         columns={columns}
         data={savedJobs.
-          map((el) => {
+          filter(el => el.job)
+          .map((el) => {
               const {_id,...rest}=el.job ?? {}
               console.log(rest,'oo')
           return {

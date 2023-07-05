@@ -75,7 +75,7 @@ export default function Gjuhet() {
                                         <Grid item md={6} sm={12} xs={12}>
                                             <TextField
                                                 id="outlined-basic"
-                                                label="Gjuha  "
+                                                label="Gjuha*"
                                                 variant="outlined"
                                                 value={data.title}
                                                 name="title"

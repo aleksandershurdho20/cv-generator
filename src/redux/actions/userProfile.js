@@ -158,26 +158,25 @@ export const userProfileActions = {
 
     validateCompanyFields:(state,payload) =>{
       const company = payload.payload
-      if(!company.name){
+      if(!company?.name){
         state.companyProfileErrors.name = "Emri nuk mund te jete bosh!";
         return;
       }
-      else if (!company.size){
+      else if (!company?.size){
         state.companyProfileErrors.size = "Madhesia nuk mund te jete bosh!";
         return;
       }
-      else if (!company.location){
+      else if (!company?.location){
         state.companyProfileErrors.location = "Vendodhja nuk mund te jete bosh!";
         return;
       }
-      else if (!company.industry){
+      else if (!company?.industry){
         state.companyProfileErrors.industry = "Industria nuk mund te jete bosh!";
         return;
       }
     },
 
     resetCompanyFields : (state,payload) =>{
-      console.log(payload.payload,"s")
        state.companyProfileErrors[payload.payload] = ""
     }
     

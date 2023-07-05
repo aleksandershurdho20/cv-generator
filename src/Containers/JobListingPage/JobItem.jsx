@@ -5,7 +5,7 @@ import moment from "moment";
 import 'moment/locale/sq' 
 import { jobType } from "constants/jobs";
 import { useEffect } from "react";
-
+moment.locale("sq")
 const JobItem = ({
   job,
   saveJob,
@@ -29,10 +29,10 @@ const JobItem = ({
       );
     }
   };
-  useEffect(()=>{
-    moment.locale("sq")
+  // useEffect(()=>{
+  //   moment.locale("sq")
 
-  },[moment])
+  // },[moment])
   return (
     <Fade in={true} key={job._id}>
       <Box

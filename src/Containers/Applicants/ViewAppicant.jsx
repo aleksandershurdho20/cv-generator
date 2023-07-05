@@ -22,9 +22,9 @@ import { useSelector } from "react-redux";
 export default function ViewAppicant() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [applicantData, setApplicantData] = useState({});
-  const [isRejected,setIRrejected] = useState(false)
+  const [isRejected, setIRrejected] = useState(false);
   const navigate = useNavigate("");
-  const {state}= useLocation()
+  const { state } = useLocation();
   const { id } = useParams();
   const { userInfo } = useSelector((state) => state.userSlice);
 
@@ -46,16 +46,16 @@ export default function ViewAppicant() {
   };
 
   const handleReject = () => {
-    const data ={
-      company:userInfo?.companyProfileId?.name
-
-    }
-    api.put(`/reject/applicant/${applicantData?.user}`,data).then(() =>{
-      toast.success("Aplikanti u refuzua me sukses!")
-    }).catch(err => err)
-  }
-
-  
+    const data = {
+      company: userInfo?.companyProfileId?.name,
+    };
+    api
+      .put(`/reject/applicant/${applicantData?.user}`, data)
+      .then(() => {
+        toast.success("Aplikanti u refuzua me sukses!");
+      })
+      .catch((err) => err);
+  };
 
   return (
     <Container sx={{ background: "#FFF" }}>
@@ -221,21 +221,31 @@ export default function ViewAppicant() {
             borderRadius="8px"
             padding="10px"
             marginTop="15px"
-            display="flex"
-            flexWrap="wrap"
-            maxWidth="100%"  
-
+      
           >
             <Typography variant="h5" fontWeight="500" marginBottom="20px">
               {" "}
               Aftesi Profesionale
             </Typography>
+            <Box 
+              display="flex"
+              flexWrap="wrap"
+              maxWidth="100%"
+            
+            >
+              <Stack direction="row" spacing={1} flexWrap="wrap">
+                {applicantData?.skills?.map((skill) => (
+                  <Chip
+                    label={skill.title}
+                    key={skill._id}
+                    variant="outlined"
+                    sx={{ marginBottom: 2 }}
+                  />
+                ))}
+              </Stack>
 
-            <Stack direction="row" spacing={1} flexWrap="wrap">
-              {applicantData?.skills?.map((skill) => (
-                <Chip label={skill.title} key={skill._id} variant="outlined" sx={{marginBottom:2}} />
-              ))}
-            </Stack>
+            </Box>
+
           </Box>
 
           <Box
@@ -243,64 +253,39 @@ export default function ViewAppicant() {
             borderRadius="8px"
             padding="10px"
             marginTop="15px"
-      
           >
             <Typography variant="h5" marginBottom="20px">
               Njohurite Gjuhesore
             </Typography>
             <Box
-                  display="flex"
-                  flexWrap="wrap"
-                  maxWidth="100%"  
-                  alignItems="center"
-                  alignContent="center"
-                  rowGap="10px"
-                  columnGap="10px"
-
+              display="flex"
+              flexWrap="wrap"
+              maxWidth="100%"
+              alignItems="center"
+              alignContent="center"
+              rowGap="10px"
+              columnGap="10px"
             >
-              {applicantData?.languages?.map(language => <Box
-                
-                border="1px solid #D5E0D5"
-                maxWidth="150px"
-                padding="10px"
-                display="flex"
-                height="53px"
-                marginBottom="5px"
-                flex="50%"
-                alignContent="center"
-                alignItems="center"
-                key={language._id}>
-                <Avatar>{language.title.charAt(0).toUpperCase()}</Avatar>
-                <Box paddingLeft="5px">
-                  <Typography noWrap>{language.title}</Typography>
-                  <Typography noWrap>{language.level}</Typography>
+              {applicantData?.languages?.map((language) => (
+                <Box
+                  border="1px solid #D5E0D5"
+                  maxWidth="150px"
+                  padding="10px"
+                  display="flex"
+                  height="53px"
+                  marginBottom="5px"
+                  flex="50%"
+                  alignContent="center"
+                  alignItems="center"
+                  key={language._id}
+                >
+                  <Avatar>{language.title.charAt(0).toUpperCase()}</Avatar>
+                  <Box paddingLeft="5px">
+                    <Typography noWrap>{language.title}</Typography>
+                    <Typography noWrap>{language.level}</Typography>
+                  </Box>
                 </Box>
-
-                </Box>)}
-              {/* <Stack
-                spacing={2}
-                direction="row"
-                alignItems="center"
-                alignContent="center"
-                flexWrap="wrap"
-              >
-                {applicantData?.languages?.map(language => <Box
-                
-                border="1px solid #D5E0D5"
-                maxWidth="150px"
-                padding="10px"
-                display="flex"
-                height="53px"
-                marginBottom="5px"
-                key={language._id}>
-                <Avatar>{language.title.charAt(0).toUpperCase()}</Avatar>
-                <Box paddingLeft="5px">
-                  <Typography noWrap>{language.title}</Typography>
-                  <Typography noWrap>{language.level}</Typography>
-                </Box>
-
-                </Box>)}
-              </Stack> */}
+              ))}
             </Box>
           </Box>
 
@@ -314,8 +299,15 @@ export default function ViewAppicant() {
               <Button variant="contained" onClick={handleClick}>
                 Kontakto
               </Button>
-              <ChatPopover anchorEl={anchorEl} handleClose={handleClose} receiver={state} applicantData={applicantData} />
-              <Button variant="bordered" onClick={handleReject} >Refuzo</Button>
+              <ChatPopover
+                anchorEl={anchorEl}
+                handleClose={handleClose}
+                receiver={state}
+                applicantData={applicantData}
+              />
+              <Button variant="bordered" onClick={handleReject}>
+                Refuzo
+              </Button>
             </Stack>
           </Box>
         </Grid>

@@ -66,7 +66,7 @@ export default function Skills(
                       <Grid item md={12} style={{ marginTop: 15 }} >
                         <TextField
                           id="outlined-basic"
-                          label="Njohuri"
+                          label="Njohuri*"
                           variant="outlined"
                           value={data.title}
                           name="title"

@@ -205,25 +205,28 @@ export default function ViewUserProfile() {
             borderRadius="8px"
             padding="10px"
             marginTop="15px"
-            display="flex"
-            flexWrap="wrap"
-            maxWidth="100%"
+          
           >
             <Typography variant="h5" fontWeight="500" marginBottom="20px">
               {" "}
               Aftesi Profesionale
             </Typography>
-
-            <Stack flexWrap="wrap" direction="row" spacing={1}>
-              {applicantData?.skills?.map((skill) => (
-                <Chip
-                  label={skill.title}
-                  key={skill._id}
-                  sx={{ marginBottom: 1 }}
-                  variant="outlined"
-                />
-              ))}
-            </Stack>
+            <Box
+              display="flex"
+              flexWrap="wrap"
+              maxWidth="100%"
+            >
+                <Stack flexWrap="wrap" direction="row" spacing={1}>
+                  {applicantData?.skills?.map((skill) => (
+                    <Chip
+                      label={skill.title}
+                      key={skill._id}
+                      sx={{ marginBottom: 1 }}
+                      variant="outlined"
+                    />
+                  ))}
+                </Stack>
+              </Box>        
           </Box>
 
           <Box

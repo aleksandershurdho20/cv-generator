@@ -85,7 +85,7 @@ export default function GetAllJobs() {
                   <TableCell>Qyteti</TableCell>
                   <TableCell>Krijuar</TableCell>
 
-                  <TableCell>Action</TableCell>
+                  <TableCell>Veprimet</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

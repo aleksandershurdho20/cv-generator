@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { jobCategories } from "constants/jobs";
 import Dropdown from "Components/Select/Select";
 import { applicantsTableColumns } from "constants/applicants";
-import { parseCandidateApplyStatus } from "helpers/parseCandidateApplyStatus";
+import { translateStatus } from "helpers/parseCandidateApplyStatus";
 
 export default function UserJobsApplicants() {
   const [query,setQuery]=useState("")
@@ -62,7 +62,7 @@ export default function UserJobsApplicants() {
           const {_id,...rest}=el.job ?? {}
           return {
             ...el,
-            status:parseCandidateApplyStatus(el.status),
+            status:translateStatus(el.status),
             ...rest
           };
         })}

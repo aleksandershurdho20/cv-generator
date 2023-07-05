@@ -16,7 +16,7 @@ export default function Profile() {
 
   const handleSubmit = () => {
     if (!userInfo) return;
-    const {_id,user,...rest}=state
+    const {_id,user,...rest}=state ?? {}
     dispatch(validateCompanyFields(state));
     const hasErrors = Object.values(rest).some((error) => error.length  === 0);
     // If there are errors, return or handle them as needed

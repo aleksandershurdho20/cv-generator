@@ -40,7 +40,7 @@ export default function JobFilter() {
     setJobType("");
     setQuery("")
     dispatch(getJobs());
-    
+    setDisplayJobsOptions("")
   };
   useEffect(() => {
     if (!userInfo && displayJobsOptions !== "") return undefined;
@@ -119,7 +119,7 @@ export default function JobFilter() {
           <Tab value="skills" label="Njohurive" />
           <Tab value="all" label="Te gjitha" />
         </Tabs>
-        <FormLabel sx={{marginTop:2,color:"#000"}}>Shfaq Punet sipas kategorive:</FormLabel>
+        <FormLabel sx={{marginTop:8,color:"#000"}}>Shfaq Punet sipas kategorive:</FormLabel>
         <Dropdown
              value={query}
              name="category"

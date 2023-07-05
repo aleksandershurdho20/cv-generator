@@ -9,6 +9,8 @@ import Chart from "Components/Chart";
 import { Typography } from "@mui/material";
 import { getDataByDateAndMonth } from "helpers/getDataByDate";
 import { parseCandidateApplyStatus } from "helpers/parseCandidateApplyStatus";
+import MessageIcon from '@mui/icons-material/Message';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 export default function Dashboard() {
   const { userInfo } = useSelector((state) => state.userSlice);
@@ -20,25 +22,24 @@ export default function Dashboard() {
       api
         .get(`statistics/company/${userInfo._id}`)
         .then((res) => {
-          const monthlyApplicants = getDataByDateAndMonth(res.data.monthlyApplicants)
-          
+          const monthlyApplicants = getDataByDateAndMonth(
+            res.data.monthlyApplicants
+          );
+
           setStatistics({
             ...res.data,
             monthlyApplicants,
-         
           });
         })
         .catch((err) => err);
     } else {
       api.get(`statistics/user/${userInfo._id}`).then((res) => {
         console.log(res);
-        const userApplicants
-        = getDataByDateAndMonth(res.data.userApplicants)
+        const userApplicants = getDataByDateAndMonth(res.data.userApplicants);
 
-               setUserStatistics({
+        setUserStatistics({
           ...res.data,
-          userApplicants
-
+          userApplicants,
         });
       });
     }
@@ -55,8 +56,12 @@ export default function Dashboard() {
             color="#038787"
             background="#038787"
             backgroundSecondary="rgb(235, 250, 242)"
-            title={`Pune te  ${isUserCompany ?`krijuara` : `preferuara` }`}
-            total={isUserCompany ?statistics?.createdJobs : userStatistics?.userSavedJobs}
+            title={`Pune te  ${isUserCompany ? `krijuara` : `preferuara`}`}
+            total={
+              isUserCompany
+                ? statistics?.createdJobs
+                : userStatistics?.userSavedJobs
+            }
             icon={<WorkOutlineIcon width={24} height={24} />}
           />
         </Grid>
@@ -71,7 +76,7 @@ export default function Dashboard() {
                 ? statistics?.totalApplicantsInJobs
                 : userStatistics?.totalJobsApply
             }
-            icon={<BugReportIcon width={24} height={24} />}
+            icon={<AccountBoxIcon width={24} height={24} />}
           />
         </Grid>
         <Grid item xs={4}>
@@ -85,7 +90,7 @@ export default function Dashboard() {
                 ? statistics?.messages
                 : userStatistics?.totalMessages
             }
-            icon={<BugReportIcon width={24} height={24} />}
+            icon={<MessageIcon width={24} height={24} />}
           />{" "}
         </Grid>
         <Grid item md={8}>
@@ -95,10 +100,16 @@ export default function Dashboard() {
             fontWeight="700"
             marginLeft="30px"
           >
-           {isUserCompany ? "Punet e krijuara sipas muajit" : "Aplikiment e kryera sipas muajit" } 
+            {isUserCompany
+              ? "Punet e krijuara sipas muajit"
+              : "Aplikiment e kryera sipas muajit"}
           </Typography>
           <Chart
-            data={isUserCompany ? statistics?.monthlyApplicants : userStatistics?.userApplicants}
+            data={
+              isUserCompany
+                ? statistics?.monthlyApplicants
+                : userStatistics?.userApplicants
+            }
             title="User Analytics"
             grid
             dataKey="count"
@@ -112,11 +123,14 @@ export default function Dashboard() {
             fontWeight="700"
             marginLeft="30px"
           >
-            {`Statusi i  ${isUserCompany ? `Aplikanteve` : `Aplikantit` }`}
-            
+            {`Statusi i  ${isUserCompany ? `Aplikanteve` : `Aplikantit`}`}
           </Typography>
           <Chart
-            data={isUserCompany ? parseCandidateApplyStatus(statistics?.applicantStatuses) : parseCandidateApplyStatus(userStatistics?.applicantStatuses)}
+            data={
+              isUserCompany
+                ? parseCandidateApplyStatus(statistics?.applicantStatuses)
+                : parseCandidateApplyStatus(userStatistics?.applicantStatuses)
+            }
             title="User Analytics"
             grid
             dataKey="count"
