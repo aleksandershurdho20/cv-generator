@@ -45,7 +45,19 @@ export default function Applicants() {
   //     ...rest
   //   };
   // })
-  console.log(applicants, "kkk");
+  console.log(something, "kkk");
+
+  const transformedArray = applicants.map((item) => {
+    const applicants = item.applicants
+    .filter(data => data.userProfileId !== undefined)
+    .map((applicant) => ({
+      ...applicant.userProfileId,
+      job:item._id
+    }));
+  
+    return applicants;
+  }).flat();
+  console.log(transformedArray,"s")
   return (
     <Container>
       {userInfo.role[0] === "company" ? (
@@ -74,7 +86,7 @@ export default function Applicants() {
           ) : (
             <Table
               columns={jobApplicantsTableColumns}
-              data={something}
+              data={transformedArray}
               actions={[
                 {
                   render: (rowData) => (
@@ -83,7 +95,7 @@ export default function Applicants() {
                         <IconButton
                           onClick={() =>
                             navigate(`/applicant/${rowData._id}`, {
-                              state: rowData.user,
+                              state: rowData,
                             })
                           }
                         >

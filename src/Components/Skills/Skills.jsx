@@ -17,7 +17,7 @@ import {
   handleChangeSkillsField,
 } from "../../redux/slices/User";
 import "./Skills.scss";
-import { resetFormFields } from 'redux/slices/cvFieldsError';
+import { resetFormFields,emptySkillFieldsErrors } from 'redux/slices/cvFieldsError';
 
 
 export default function Skills(
@@ -37,7 +37,10 @@ export default function Skills(
 
   }
   }
-  const addSkillsFields = () => dispatch(addSkillFields())
+  const addSkillsFields = () => {
+    dispatch(addSkillFields())
+    dispatch(emptySkillFieldsErrors())
+  }
   const removeSkills=(index) => dispatch(removeSkillFields({index}))
   
   const getFieldErrorMessage = (i) =>{

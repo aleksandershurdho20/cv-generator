@@ -18,6 +18,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { api } from "utils/api/api";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import JobItem from "Containers/JobListingPage/JobItem";
 
 export default function ViewAppicant() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -27,14 +28,23 @@ export default function ViewAppicant() {
   const { state } = useLocation();
   const { id } = useParams();
   const { userInfo } = useSelector((state) => state.userSlice);
-
+  const [jobData,setJobData]=useState({})
+  const [status,setStatus]=useState("")
   useEffect(() => {
     api
       .get(`applicant/${id}`)
       .then((res) => {
+        console.log(res.data,"resko")
         setApplicantData(res.data);
       })
       .catch((err) => err);
+    
+      api.get(`job/${state.job}`).then(res =>{
+        setJobData(res.data)
+      })
+      api.get(`/applicant/status/${state.user}`).then(res =>{
+        setStatus(res.data)
+      })
   }, [id]);
 
   const handleClick = (event) => {
@@ -50,12 +60,13 @@ export default function ViewAppicant() {
       company: userInfo?.companyProfileId?.name,
     };
     api
-      .put(`/reject/applicant/${applicantData?.user}`, data)
+      .put(`/reject/applicant/${applicantData?.user}/job/${state.job}`, data)
       .then(() => {
         toast.success("Aplikanti u refuzua me sukses!");
       })
       .catch((err) => err);
   };
+
 
   return (
     <Container sx={{ background: "#FFF" }}>
@@ -290,6 +301,18 @@ export default function ViewAppicant() {
           </Box>
 
           <Box
+           border="1px solid #D5E0D5"
+           borderRadius="8px"
+           padding="10px"
+           marginTop="15px"
+          >
+              <Typography variant="h5" >
+                Puna e aplikuar
+            </Typography>
+          <JobItem job={jobData} isCompany  />
+
+          </Box>      
+          <Box
             border="1px solid #D5E0D5"
             borderRadius="8px"
             padding="10px"
@@ -302,14 +325,15 @@ export default function ViewAppicant() {
               <ChatPopover
                 anchorEl={anchorEl}
                 handleClose={handleClose}
-                receiver={state}
-                applicantData={applicantData}
+                receiver={state.user}
+                applicantData={{...applicantData,status:status?.status,candidate:status?.candidate,job:state?.job}}
               />
               <Button variant="bordered" onClick={handleReject}>
                 Refuzo
               </Button>
             </Stack>
           </Box>
+
         </Grid>
       </Grid>
     </Container>

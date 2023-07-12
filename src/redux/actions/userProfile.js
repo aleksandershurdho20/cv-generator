@@ -79,10 +79,10 @@ export const userProfileActions = {
     if (Array.isArray(state.userInfo.userProfileId.languages)) {
       state.userInfo.userProfileId.languages = [
         ...state.userInfo.userProfileId.languages,
-        { title: "", level: "" },
+        { title: "", level: "fillestar" },
       ];
     } else {
-      state.userInfo.userProfileId.languages = [{ title: "", level: "" }];
+      state.userInfo.userProfileId.languages = [{ title: "", level: "fillestar" }];
     }
   },
   handleChangeLanguageField: (state, action) => {

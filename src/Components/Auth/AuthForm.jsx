@@ -17,6 +17,7 @@ import { api } from 'utils/api/api';
 import {useDispatch} from 'react-redux'
 import { authenticateUser } from "redux/slices/User";
 import { toast } from 'react-toastify';
+import { validateEmail } from 'helpers/validateEmail';
 
 export default function AuthForm({ isInLoginView, handleAuthState }) {
     const [authData,setAuthData]=useState({
@@ -37,7 +38,16 @@ export default function AuthForm({ isInLoginView, handleAuthState }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const {role,...rest}=authData
+    if(!authData.email || !authData.password){
+      alert("Emaili ose Fjale Kalimi nuk mund te jete bosh!")
+      return;
+    }
+    if(!validateEmail(authData.email)){
+      alert("Emaili duhet te jete ne formatin e duhur!")
+      return;
+    }
     
+  
     const data = isInLoginView  ? rest : authData
     api.post(isInLoginView ? "login" : "register", data).then(res => {
       if(isInLoginView){

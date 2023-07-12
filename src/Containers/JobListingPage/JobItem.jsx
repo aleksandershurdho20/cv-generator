@@ -12,12 +12,13 @@ const JobItem = ({
   removeSavedJob,
   savedJobs,
   handleViewJob,
+  isCompany
 }) => {
   const isJobSaved = (id) => {
     const savedJob = savedJobs?.find((el) => el?.job?._id === id);
     if (savedJob) {
       return (
-        <IconButton onClick={() => removeSavedJob(savedJob._id)}>
+        <IconButton onClick={() => removeSavedJob(savedJob?._id)}>
           <BookmarkRemoveIcon />
         </IconButton>
       );
@@ -34,7 +35,7 @@ const JobItem = ({
 
   // },[moment])
   return (
-    <Fade in={true} key={job._id}>
+    <Fade in={true} key={job?._id}>
       <Box
         backgroundColor="white"
         padding="20px"
@@ -51,7 +52,7 @@ const JobItem = ({
             {job.title}
           </Typography>
 
-          {isJobSaved(job._id)}
+          {!isCompany && isJobSaved(job?._id)}
         </Box>
         <Box>
           <span>
@@ -85,7 +86,7 @@ const JobItem = ({
 
           <span>{moment(job.createdAt).locale("sq").fromNow()}</span>
         </Box>
-        <Button onClick={() => handleViewJob(job._id)}>Shiko</Button>
+        {!isCompany && <Button onClick={() => handleViewJob(job._id)}>Shiko</Button> }
       </Box>
     </Fade>
   );

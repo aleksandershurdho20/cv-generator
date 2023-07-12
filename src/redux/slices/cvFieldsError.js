@@ -158,6 +158,12 @@ export const cvFieldsError = createSlice({
     goToPreviousStep: (state) => {
       state.activeStep = state.activeStep - 1;
     },
+    emptySkillFieldsErrors:(state) =>{
+      state.skill = ""
+    },
+    emptyLanguageFieldsError:(state) =>{
+      state.language = ""
+    },
   },
 });
 
@@ -165,6 +171,8 @@ export const {
   validateFormFields,
   resetFormFields,
   goToPreviousStep,
+  emptySkillFieldsErrors,
+  emptyLanguageFieldsError
 } = cvFieldsError.actions;
 
 export const cvFieldsState = (state) => state.cvFieldsError;

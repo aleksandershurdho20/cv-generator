@@ -18,7 +18,7 @@ import {
     handleChangeLanguageField,
     removeLanguageFields,
 } from "../../redux/slices/User";
-import { resetFormFields } from "redux/slices/cvFieldsError";
+import { resetFormFields,emptyLanguageFieldsError } from "redux/slices/cvFieldsError";
 
 
 export default function Gjuhet() {
@@ -30,6 +30,7 @@ export default function Gjuhet() {
     const dispatch = useDispatch();
     const addMoreLanguages = () => {
         dispatch(addMoreLangauges());
+        dispatch(emptyLanguageFieldsError())
     };
     const deleteAddedLanguages = (index) => {
         dispatch(removeLanguageFields({index}));
@@ -46,6 +47,7 @@ export default function Gjuhet() {
        
     };
 
+    console.log(languages)
     const getFieldErrorMessage = (i) =>{
         if(typeof language === "object"){
             return language[i]
@@ -106,9 +108,12 @@ export default function Gjuhet() {
                                                     )
                                                 }
                                             >
-                                                <option>Fillestar</option>
-                                                <option>Bazike</option>
-                                                <option>Keq</option>
+                                                <option value="fillestar">Fillestar</option>
+                                                <option value="Elementare">Elementare</option>
+                                                <option value="Mesatare">Mesatare</option>
+                                                <option value="Mbi Mesatare">Mbi Mesatare</option>
+                                                <option value="E avancuar">E avancuar</option>
+
                                             </select>
 
                                             {index !== 0 && (

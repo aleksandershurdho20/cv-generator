@@ -26,6 +26,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { toast } from "react-toastify";
 const Messages = () => {
   const { userInfo } = useSelector((state) => state.userSlice);
+  console.log(userInfo,'userInfo')
   const [search,setSearch]=useState("")
   const [conversation, setConversation] = useState([]);
   const [messages, setMessages] = useState([]);

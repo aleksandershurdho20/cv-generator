@@ -39,7 +39,7 @@ export const cvData = {
   languages: [
     {
       title: "",
-      level: "",
+      level: "fillestare",
     },
   ],
 };

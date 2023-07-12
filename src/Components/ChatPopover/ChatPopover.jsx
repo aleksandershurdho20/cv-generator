@@ -14,7 +14,7 @@ import { useEffect } from "react";
 export default function ChatPopOver({handleClose,anchorEl,receiver,applicantData,isInViewMode}) {
 
   const [message,setMessage]=useState("")
-  
+  console.log(applicantData,'applicantData')
   const [conversation,setConversation]=useState([])
   const { userInfo } = useSelector((state) => state.userSlice);
 
@@ -28,7 +28,7 @@ export default function ChatPopOver({handleClose,anchorEl,receiver,applicantData
   const open = Boolean(anchorEl);
 
   const id = open ? 'simple-popover' : undefined;
-
+  console.log(applicantData ,"dsd")
   const handleSendMessage = () =>{
     
     const params={
@@ -36,15 +36,18 @@ export default function ChatPopOver({handleClose,anchorEl,receiver,applicantData
       receiver:receiver,
       message,
     }
+    console.log(params,"parameters")
     
     api.post("conversation",{members:[userInfo?._id,receiver],params}).then(() =>{
       toast.success("Mesazhi u dergua me sukses!")
       setMessage("")
 
     }).catch(err => err)
-   if(applicantData?.status !== "shortlisted" && !isInViewMode){
+    console.log(applicantData)
+   if( !isInViewMode){
+    
 
-     api.put(`/contact/applicant/${applicantData?.user}`).then(res =>res).catch(err => err)
+     api.put(`/contact/applicant/${applicantData?.candidate}/job/${applicantData.job}`).then(res =>res).catch(err => err)
    }
   }
   return (
